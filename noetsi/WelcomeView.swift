@@ -7,44 +7,40 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct WelcomeView: View {
     @State private var username = ""
     @State private var password = ""
-    
-    @State private var accentColors: [Color] = [.red, .blue, .pink, .cyan, .green, .yellow]
 
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Text("Welcome to ")
+                Text("welcome to ")
                     .font(.title.bold())
                 Text("noetsi")
                     .font(.title.bold())
-                    .foregroundColor(accentColors.randomElement()!)
+                    .foregroundColor(.red)
                     .padding(10)
                     .background(RoundedRectangle(cornerRadius: 10).fill())
             }
             
                 
             VStack {
-                TextField("Username", text: $username)
-                    .font(.headline)
+                TextField("username", text: $username)
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill().opacity(0.3))
+                    .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
                     .padding(.bottom)
 
-                TextField("Password", text: $password)
-                    .font(.headline)
+                SecureField("password", text: $password)
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill().opacity(0.3))
+                    .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
                     .onSubmit {
                         username = "k"
                     }
                     .padding(.bottom, 25)
                 
-                Button("Continue") { }
+                Button("let me in") { }
                     .font(.title.bold())
-                    .foregroundColor(accentColors.randomElement()!)
+                    .foregroundColor(.blue)
                     .padding(10)
                     .background(RoundedRectangle(cornerRadius: 10).fill())
             }
@@ -56,6 +52,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        WelcomeView()
     }
 }

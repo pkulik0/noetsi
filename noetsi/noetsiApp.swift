@@ -15,7 +15,7 @@ struct noetsiApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WelcomeView()
         }
     }
 }

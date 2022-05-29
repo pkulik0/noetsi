@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D696B3C628440FA00018281D /* noetsiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C528440FA00018281D /* noetsiApp.swift */; };
-		D696B3C828440FA00018281D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* ContentView.swift */; };
+		D696B3C828440FA00018281D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* WelcomeView.swift */; };
 		D696B3CA28440FA10018281D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3C928440FA10018281D /* Assets.xcassets */; };
 		D696B3CD28440FA10018281D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3CC28440FA10018281D /* Preview Assets.xcassets */; };
 		D696B3F1284420F10018281D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F0284420F10018281D /* FirebaseAuth */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		D696B3C228440FA00018281D /* noetsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noetsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D696B3C528440FA00018281D /* noetsiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiApp.swift; sourceTree = "<group>"; };
-		D696B3C728440FA00018281D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D696B3C728440FA00018281D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		D696B3C928440FA10018281D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D696B3CC28440FA10018281D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 			children = (
 				D696B3C528440FA00018281D /* noetsiApp.swift */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
-				D696B3C728440FA00018281D /* ContentView.swift */,
+				D696B3C728440FA00018281D /* WelcomeView.swift */,
 				D696B3C928440FA10018281D /* Assets.xcassets */,
 				D696B3CB28440FA10018281D /* Preview Content */,
 			);
@@ -152,7 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D696B3C828440FA00018281D /* ContentView.swift in Sources */,
+				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
