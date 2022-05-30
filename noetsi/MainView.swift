@@ -11,20 +11,25 @@ import Firebase
 struct MainView: View {
     @State private var changeView = false
     
-    let firestoreManager = FirestoreManager()
+    @EnvironmentObject var firestoreManager: FirestoreManager
 
     var body: some View {
         // TODO: This view :)
-        VStack {
-            Text("Hello, \(Auth.auth().currentUser!.email ?? "email")")
-            Button("Sign out") {
-                do {
-                    try Auth.auth().signOut()
-                    changeView = true
-                } catch {
-                    print(error.localizedDescription)
+        NavigationView {
+            VStack {
+                List(firestoreManager.notes) { note in
+                    NavigationLink {
+                        Text(note.body)
+                            .font(.title.bold())
+                    } label: {
+                        ListRowView(note: note)
+                    }
+
                 }
+                .listStyle(.plain)
+                .listRowSeparator(.hidden)
             }
+            .navigationTitle("Notes")
         }
         .fullScreenCover(isPresented: $changeView) {
             WelcomeView()
@@ -35,5 +40,28 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+    }
+}
+
+struct ListRowView: View {
+    let note: Note
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(note.title)
+                    .font(.headline)
+                HStack {
+                    ForEach(note.tags, id: \.self) { tag in
+                        Text(tag)
+                            .font(.subheadline)
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+            Spacer()
+            Text(note.body)
+                .font(.body)
+        }
     }
 }
