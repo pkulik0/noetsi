@@ -15,7 +15,11 @@ struct noetsiApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            WelcomeView()
+            if Auth.auth().currentUser != nil {
+                MainView()
+            } else {
+                WelcomeView()
+            }
         }
     }
 }

@@ -14,6 +14,7 @@
 		D696B3F1284420F10018281D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F0284420F10018281D /* FirebaseAuth */; };
 		D696B3F3284420F10018281D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F2284420F10018281D /* FirebaseFirestore */; };
 		D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D696B3F4284421E80018281D /* GoogleService-Info.plist */; };
+		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		D696B3C928440FA10018281D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D696B3CC28440FA10018281D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		D696B3C428440FA00018281D /* noetsi */ = {
 			isa = PBXGroup;
 			children = (
+				D696B3F628444EBB0018281D /* MainView.swift */,
 				D696B3C528440FA00018281D /* noetsiApp.swift */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
+				D696B3F728444EBB0018281D /* MainView.swift in Sources */,
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,6 +17,8 @@ struct WelcomeView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
+    @State private var authSuccess = false
+    
     var isValid: Bool {
         return email.contains("@") && email.count > 5 && !password.isEmpty
     }
@@ -66,6 +68,9 @@ struct WelcomeView: View {
             }
             .padding()
         }
+        .fullScreenCover(isPresented: .constant(authSuccess), content: {
+            MainView()
+        })
         .alert("Error", isPresented: $showingAlert, actions: {
             Button("OK") {}
         }, message: {
@@ -84,7 +89,7 @@ struct WelcomeView: View {
                 alertMessage = error.localizedDescription
                 showingAlert = true
             } else {
-                print("signup success")
+                authSuccess = true
             }
         }
     }
@@ -95,7 +100,7 @@ struct WelcomeView: View {
                 alertMessage = error.localizedDescription
                 showingAlert = true
             } else {
-                print("signin success")
+                authSuccess = true
             }
         }
     }
