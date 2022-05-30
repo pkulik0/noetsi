@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct WelcomeView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
+    
+    @State private var colorsSwitched = true
+    
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    
+    var isValid: Bool {
+        return email.contains("@") && email.count > 5 && !password.isEmpty
+    }
 
     var body: some View {
         VStack {
@@ -18,35 +28,76 @@ struct WelcomeView: View {
                     .font(.title.bold())
                 Text("noetsi")
                     .font(.title.bold())
-                    .foregroundColor(.red)
+                    .foregroundColor(colorsSwitched ? .blue : .red)
                     .padding(10)
                     .background(RoundedRectangle(cornerRadius: 10).fill())
             }
             
                 
             VStack {
-                TextField("username", text: $username)
+                TextField("email", text: $email)
+                    .textContentType(.emailAddress)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
                     .padding(.bottom)
 
                 SecureField("password", text: $password)
+                    .textContentType(.password)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
-                    .onSubmit {
-                        username = "k"
-                    }
                     .padding(.bottom, 25)
                 
-                Button("let me in") { }
-                    .font(.title.bold())
-                    .foregroundColor(.blue)
-                    .padding(10)
-                    .background(RoundedRectangle(cornerRadius: 10).fill())
+                HStack {
+                    Button("sign up", action: signup)
+                        .disabled(!isValid)
+                        .font(.title.bold())
+                        .foregroundColor(isValid ? .black : .black.opacity(0.25))
+                        .padding(10)
+                        .animation(.default, value: isValid)
+                    
+                    Button("sign in", action: signin)
+                        .disabled(!isValid)
+                        .font(.title.bold())
+                        .foregroundColor(isValid ? (colorsSwitched ? .red : .blue) : .white)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill())
+                        .opacity(isValid ? 1.0 : 0.5)
+                }
             }
             .padding()
         }
-        
+        .alert("Error", isPresented: $showingAlert, actions: {
+            Button("OK") {}
+        }, message: {
+            Text(alertMessage)
+        })
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: Double.random(in: 30...60), repeats: true) { timer in
+                colorsSwitched.toggle()
+            }
+        }
+    }
+    
+    func signup() {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                alertMessage = error.localizedDescription
+                showingAlert = true
+            } else {
+                print("signup success")
+            }
+        }
+    }
+    
+    func signin() {
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                alertMessage = error.localizedDescription
+                showingAlert = true
+            } else {
+                print("signin success")
+            }
+        }
     }
 }
 
