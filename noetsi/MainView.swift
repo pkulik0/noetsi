@@ -9,9 +9,26 @@ import SwiftUI
 import Firebase
 
 struct MainView: View {
+    @State private var changeView = false
+    
+    let firestoreManager = FirestoreManager()
+
     var body: some View {
         // TODO: This view :)
-        Text("Hello, \(Auth.auth().currentUser!.email ?? "email")")
+        VStack {
+            Text("Hello, \(Auth.auth().currentUser!.email ?? "email")")
+            Button("Sign out") {
+                do {
+                    try Auth.auth().signOut()
+                    changeView = true
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $changeView) {
+            WelcomeView()
+        }
     }
 }
 
