@@ -8,7 +8,7 @@
 import Firebase
 
 class FirestoreManager: ObservableObject {
-    var notes: [Note] = []
+    @Published var notes: [Note] = []
 
     var uid: String {
         if let user = Auth.auth().currentUser {

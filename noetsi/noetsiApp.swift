@@ -10,16 +10,21 @@ import Firebase
 
 @main
 struct noetsiApp: App {
+    @StateObject var firestoreManager = FirestoreManager()
+
     init() {
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
-            if Auth.auth().currentUser != nil {
-                MainView()
-            } else {
-                WelcomeView()
+            Group {
+                if Auth.auth().currentUser != nil {
+                    MainView()
+                } else {
+                    WelcomeView()
+                }
             }
+            .environmentObject(firestoreManager)
         }
     }
 }
