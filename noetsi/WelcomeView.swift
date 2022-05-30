@@ -53,9 +53,8 @@ struct WelcomeView: View {
                     Button("sign up", action: signup)
                         .disabled(!isValid)
                         .font(.title.bold())
-                        .foregroundColor(isValid ? .black : .black.opacity(0.25))
+                        .foregroundColor(isValid ? Color(uiColor: .label) : Color(uiColor: .label).opacity(0.25))
                         .padding(10)
-                        .animation(.default, value: isValid)
                     
                     Button("sign in", action: signin)
                         .disabled(!isValid)
@@ -83,25 +82,24 @@ struct WelcomeView: View {
         }
     }
     
+    func handleAuthResult(error: Error?) {
+        if let error = error {
+            alertMessage = error.localizedDescription
+            showingAlert = true
+        } else {
+            authSuccess = true
+        }
+    }
+    
     func signup() {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                alertMessage = error.localizedDescription
-                showingAlert = true
-            } else {
-                authSuccess = true
-            }
+            handleAuthResult(error: error)
         }
     }
     
     func signin() {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                alertMessage = error.localizedDescription
-                showingAlert = true
-            } else {
-                authSuccess = true
-            }
+            handleAuthResult(error: error)
         }
     }
 }
