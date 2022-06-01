@@ -17,10 +17,9 @@ struct MainView: View {
         // TODO: This view :)
         NavigationView {
             VStack {
-                List(firestoreManager.notes) { note in
+                List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
                     NavigationLink {
-                        Text(note.body)
-                            .font(.title.bold())
+                        NoteView(noteID: noteIndex)
                     } label: {
                         ListRowView(note: note)
                     }
@@ -30,6 +29,16 @@ struct MainView: View {
                 .listRowSeparator(.hidden)
             }
             .navigationTitle("Notes")
+            .toolbar {
+                Button("Sign out") {
+                    do {
+                        try Auth.auth().signOut()
+                        changeView = true
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
         .fullScreenCover(isPresented: $changeView) {
             WelcomeView()
