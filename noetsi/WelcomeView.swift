@@ -9,6 +9,8 @@ import SwiftUI
 import Firebase
 
 struct WelcomeView: View {
+    @EnvironmentObject var firestoreManager: FirestoreManager
+
     @State private var email = ""
     @State private var password = ""
     
@@ -88,6 +90,7 @@ struct WelcomeView: View {
             showingAlert = true
         } else {
             authSuccess = true
+            firestoreManager.fetchNotes()
         }
     }
     

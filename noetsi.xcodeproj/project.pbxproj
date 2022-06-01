@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6601A4728456EBF00BB639F /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6601A4628456EBF00BB639F /* NoteView.swift */; };
 		D696B3C628440FA00018281D /* noetsiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C528440FA00018281D /* noetsiApp.swift */; };
 		D696B3C828440FA00018281D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* WelcomeView.swift */; };
 		D696B3CA28440FA10018281D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3C928440FA10018281D /* Assets.xcassets */; };
@@ -15,9 +16,12 @@
 		D696B3F3284420F10018281D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F2284420F10018281D /* FirebaseFirestore */; };
 		D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D696B3F4284421E80018281D /* GoogleService-Info.plist */; };
 		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
+		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
+		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6601A4628456EBF00BB639F /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		D696B3C228440FA00018281D /* noetsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noetsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D696B3C528440FA00018281D /* noetsiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiApp.swift; sourceTree = "<group>"; };
 		D696B3C728440FA00018281D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -25,6 +29,8 @@
 		D696B3CC28440FA10018281D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		D6A36B492844E4E700D11E71 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,13 @@
 			isa = PBXGroup;
 			children = (
 				D696B3F628444EBB0018281D /* MainView.swift */,
-				D696B3C528440FA00018281D /* noetsiApp.swift */,
-				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
+				D6601A4628456EBF00BB639F /* NoteView.swift */,
+				D696B3C528440FA00018281D /* noetsiApp.swift */,
+				D6A36B472844DD0500D11E71 /* FirestoreManager.swift */,
+				D6A36B492844E4E700D11E71 /* Note.swift */,
 				D696B3C928440FA10018281D /* Assets.xcassets */,
+				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 				D696B3CB28440FA10018281D /* Preview Content */,
 			);
 			path = noetsi;
@@ -155,9 +164,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */,
 				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
+				D6601A4728456EBF00BB639F /* NoteView.swift in Sources */,
 				D696B3F728444EBB0018281D /* MainView.swift in Sources */,
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
+				D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
