@@ -12,4 +12,5 @@ struct Note: Identifiable {
     var title: String
     var body: String
     var tags: [String]
+    var color: String
 }

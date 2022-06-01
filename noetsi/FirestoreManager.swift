@@ -31,11 +31,12 @@ class FirestoreManager: ObservableObject {
                 return
             }
             for document in querySnapshot!.documents {
-                var note: Note = Note(id: document.documentID, title: "", body: "", tags: [])
+                var note: Note = Note(id: document.documentID, title: "", body: "", tags: [], color: "white")
                 
                 note.title = document.data()["title"] as? String ?? "Unknown title"
                 note.body = document.data()["body"] as? String ?? "Unknown content"
                 note.tags = document.data()["tags"] as? [String] ?? []
+                note.color = document.data()["color"] as? String ?? "white"
                 
                 self.notes.append(note)
                 print("\(note)")

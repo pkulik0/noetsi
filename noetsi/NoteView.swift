@@ -12,20 +12,36 @@ struct NoteView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     @State private var showMore: Bool = false
+    @State private var showChangeColor: Bool = false
+    
+    @State private var color: Color = Color.white
 
     var body: some View {
-        VStack {
-            Divider()
+        ZStack {
+            color.opacity(0.25).ignoresSafeArea()
+            
             TextEditor(text: $firestoreManager.notes[noteID].body)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.red.opacity(0.5))
+                .padding([.top, .leading])
+                .onAppear {
+                    UITextView.appearance().backgroundColor = .clear
+                }
         }
         .confirmationDialog("More", isPresented: $showMore) {
-            Button("Share") {}
-            Button("Add tag") {}
-            Button("Change color") {}
+            Button("Change color") {
+                showMore = false
+                showChangeColor = true
+            }
+            Button("Share a copy") {}
             Button("Delete", role: .destructive) {}
         }
+        .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
+            Button("Red") { color = .red }
+            Button("Green") { color = .green }
+            Button("Blue") { color = .blue }
+            Button("Yellow") { color = .yellow }
+            Button("Purple") { color = .purple }
+            Button("White") { color = .white }
+        })
         .toolbar {
             Button {
                 showMore = true
