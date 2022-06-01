@@ -26,6 +26,7 @@ struct ListNoteRowView: View {
             Spacer()
             Text(note.body)
                 .font(.body)
+                .frame(maxHeight: 100)
         }
     }
 }
