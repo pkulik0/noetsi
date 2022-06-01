@@ -21,7 +21,7 @@ struct MainView: View {
                     NavigationLink {
                         NoteView(noteID: noteIndex)
                     } label: {
-                        ListRowView(note: note)
+                        ListNoteRowView(note: note)
                     }
 
                 }
@@ -49,28 +49,5 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-    }
-}
-
-struct ListRowView: View {
-    let note: Note
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(note.title)
-                    .font(.headline)
-                HStack {
-                    ForEach(note.tags, id: \.self) { tag in
-                        Text(tag)
-                            .font(.subheadline)
-                            .foregroundColor(.red)
-                    }
-                }
-            }
-            Spacer()
-            Text(note.body)
-                .font(.body)
-        }
     }
 }
