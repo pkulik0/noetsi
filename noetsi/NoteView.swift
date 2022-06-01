@@ -14,16 +14,17 @@ struct NoteView: View {
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
     
-    @State private var color: Color = Color.white
+    @State private var noteColor: Color = Color.white
 
     var body: some View {
         ZStack {
-            color.opacity(0.25).ignoresSafeArea()
+            noteColor.opacity(0.25).ignoresSafeArea()
             
             TextEditor(text: $firestoreManager.notes[noteID].body)
                 .padding([.top, .leading])
                 .onAppear {
                     UITextView.appearance().backgroundColor = .clear
+                    setNoteColor()
                 }
         }
         .confirmationDialog("More", isPresented: $showMore) {
@@ -35,12 +36,30 @@ struct NoteView: View {
             Button("Delete", role: .destructive) {}
         }
         .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
-            Button("Red") { color = .red }
-            Button("Green") { color = .green }
-            Button("Blue") { color = .blue }
-            Button("Yellow") { color = .yellow }
-            Button("Purple") { color = .purple }
-            Button("White") { color = .white }
+            Button("Red") {
+                firestoreManager.notes[noteID].color = "red"
+                setNoteColor()
+            }
+            Button("Green") {
+                firestoreManager.notes[noteID].color = "green"
+                setNoteColor()
+            }
+            Button("Blue") {
+                firestoreManager.notes[noteID].color = "blue"
+                setNoteColor()
+            }
+            Button("Yellow") {
+                firestoreManager.notes[noteID].color = "yellow"
+                setNoteColor()
+            }
+            Button("Purple") {
+                firestoreManager.notes[noteID].color = "purple"
+                setNoteColor()
+            }
+            Button("White") {
+                firestoreManager.notes[noteID].color = "white"
+                setNoteColor()
+            }
         })
         .toolbar {
             Button {
@@ -51,6 +70,29 @@ struct NoteView: View {
         }
         .navigationTitle(firestoreManager.notes[noteID].title)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    func setNoteColor() {
+        switch firestoreManager.notes[noteID].color {
+        case "red":
+            noteColor = .red
+            break
+        case "green":
+            noteColor = .green
+            break
+        case "blue":
+            noteColor = .blue
+            break
+        case "yellow":
+            noteColor = .yellow
+            break
+        case "purple":
+            noteColor = .purple
+            break
+        default:
+            noteColor = .white
+            break
+        }
     }
 }
 
