@@ -39,7 +39,7 @@ struct TagEditorView: View {
                         Label("Add", systemImage: "plus")
                     }.disabled(!isTagValid(newTag))
                 } header: {
-                    Text("Add a new tag?")
+                    Text("Add a new tag")
                 }
             }
             .navigationTitle("\(firestoreManager.notes[noteID].title)'s tags")
@@ -54,6 +54,9 @@ struct TagEditorView: View {
                     }
                 }
             }
+        }
+        .onDisappear {
+            firestoreManager.writeNote(id: noteID)
         }
     }
     
