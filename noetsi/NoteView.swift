@@ -33,7 +33,7 @@ struct NoteView: View {
         ZStack {
             noteColor.opacity(0.25).ignoresSafeArea()
             
-            VStack {
+            VStack(alignment: .leading) {
                 TextField("Title", text: $firestoreManager.notes[noteID].title)
                     .font(.title.bold())
                 
@@ -50,9 +50,21 @@ struct NoteView: View {
                         }
                 }
                 
-                HStack {
-                    ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
-                        TagView(tag: tag)
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack {
+                        ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
+                            TagView(tag: tag)
+                        }
+                        Button {
+                            // TODO: edit tags
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                                .labelStyle(.iconOnly)
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(Circle().fill(.secondary))
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }

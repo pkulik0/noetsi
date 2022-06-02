@@ -18,7 +18,7 @@ struct TagView: View {
             Text(tag)
         }
         .padding(10)
-        .background(Capsule().stroke(.secondary, lineWidth: 3))
+        .background(Capsule().strokeBorder(.secondary, lineWidth: 3))
     }
 }
 
