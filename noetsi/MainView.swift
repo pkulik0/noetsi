@@ -14,7 +14,6 @@ struct MainView: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
 
     var body: some View {
-        // TODO: This view :)
         NavigationView {
             VStack {
                 List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
