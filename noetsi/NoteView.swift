@@ -14,6 +14,7 @@ struct NoteView: View {
     
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
+    @State private var showTagEditor: Bool = false
     
     @State private var noteColor: Color = .white
     
@@ -56,7 +57,7 @@ struct NoteView: View {
                             TagView(tag: tag)
                         }
                         Button {
-                            // TODO: edit tags
+                            showTagEditor = true
                         } label: {
                             Label("Edit", systemImage: "pencil")
                                 .labelStyle(.iconOnly)
@@ -84,6 +85,9 @@ struct NoteView: View {
                     setNoteColor()
                 }
             }
+        })
+        .sheet(isPresented: $showTagEditor, content: {
+            TagEditorView(noteID: noteID)
         })
         .toolbar {
             Button {
