@@ -19,8 +19,11 @@ struct TagEditorView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
-                        Text(tag)
+                    ForEach(Array(firestoreManager.notes[noteID].tags.enumerated()), id: \.offset) { index, tag in
+                        HStack {
+                            Image(systemName: "\(index).circle")
+                            Text(tag)
+                        }
                     }
                     .onDelete(perform: deleteTags)
                 } header: {
@@ -42,13 +45,13 @@ struct TagEditorView: View {
             .navigationTitle("\(firestoreManager.notes[noteID].title)'s tags")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Done") {
+                    EditButton()
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
                         dismiss()
                     }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
                 }
             }
         }
