@@ -47,6 +47,12 @@ struct NoteView: View {
                             setNoteColor()
                         }
                 }
+                
+                HStack {
+                    ForEach(0..<firestoreManager.notes[noteID].tags.count) { tagID in
+                        TagView(noteID: noteID, tagID: tagID)
+                    }
+                }
             }
             .padding([.top, .leading])
         }
@@ -77,17 +83,5 @@ struct NoteView: View {
     
     func setNoteColor() {
         noteColor = colorByName[firestoreManager.notes[noteID].color] ?? .white
-    }
-}
-
-struct TagView: View {
-    let tag: String
-    var body: some View {
-        Text(tag)
-            .font(.subheadline)
-            .padding()
-            .background(.red)
-            .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
