@@ -10,29 +10,39 @@ import SwiftUI
 struct ListNoteRowView: View {
     let note: Note
     
+    @EnvironmentObject private var firestoreManager: FirestoreManager
+    
+    private var noteColor: Color {
+        Color.noteColorByName[note.color]?.opacity(0.5) ?? .white
+    }
+    
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
+            HStack {
                 Text(note.title)
                     .font(.headline)
-                HStack {
-                    ForEach(note.tags, id: \.self) { tag in
-                        Text(tag)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
+                Image(systemName: "chevron.right")
+                    .font(.subheadline)
             }
-            Spacer()
+            .frame(maxWidth: .infinity)
+    
             Text(note.body)
                 .font(.body)
-                .frame(maxHeight: 100)
+                .padding(.horizontal)
+                .lineLimit(5)
+
+            TagListView(noteID: firestoreManager.notes.firstIndex(where: { element in
+                note.id == element.id
+            }) ?? 0)
         }
+        .padding()
+        .background(noteColor.opacity(0.8))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
 struct ListNoteRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ListNoteRowView(note: Note(id: "", title: "Note0", body: "Body of note0", tags: ["tag0", "nsfw"], color: "red"))
+        ListNoteRowView(note: Note(id: "", title: "Note0", body: "Body note0", tags: ["tag0"], color: "blue"))
     }
 }

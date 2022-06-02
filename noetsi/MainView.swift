@@ -18,13 +18,12 @@ struct MainView: View {
         NavigationView {
             VStack {
                 List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
-                    NavigationLink {
-                        NoteView(noteID: noteIndex)
-                    } label: {
+                    ZStack {
+                        NavigationLink(destination: NoteView(noteID: noteIndex)) {}.opacity(0)
                         ListNoteRowView(note: note)
+                            .shadow(radius: 5)
                     }
                     .listRowSeparator(.hidden)
-
                 }
                 .listStyle(.plain)
             }
