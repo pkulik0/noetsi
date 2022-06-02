@@ -96,6 +96,9 @@ struct NoteView: View {
                 Label("More", systemImage: "ellipsis")
             }
         }
+        .onDisappear {
+            firestoreManager.writeNote(id: noteID)
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
     
