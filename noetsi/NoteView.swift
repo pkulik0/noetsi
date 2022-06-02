@@ -41,23 +41,7 @@ struct NoteView: View {
                         }
                 }
                 
-                ScrollView(.horizontal, showsIndicators: true) {
-                    HStack {
-                        ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
-                            TagView(tag: tag)
-                        }
-                        Button {
-                            showTagEditor = true
-                        } label: {
-                            Label("Edit", systemImage: "pencil")
-                                .labelStyle(.iconOnly)
-                                .foregroundColor(.white)
-                                .padding(10)
-                                .background(Circle().fill(.secondary))
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+                TagListView(noteID: noteID)
             }
             .padding([.top, .leading])
         }
