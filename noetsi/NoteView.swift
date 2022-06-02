@@ -17,6 +17,8 @@ struct NoteView: View {
     
     @State private var noteColor: Color = .white
     
+    @State private var updater: Bool = false
+    
     let supportedColors: [Color] = [.red, .green, .blue, .yellow, .purple, .white]
 
     var colorByName: [String: Color] {
@@ -49,8 +51,8 @@ struct NoteView: View {
                 }
                 
                 HStack {
-                    ForEach(0..<firestoreManager.notes[noteID].tags.count) { tagID in
-                        TagView(noteID: noteID, tagID: tagID)
+                    ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
+                        TagView(tag: tag)
                     }
                 }
             }
