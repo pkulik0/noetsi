@@ -30,3 +30,9 @@ struct ListNoteRowView: View {
         }
     }
 }
+
+struct ListNoteRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        ListNoteRowView(note: Note(id: "", title: "Note0", body: "Body of note0", tags: ["tag0", "nsfw"], color: "red"))
+    }
+}

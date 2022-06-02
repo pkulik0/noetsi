@@ -23,10 +23,10 @@ struct MainView: View {
                     } label: {
                         ListNoteRowView(note: note)
                     }
+                    .listRowSeparator(.hidden)
 
                 }
                 .listStyle(.plain)
-                .listRowSeparator(.hidden)
             }
             .navigationTitle("Notes")
             .toolbar {
