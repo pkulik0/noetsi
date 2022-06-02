@@ -24,8 +24,7 @@ struct TagListView: View {
                 Button {
                     showTagEditor = true
                 } label: {
-                    Label("Edit", systemImage: "pencil")
-                        .labelStyle(.iconOnly)
+                    Image(systemName: firestoreManager.notes[noteID].tags.count > 0 ? "pencil" : "plus")
                         .foregroundColor(.white)
                         .padding(5)
                         .background(Circle().fill(.secondary))
