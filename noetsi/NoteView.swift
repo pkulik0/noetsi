@@ -20,16 +20,6 @@ struct NoteView: View {
     
     @State private var updater: Bool = false
     
-    let supportedColors: [Color] = [.red, .green, .blue, .yellow, .purple, .white]
-
-    var colorByName: [String: Color] {
-        var result: [String: Color] = [:]
-        for color in supportedColors {
-            result[color.description] = color
-        }
-        return result
-    }
-
     var body: some View {
         ZStack {
             noteColor.opacity(0.25).ignoresSafeArea()
@@ -79,7 +69,7 @@ struct NoteView: View {
             Button("Delete", role: .destructive) {}
         }
         .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
-            ForEach(supportedColors, id: \.self) { color in
+            ForEach(Color.noteColors, id: \.self) { color in
                 Button(color.description.capitalized) {
                     firestoreManager.notes[noteID].color = color.description
                     setNoteColor()
@@ -103,6 +93,6 @@ struct NoteView: View {
     }
     
     func setNoteColor() {
-        noteColor = colorByName[firestoreManager.notes[noteID].color] ?? .white
+        noteColor = Color.noteColorByName[firestoreManager.notes[noteID].color] ?? .white
     }
 }
