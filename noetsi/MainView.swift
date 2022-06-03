@@ -10,23 +10,41 @@ import Firebase
 
 struct MainView: View {
     @State private var changeView = false
+    @State private var showNewNote = false
     
     @EnvironmentObject var firestoreManager: FirestoreManager
 
     var body: some View {
         NavigationView {
-            VStack {
-                List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
-                    ZStack {
-                        NavigationLink(destination: NoteView(noteID: noteIndex)) {}.opacity(0)
-                        ListNoteRowView(note: note)
-                            .shadow(radius: 5)
+            ZStack(alignment: .bottomTrailing) {
+                VStack {
+                    List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
+                        ZStack {
+                            NavigationLink(destination: NoteView(noteID: noteIndex)) {}.opacity(0)
+                            ListNoteRowView(note: note)
+                                .shadow(radius: 5)
+                        }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
+                
+                NavigationLink {
+                    NoteView(noteID: 0)
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .padding()
+                        .background(Color.secondary)
+                        .clipShape(Circle())
+                }
+                .simultaneousGesture(TapGesture().onEnded({
+                    addNote()
+                }))
+                .buttonStyle(.plain)
+                .offset(x: -20, y: 0)
             }
-            .navigationTitle("Notes")
+            .navigationTitle("noetsi")
             .toolbar {
                 Button("Sign out") {
                     do {
@@ -41,6 +59,11 @@ struct MainView: View {
         .fullScreenCover(isPresented: $changeView) {
             WelcomeView()
         }
+    }
+    
+    func addNote() {
+        let note = Note(id: UUID().uuidString, title: "", body: "", tags: [], color: "blue")
+        firestoreManager.notes.insert(note, at: 0)
     }
 }
 
