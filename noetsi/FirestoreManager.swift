@@ -31,7 +31,22 @@ class FirestoreManager: ObservableObject {
         let note = notes[id]
         db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "color": note.color], merge: true) { error in
             if let error = error {
-                print("Could not update note \(id): \(error.localizedDescription)")
+                print("Could not update note \(note.id): \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func deleteNote(id: Int) {
+        guard let uid = uid else {
+            return
+        }
+        
+        let note = notes[id]
+        db.collection(uid).document(note.id).delete() { error in
+            if let error = error {
+                print("Could not delete note \(note.id): \(error.localizedDescription)")
+            } else {
+                self.notes.remove(at: id)
             }
         }
     }

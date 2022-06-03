@@ -18,13 +18,16 @@ struct MainView: View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 VStack {
-                    List(Array(firestoreManager.notes.enumerated()), id: \.offset) { noteIndex, note in
-                        ZStack {
-                            NavigationLink(destination: NoteView(noteID: noteIndex)) {}.opacity(0)
-                            ListNoteRowView(note: note)
-                                .shadow(radius: 5)
+                    List {ç
+                        ForEach(0..<firestoreManager.notes.count, id: \.self) { noteID in
+                            ZStack {
+                                NavigationLink(destination: NoteView(noteID: noteID)) {}.opacity(0)
+                                ListNoteView(noteID: noteID)
+                                    .shadow(radius: 5)
+                            }
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowSeparator(.hidden)
+                        .onDelete(perform: deleteNotes)
                     }
                     .listStyle(.plain)
                 }
@@ -46,13 +49,18 @@ struct MainView: View {
             }
             .navigationTitle("noetsi")
             .toolbar {
-                Button("Sign out") {
-                    do {
-                        try Auth.auth().signOut()
-                        changeView = true
-                    } catch {
-                        print(error.localizedDescription)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Sign out") {
+                        do {
+                            try Auth.auth().signOut()
+                            changeView = true
+                        } catch {
+                            print(error.localizedDescription)
+                        }
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
                 }
             }
         }
@@ -64,6 +72,12 @@ struct MainView: View {
     func addNote() {
         let note = Note(id: UUID().uuidString, title: "", body: "", tags: [], color: "blue")
         firestoreManager.notes.insert(note, at: 0)
+    }
+    
+    func deleteNotes(at offsets: IndexSet) {
+        for index in offsets {
+            firestoreManager.deleteNote(id: index)
+        }
     }
 }
 

@@ -11,6 +11,7 @@ struct NoteView: View {
     let noteID: Int
     
     @EnvironmentObject private var firestoreManager: FirestoreManager
+    @Environment(\.dismiss) private var dismiss
     
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
@@ -39,7 +40,7 @@ struct NoteView: View {
                         }
                 }
                 
-                TagListView(noteID: noteID)
+                TagListView(noteID: noteID, showHeader: true)
             }
             .padding([.top, .leading])
         }
@@ -48,7 +49,7 @@ struct NoteView: View {
                 showChangeColor = true
             }
             Button("Share a copy") {}
-            Button("Delete", role: .destructive) {}
+            Button("Delete", role: .destructive, action: deleteNote)
         }
         .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
             ForEach(Color.noteColors, id: \.self) { color in
@@ -72,6 +73,11 @@ struct NoteView: View {
             firestoreManager.writeNote(id: noteID)
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    func deleteNote() {
+        firestoreManager.deleteNote(id: noteID)
+        dismiss()
     }
     
     func setNoteColor() {
