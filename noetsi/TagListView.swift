@@ -13,23 +13,30 @@ struct TagListView: View {
     @State private var showTagEditor = false
     
     let noteID: Int
+    let showHeader: Bool
 
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
-                    TagView(tag: tag)
-                        .font(.caption)
+        VStack(alignment: .leading) {
+            if showHeader {
+                Text("Tags:")
+                    .font(.headline)
+            }
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
+                        TagView(tag: tag)
+                            .font(.caption)
+                    }
+                    Button {
+                        showTagEditor = true
+                    } label: {
+                        Image(systemName: firestoreManager.notes[noteID].tags.count > 0 ? "pencil" : "plus")
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .background(Circle().fill(.secondary))
+                    }
+                    .buttonStyle(.plain)
                 }
-                Button {
-                    showTagEditor = true
-                } label: {
-                    Image(systemName: firestoreManager.notes[noteID].tags.count > 0 ? "pencil" : "plus")
-                        .foregroundColor(.white)
-                        .padding(5)
-                        .background(Circle().fill(.secondary))
-                }
-                .buttonStyle(.plain)
             }
         }
         .sheet(isPresented: $showTagEditor) {
