@@ -22,7 +22,7 @@ struct NoteView: View {
     
     var body: some View {
         ZStack {
-            noteColor.opacity(0.25).ignoresSafeArea()
+            noteColor.opacity(0.4).ignoresSafeArea()
             
             VStack(alignment: .leading) {
                 TextField("Title", text: $firestoreManager.notes[noteID].title)
