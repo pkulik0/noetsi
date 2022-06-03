@@ -21,7 +21,7 @@ struct TagListView: View {
                 Text("Tags:")
                     .font(.headline)
             }
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
                         TagView(tag: tag)
