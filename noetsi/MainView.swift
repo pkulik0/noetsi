@@ -18,7 +18,7 @@ struct MainView: View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 VStack {
-                    List {ç
+                    List {
                         ForEach(0..<firestoreManager.notes.count, id: \.self) { noteID in
                             ZStack {
                                 NavigationLink(destination: NoteView(noteID: noteID)) {}.opacity(0)
