@@ -32,8 +32,6 @@ class FirestoreManager: ObservableObject {
         db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "color": note.color], merge: true) { error in
             if let error = error {
                 print("Could not update note \(id): \(error.localizedDescription)")
-            } else {
-                print("note \(id) updated.")
             }
         }
     }
