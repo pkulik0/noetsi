@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TagEditorView: View {
-    let noteID: Int
-    
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) var dismiss
     
     @State private var newTag: String = ""
+    
+    let noteID: Int
 
     var body: some View {
         NavigationView {

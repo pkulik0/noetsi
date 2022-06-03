@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct WelcomeView: View {
-    @EnvironmentObject var firestoreManager: FirestoreManager
+    @EnvironmentObject private var firestoreManager: FirestoreManager
 
     @State private var email = ""
     @State private var password = ""

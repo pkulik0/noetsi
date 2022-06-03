@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ListNoteRowView: View {
-    let note: Note
-    
     @EnvironmentObject private var firestoreManager: FirestoreManager
+    
+    let note: Note
     
     private var noteColor: Color {
         Color.noteColorByName[note.color]?.opacity(0.5) ?? .white

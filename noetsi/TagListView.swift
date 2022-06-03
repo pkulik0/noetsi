@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TagListView: View {
-    let noteID: Int
-
     @EnvironmentObject private var firestoreManager: FirestoreManager
     
     @State private var showTagEditor = false
+    
+    let noteID: Int
 
     var body: some View {
         ScrollView(.horizontal) {

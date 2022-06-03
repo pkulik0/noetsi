@@ -10,15 +10,13 @@ import SwiftUI
 struct NoteView: View {
     let noteID: Int
     
-    @EnvironmentObject var firestoreManager: FirestoreManager
+    @EnvironmentObject private var firestoreManager: FirestoreManager
     
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     
     @State private var noteColor: Color = .white
-    
-    @State private var updater: Bool = false
     
     var body: some View {
         ZStack {

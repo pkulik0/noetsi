@@ -9,10 +9,10 @@ import SwiftUI
 import Firebase
 
 struct MainView: View {
+    @EnvironmentObject private var firestoreManager: FirestoreManager
+    
     @State private var changeView = false
     @State private var showNewNote = false
-    
-    @EnvironmentObject var firestoreManager: FirestoreManager
 
     var body: some View {
         NavigationView {

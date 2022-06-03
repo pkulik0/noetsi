@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct noetsiApp: App {
-    @StateObject var firestoreManager = FirestoreManager()
+    @StateObject private var firestoreManager = FirestoreManager()
 
     init() {
         FirebaseApp.configure()
