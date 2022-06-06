@@ -47,25 +47,24 @@ struct NoteView: View {
                 }
                 
                 TagListView(note: note, showHeader: true)
+                
+                if showChangeColor {
+                    ColorPicker(selection: $note.color, isPresented: $showChangeColor, items: Color.noteColors)
+                }
             }
             .padding([.top, .leading])
         }
         .confirmationDialog("More", isPresented: $showMore) {
             Button("Change color") {
-                showChangeColor = true
+                withAnimation {
+                    showChangeColor = true
+                }
             }
             Button("Share a copy") {
                 // TODO: share a copy
             }
             Button("Delete", role: .destructive, action: deleteNote)
         }
-        .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
-            ForEach(Color.noteColors, id: \.self) { color in
-                Button(color.description.capitalized) {
-                    note.colorName = color.description
-                }
-            }
-        })
         .sheet(isPresented: $showTagEditor, content: {
             TagEditorView(note: note)
         })

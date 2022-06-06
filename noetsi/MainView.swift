@@ -85,7 +85,9 @@ struct MainView: View {
     }
     
     func addNote() {
-        noteList.notes.insert(Note(), at: 0)
+        withAnimation {
+            noteList.notes.insert(Note(), at: 0)
+        }
     }
     
     func deleteNotes(at offsets: IndexSet) {

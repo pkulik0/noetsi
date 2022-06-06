@@ -31,7 +31,9 @@ struct TagEditorView: View {
                 Section {
                     TextField("Tag", text: $newTag)
                     Button {
-                        note.tags.append(newTag)
+                        withAnimation {
+                            note.tags.append(newTag)
+                        }
                         newTag = ""
                     } label: {
                         Label("Add", systemImage: "plus")
