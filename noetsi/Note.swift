@@ -40,7 +40,8 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     convenience init() {
-        self.init(title: "", body: "", tags: [], colorName: Color.noteColors.randomElement()!.description)
+        let randomColor = Color.noteColors.randomElement() ?? .blue
+        self.init(title: "", body: "", tags: [], colorName: randomColor.description)
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
