@@ -40,7 +40,7 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
-        lhs.id == rhs.id && lhs.title == rhs.title && lhs.body == rhs.body && lhs.tags == rhs.tags && lhs.colorName == rhs.colorName
+        (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.colorName == rhs.colorName)
     }
 }
 
