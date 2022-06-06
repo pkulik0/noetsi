@@ -7,10 +7,19 @@
 
 import Firebase
 
+enum UserStatus {
+    case loading, success, failed, no_user
+}
+
 class FirestoreManager: ObservableObject {
     @Published var notes: [Note] = []
+    @Published var status: UserStatus = .loading
     
     let db = Firestore.firestore()
+    
+    init() {
+        fetchNotes()
+    }
 
     var uid: String? {
         if let user = Auth.auth().currentUser {
@@ -18,60 +27,59 @@ class FirestoreManager: ObservableObject {
         }
         return nil
     }
-    
-    init() {
-        fetchNotes()
-    }
-    
-    func writeNote(id: Int) {
+
+    func writeNote(note: Note) {
         guard let uid = uid else {
             return
         }
 
-        let note = notes[id]
-        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "color": note.color], merge: true) { error in
+        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "color": note.colorName], merge: true) { error in
             if let error = error {
-                print("Could not update note \(note.id): \(error.localizedDescription)")
+                print("Could not write/update note \(note.id): \(error.localizedDescription)")
+            } else {
+                print("Note updated: \(note.id)")
             }
         }
     }
-    
-    func deleteNote(id: Int) {
+
+    func deleteNote(id: String) {
         guard let uid = uid else {
             return
         }
-        
-        let note = notes[id]
-        db.collection(uid).document(note.id).delete() { error in
+
+        db.collection(uid).document(id).delete() { error in
             if let error = error {
-                print("Could not delete note \(note.id): \(error.localizedDescription)")
+                print("Could not delete note \(id): \(error.localizedDescription)")
             } else {
-                self.notes.remove(at: id)
+                print("Note deleted: \(id)")
             }
         }
     }
     
     func fetchNotes() {
-        guard let uid = uid else { 
+        guard let uid = uid else {
+            status = .no_user
             return
         }
 
         db.collection(uid).getDocuments { (querySnapshot, error) in
             if let error = error {
-                // TODO: handle better?
+                self.status = .failed
                 print(error.localizedDescription)
                 return
             }
+            
             for document in querySnapshot!.documents {
-                var note: Note = Note(id: document.documentID, title: "", body: "", tags: [], color: "")
+                let note: Note = Note(id: document.documentID)
 
                 note.title = document.data()["title"] as? String ?? "Unknown title"
                 note.body = document.data()["body"] as? String ?? "Unknown content"
                 note.tags = document.data()["tags"] as? [String] ?? []
-                note.color = document.data()["color"] as? String ?? "white"
+                note.colorName = document.data()["color"] as? String ?? "white"
                 
                 self.notes.append(note)
             }
+            self.status = .success
         }
     }
 }

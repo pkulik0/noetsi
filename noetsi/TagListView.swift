@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct TagListView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
-    
     @State private var showTagEditor = false
     
-    let noteID: Int
+    @ObservedObject var note: Note
     let showHeader: Bool
 
     var body: some View {
@@ -23,14 +21,14 @@ struct TagListView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(firestoreManager.notes[noteID].tags, id: \.self) { tag in
+                    ForEach(note.tags, id: \.self) { tag in
                         TagView(tag: tag)
                             .font(.caption)
                     }
                     Button {
                         showTagEditor = true
                     } label: {
-                        Image(systemName: firestoreManager.notes[noteID].tags.count > 0 ? "pencil" : "plus")
+                        Image(systemName: note.tags.count > 0 ? "pencil" : "plus")
                             .foregroundColor(.white)
                             .padding(5)
                             .background(Circle().fill(.secondary))
@@ -40,7 +38,7 @@ struct TagListView: View {
             }
         }
         .sheet(isPresented: $showTagEditor) {
-            TagEditorView(noteID: noteID)
+            TagEditorView(note: note)
         }
     }
 }

@@ -11,6 +11,12 @@ import Firebase
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     
+    @StateObject private var noteList: NoteList = NoteList()
+    
+    var firstNote: Note {
+        noteList.notes.first ?? Note()
+    }
+    
     @State private var changeView = false
     @State private var showNewNote = false
 
@@ -19,10 +25,13 @@ struct MainView: View {
             ZStack(alignment: .bottomTrailing) {
                 VStack {
                     List {
-                        ForEach(0..<firestoreManager.notes.count, id: \.self) { noteID in
+                        ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
                             ZStack {
-                                NavigationLink(destination: NoteView(noteID: noteID)) {}.opacity(0)
-                                ListNoteView(noteID: noteID)
+                                NavigationLink {
+                                    NoteView(noteList: noteList, noteIndex: noteIndex)
+                                } label: {}
+                                    .opacity(0)
+                                ListNoteView(note: note)
                                     .shadow(radius: 5)
                             }
                             .listRowSeparator(.hidden)
@@ -33,7 +42,7 @@ struct MainView: View {
                 }
                 
                 NavigationLink {
-                    NoteView(noteID: 0)
+                    NoteView(noteList: noteList, noteIndex: 0)
                 } label: {
                     Image(systemName: "plus")
                         .font(.title)
@@ -67,16 +76,21 @@ struct MainView: View {
         .fullScreenCover(isPresented: $changeView) {
             WelcomeView()
         }
+        .onAppear {
+            noteList.notes = firestoreManager.notes
+        }
+        .onChange(of: firestoreManager.status) { _ in
+            noteList.notes = firestoreManager.notes
+        }
     }
     
     func addNote() {
-        let note = Note(id: UUID().uuidString, title: "", body: "", tags: [], color: "blue")
-        firestoreManager.notes.insert(note, at: 0)
+        noteList.notes.insert(Note(), at: 0)
     }
     
     func deleteNotes(at offsets: IndexSet) {
         for index in offsets {
-            firestoreManager.deleteNote(id: index)
+            noteList.remove(at: index, firestoreManager: firestoreManager)
         }
     }
 }

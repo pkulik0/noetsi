@@ -8,39 +8,45 @@
 import SwiftUI
 
 struct NoteView: View {
-    let noteID: Int
-    
     @EnvironmentObject private var firestoreManager: FirestoreManager
+
+    @ObservedObject var noteList: NoteList
+    @ObservedObject var note: Note
+    var noteIndex: Int
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     
-    @State private var noteColor: Color = .white
-    
+    init(noteList: NoteList, noteIndex: Int) {
+        self.noteList = noteList
+        self.noteIndex = noteIndex
+        self.note = noteList.notes.count > noteIndex ? noteList.notes[noteIndex] : Note()
+    }
+
     var body: some View {
         ZStack {
-            noteColor.opacity(0.4).ignoresSafeArea()
+            note.color.opacity(0.4).ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                TextField("Title", text: $firestoreManager.notes[noteID].title)
+                TextField("Title", text: $note.title)
                     .font(.title.bold())
                 
                 ZStack(alignment: .topLeading) {
-                    if firestoreManager.notes[noteID].body.isEmpty {
+                    if note.body.isEmpty {
                         Text("...")
                             .opacity(0.75)
                             .padding(.top)
                     }
-                    TextEditor(text: $firestoreManager.notes[noteID].body)
+                    TextEditor(text: $note.body)
                         .onAppear {
                             UITextView.appearance().backgroundColor = .clear
-                            setNoteColor()
                         }
                 }
                 
-                TagListView(noteID: noteID, showHeader: true)
+                TagListView(note: note, showHeader: true)
             }
             .padding([.top, .leading])
         }
@@ -48,19 +54,20 @@ struct NoteView: View {
             Button("Change color") {
                 showChangeColor = true
             }
-            Button("Share a copy") {}
+            Button("Share a copy") {
+                // TODO: share a copy
+            }
             Button("Delete", role: .destructive, action: deleteNote)
         }
         .confirmationDialog("Choose a color", isPresented: $showChangeColor, actions: {
             ForEach(Color.noteColors, id: \.self) { color in
                 Button(color.description.capitalized) {
-                    firestoreManager.notes[noteID].color = color.description
-                    setNoteColor()
+                    note.colorName = color.description
                 }
             }
         })
         .sheet(isPresented: $showTagEditor, content: {
-            TagEditorView(noteID: noteID)
+            TagEditorView(note: note)
         })
         .toolbar {
             Button {
@@ -69,18 +76,21 @@ struct NoteView: View {
                 Label("More", systemImage: "ellipsis")
             }
         }
-        .onDisappear {
-            firestoreManager.writeNote(id: noteID)
-        }
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            if note.title.isEmpty && note.body.isEmpty && note.tags.isEmpty {
+                noteList.remove(at: noteIndex, firestoreManager: firestoreManager)
+            } else {
+                firestoreManager.writeNote(note: note)
+            }
+        }
     }
     
     func deleteNote() {
-        firestoreManager.deleteNote(id: noteID)
+        note.title = ""
+        note.body = ""
+        note.tags = []
+
         dismiss()
-    }
-    
-    func setNoteColor() {
-        noteColor = Color.noteColorByName[firestoreManager.notes[noteID].color] ?? .white
     }
 }

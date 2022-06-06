@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct TagEditorView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) var dismiss
     
+    @ObservedObject var note: Note
     @State private var newTag: String = ""
-    
-    let noteID: Int
 
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    ForEach(Array(firestoreManager.notes[noteID].tags.enumerated()), id: \.offset) { index, tag in
+                    ForEach(Array(note.tags.enumerated()), id: \.offset) { index, tag in
                         HStack {
                             Image(systemName: "\(index).circle")
                             Text(tag)
@@ -33,7 +31,7 @@ struct TagEditorView: View {
                 Section {
                     TextField("Tag", text: $newTag)
                     Button {
-                        firestoreManager.notes[noteID].tags.append(newTag)
+                        note.tags.append(newTag)
                         newTag = ""
                     } label: {
                         Label("Add", systemImage: "plus")
@@ -42,7 +40,7 @@ struct TagEditorView: View {
                     Text("Add a new tag")
                 }
             }
-            .navigationTitle("\(firestoreManager.notes[noteID].title)'s tags")
+            .navigationTitle("Tag Editor")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
@@ -55,13 +53,10 @@ struct TagEditorView: View {
                 }
             }
         }
-        .onDisappear {
-            firestoreManager.writeNote(id: noteID)
-        }
     }
     
     func deleteTags(at offsets: IndexSet) {
-        firestoreManager.notes[noteID].tags.remove(atOffsets: offsets)
+        note.tags.remove(atOffsets: offsets)
     }
 
     func isTagValid(_ tag: String) -> Bool {

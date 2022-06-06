@@ -8,23 +8,17 @@
 import SwiftUI
 
 struct ListNoteView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
-    
-    let noteID: Int
-    
-    private var noteColor: Color {
-        Color.noteColorByName[firestoreManager.notes[noteID].color]?.opacity(0.5) ?? .white
-    }
-    
+    @ObservedObject var note: Note
+
     private var bodyPlaceholder: String {
-        if firestoreManager.notes[noteID].body.isEmpty {
+        if note.body.isEmpty {
             return "Empty"
         }
         return ""
     }
     
     private var titlePlaceholder: String {
-        if firestoreManager.notes[noteID].title.isEmpty {
+        if note.title.isEmpty {
             return "Untitled"
         }
         return ""
@@ -33,7 +27,7 @@ struct ListNoteView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("\(titlePlaceholder)\(firestoreManager.notes[noteID].title)")
+                Text("\(titlePlaceholder)\(note.title)")
                     .font(.headline)
                     .foregroundColor(titlePlaceholder.count > 0 ? .secondary : .primary)
                 Image(systemName: "chevron.right")
@@ -41,16 +35,16 @@ struct ListNoteView: View {
             }
             .frame(maxWidth: .infinity)
     
-            Text("\(bodyPlaceholder)\(firestoreManager.notes[noteID].body)")
+            Text("\(bodyPlaceholder)\(note.body)")
                 .font(.body)
                 .padding(10)
                 .lineLimit(5)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
 
-            TagListView(noteID: noteID, showHeader: false)
+            TagListView(note: note, showHeader: false)
         }
         .padding()
-        .background(noteColor.opacity(0.8))
+        .background(note.color.opacity(0.4))
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
