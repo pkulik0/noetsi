@@ -78,9 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				D696B3F628444EBB0018281D /* MainView.swift */,
+				D696B3C728440FA00018281D /* WelcomeView.swift */,
 				D67E75362847D9FC00150062 /* ListNoteView.swift */,
 				D66A6AD128497CF2009DB38F /* TagListView.swift */,
-				D696B3C728440FA00018281D /* WelcomeView.swift */,
+				D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */,
 				D6601A4628456EBF00BB639F /* NoteView.swift */,
 				D66A6ACF28497193009DB38F /* NoteColorExtension.swift */,
 				D66A6ACD28492C4F009DB38F /* TagEditorView.swift */,
@@ -91,7 +92,6 @@
 				D696B3C928440FA10018281D /* Assets.xcassets */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 				D696B3CB28440FA10018281D /* Preview Content */,
-				D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */,
 			);
 			path = noetsi;
 			sourceTree = "<group>";

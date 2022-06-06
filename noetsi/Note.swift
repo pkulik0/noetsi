@@ -12,6 +12,7 @@ class Note: ObservableObject, Identifiable, Equatable {
     @Published var title: String
     @Published var body: String
     @Published var tags: [String]
+    @Published var timestamp: Int
     @Published var colorName: String
     
     var color: Color {
@@ -22,26 +23,20 @@ class Note: ObservableObject, Identifiable, Equatable {
             colorName = newColor.description
         }
     }
-    
-    init(id: String, title: String, body: String, tags: [String], colorName: String) {
+
+    init(id: String) {
+        let randomColor = Color.noteColors.randomElement() ?? .blue
+        
         self.id = id
-        self.title = title
-        self.body = body
-        self.tags = tags
-        self.colorName = colorName
-    }
-    
-    convenience init(title: String, body: String, tags: [String], colorName: String) {
-        self.init(id: UUID().uuidString, title: title, body: body, tags: tags, colorName: colorName)
-    }
-    
-    convenience init(id: String) {
-        self.init(id: id, title: "", body: "", tags: [], colorName: "")
+        self.title = ""
+        self.body = ""
+        self.tags = []
+        self.timestamp = Int(Date().timeIntervalSince1970)
+        self.colorName = randomColor.description
     }
     
     convenience init() {
-        let randomColor = Color.noteColors.randomElement() ?? .blue
-        self.init(title: "", body: "", tags: [], colorName: randomColor.description)
+        self.init(id: UUID().uuidString)
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {

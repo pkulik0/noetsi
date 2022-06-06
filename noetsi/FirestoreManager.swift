@@ -33,7 +33,7 @@ class FirestoreManager: ObservableObject {
             return
         }
 
-        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "color": note.colorName], merge: true) { error in
+        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.colorName], merge: true) { error in
             if let error = error {
                 print("Could not write/update note \(note.id): \(error.localizedDescription)")
             } else {
@@ -75,6 +75,7 @@ class FirestoreManager: ObservableObject {
                 note.title = document.data()["title"] as? String ?? "Unknown title"
                 note.body = document.data()["body"] as? String ?? "Unknown content"
                 note.tags = document.data()["tags"] as? [String] ?? []
+                note.timestamp = document.data()["timestamp"] as? Int ?? 0
                 note.colorName = document.data()["color"] as? String ?? "white"
                 
                 self.notes.append(note)
