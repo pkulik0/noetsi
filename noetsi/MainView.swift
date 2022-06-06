@@ -37,6 +37,7 @@ struct MainView: View {
                             .listRowSeparator(.hidden)
                         }
                         .onDelete(perform: deleteNotes)
+                        .onMove(perform: move)
                     }
                     .listStyle(.plain)
                 }
@@ -77,11 +78,15 @@ struct MainView: View {
             WelcomeView()
         }
         .onAppear {
-            noteList.notes = firestoreManager.notes
+            updateData()
         }
         .onChange(of: firestoreManager.status) { _ in
-            noteList.notes = firestoreManager.notes
+            updateData()
         }
+    }
+    
+    func updateData() {
+        noteList.notes = firestoreManager.notes
     }
     
     func addNote() {
@@ -94,6 +99,11 @@ struct MainView: View {
         for index in offsets {
             noteList.remove(at: index, firestoreManager: firestoreManager)
         }
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        noteList.notes.move(fromOffsets: source, toOffset: destination)
+        // TODO: save order in db
     }
 }
 
