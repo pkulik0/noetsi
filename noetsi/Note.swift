@@ -36,11 +36,11 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     convenience init(id: String) {
-        self.init(id: id, title: "", body: "", tags: [], colorName: "blue")
+        self.init(id: id, title: "", body: "", tags: [], colorName: "")
     }
     
     convenience init() {
-        self.init(title: "", body: "", tags: [], colorName: "blue")
+        self.init(title: "", body: "", tags: [], colorName: Color.noteColors.randomElement()!.description)
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
