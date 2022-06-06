@@ -15,7 +15,12 @@ class Note: ObservableObject, Identifiable, Equatable {
     @Published var colorName: String
     
     var color: Color {
-        Color.noteColorByName[self.colorName] ?? .white
+        get {
+            Color.noteColorByName[self.colorName] ?? .white
+        }
+        set(newColor) {
+            colorName = newColor.description
+        }
     }
     
     init(id: String, title: String, body: String, tags: [String], colorName: String) {
