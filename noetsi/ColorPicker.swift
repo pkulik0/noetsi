@@ -20,8 +20,8 @@ struct ColorPicker: View {
                     Spacer()
                     ForEach(Color.noteColors, id: \.self) { color in
                         Button {
-                            selection = color
                             withAnimation {
+                                selection = color
                                 isPresented = false
                             }
                         } label: {
