@@ -61,6 +61,7 @@ class FirestoreManager: ObservableObject {
             status = .no_user
             return
         }
+        self.status = .loading
 
         db.collection(uid).getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -69,6 +70,8 @@ class FirestoreManager: ObservableObject {
                 return
             }
             
+            self.notes = []
+
             for document in querySnapshot!.documents {
                 let note: Note = Note(id: document.documentID)
 
