@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 class Note: ObservableObject, Identifiable, Equatable {
     @Published var id: String
@@ -15,6 +16,10 @@ class Note: ObservableObject, Identifiable, Equatable {
     @Published var timestamp: Int
     @Published var colorName: String
     
+    @Published var checklist: [String: Bool]?
+    @Published var images: [Image]?
+    @Published var location: CLLocation?
+    
     var color: Color {
         get {
             Color.noteColorByName[self.colorName] ?? .white
@@ -23,16 +28,19 @@ class Note: ObservableObject, Identifiable, Equatable {
             colorName = newColor.description
         }
     }
-
-    init(id: String) {
-        let randomColor = Color.noteColors.randomElement() ?? .blue
-        
+    
+    init(id: String, title: String, body: String, tags: [String], timestamp: Int, colorName: String) {
         self.id = id
-        self.title = ""
-        self.body = ""
-        self.tags = []
-        self.timestamp = Int(Date().timeIntervalSince1970)
-        self.colorName = randomColor.description
+        self.title = title
+        self.body = body
+        self.tags = tags
+        self.timestamp = timestamp
+        self.colorName = colorName
+    }
+
+    convenience init(id: String) {
+        let randomColor = Color.noteColors.randomElement() ?? .blue
+        self.init(id: id, title: "", body: "", tags: [], timestamp: Int(Date().timeIntervalSince1970), colorName: randomColor.description)
     }
     
     convenience init() {
@@ -41,6 +49,11 @@ class Note: ObservableObject, Identifiable, Equatable {
     
     static func == (lhs: Note, rhs: Note) -> Bool {
         (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.colorName == rhs.colorName)
+    }
+    
+    func copy() -> Note {
+        let copy = Note(id: self.id, title: self.title, body: self.body, tags: self.tags, timestamp: self.timestamp, colorName: self.colorName)
+        return copy
     }
 }
 

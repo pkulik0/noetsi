@@ -12,6 +12,7 @@ struct NoteView: View {
 
     @ObservedObject var noteList: NoteList
     @ObservedObject var note: Note
+    private let noteUnmodified: Note
     var noteIndex: Int
     
     @Environment(\.dismiss) private var dismiss
@@ -20,10 +21,15 @@ struct NoteView: View {
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     
+    @FocusState private var isBodyFocused: Bool
+    @FocusState private var isTitleFocused: Bool
+    
     init(noteList: NoteList, noteIndex: Int) {
         self.noteList = noteList
         self.noteIndex = noteIndex
         self.note = noteList.notes.count > noteIndex ? noteList.notes[noteIndex] : Note()
+        // TODO: Fix this bugged implementation of noteUnmodified, needs to overwrite the note in firestoreManager (or abandon not saving)
+        self.noteUnmodified = noteList.notes.count > noteIndex ? noteList.notes[noteIndex].copy() : Note()
     }
 
     var body: some View {
@@ -33,14 +39,16 @@ struct NoteView: View {
             VStack(alignment: .leading) {
                 TextField("Title", text: $note.title)
                     .font(.title.bold())
+                    .focused($isTitleFocused)
                 
                 ZStack(alignment: .topLeading) {
                     if note.body.isEmpty {
                         Text("...")
-                            .opacity(0.75)
+                            .opacity(0.5)
                             .padding(.top)
                     }
                     TextEditor(text: $note.body)
+                        .focused($isBodyFocused)
                         .onAppear {
                             UITextView.appearance().backgroundColor = .clear
                         }
@@ -50,14 +58,15 @@ struct NoteView: View {
                 
                 if showChangeColor {
                     ColorPicker(selection: $note.color, isPresented: $showChangeColor, items: Color.noteColors)
+                        .transition(.move(edge: .bottom))
                 }
             }
-            .padding([.top, .leading])
+            .padding()
         }
         .confirmationDialog("More", isPresented: $showMore) {
             Button("Change color") {
                 withAnimation {
-                    showChangeColor = true
+                    showChangeColor.toggle()
                 }
             }
             Button("Share a copy") {
@@ -66,21 +75,35 @@ struct NoteView: View {
             Button("Delete", role: .destructive, action: deleteNote)
         }
         .sheet(isPresented: $showTagEditor, content: {
-            TagEditorView(note: note)
+            TagEditorView(note: note, updateNote: false)
         })
         .toolbar {
-            Button {
-                showMore = true
-            } label: {
-                Label("More", systemImage: "ellipsis")
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showMore = true
+                } label: {
+                    Label("More", systemImage: "ellipsis")
+                }
+            }
+            
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                
+                Button("Done") {
+                    isBodyFocused = false
+                    isTitleFocused = false
+                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear {
             if note.title.isEmpty && note.body.isEmpty && note.tags.isEmpty {
                 noteList.remove(at: noteIndex, firestoreManager: firestoreManager)
-            } else {
+            } else if note != noteUnmodified {
                 firestoreManager.writeNote(note: note)
+                print("bbbbb")
+            } else {
+                print("aaaaa")
             }
         }
     }
