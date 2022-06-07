@@ -101,9 +101,6 @@ struct NoteView: View {
                 noteList.remove(at: noteIndex, firestoreManager: firestoreManager)
             } else if note != noteUnmodified {
                 firestoreManager.writeNote(note: note)
-                print("bbbbb")
-            } else {
-                print("aaaaa")
             }
         }
     }

@@ -37,7 +37,13 @@ class FirestoreManager: ObservableObject {
             if let error = error {
                 print("Could not write/update note \(note.id): \(error.localizedDescription)")
             } else {
-                print("Note updated: \(note.id)")
+                if let index = self.notes.firstIndex(where: { n in n == note}) {
+                    self.notes[index] = note
+                    print("Note updated: \(note.id)")
+                } else {
+                    self.notes.insert(note, at: 0)
+                    print("Note created: \(note.id)")
+                }
             }
         }
     }
