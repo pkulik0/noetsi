@@ -41,7 +41,7 @@ struct ListNoteView: View {
                 .lineLimit(5)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
 
-            TagListView(note: note, showHeader: false)
+            TagListView(note: note, updateNote: true, showHeader: false)
         }
         .padding()
         .background(note.color.opacity(0.4))

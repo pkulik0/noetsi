@@ -11,6 +11,7 @@ struct TagListView: View {
     @State private var showTagEditor = false
     
     @ObservedObject var note: Note
+    var updateNote: Bool = false
     let showHeader: Bool
 
     var body: some View {
@@ -38,7 +39,7 @@ struct TagListView: View {
             }
         }
         .sheet(isPresented: $showTagEditor) {
-            TagEditorView(note: note)
+            TagEditorView(note: note, updateNote: updateNote)
         }
     }
 }

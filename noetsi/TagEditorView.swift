@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct TagEditorView: View {
+    @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var note: Note
     @State private var newTag: String = ""
+    let updateNote: Bool
 
     var body: some View {
         NavigationView {
@@ -53,6 +55,11 @@ struct TagEditorView: View {
                         dismiss()
                     }
                 }
+            }
+        }
+        .onDisappear {
+            if updateNote {
+                firestoreManager.writeNote(note: note)
             }
         }
     }
