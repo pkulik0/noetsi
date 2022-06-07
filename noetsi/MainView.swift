@@ -23,23 +23,31 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                VStack {
-                    List {
-                        ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
-                            ZStack {
-                                NavigationLink {
-                                    NoteView(noteList: noteList, noteIndex: noteIndex)
-                                } label: {}
-                                    .opacity(0)
-                                ListNoteView(note: note)
-                                    .shadow(radius: 5)
-                            }
-                            .listRowSeparator(.hidden)
+                List {
+                    ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
+                        ZStack {
+                            NavigationLink {
+                                NoteView(noteList: noteList, noteIndex: noteIndex)
+                            } label: {}
+                                .opacity(0)
+                            ListNoteView(note: note)
+                                .shadow(radius: 5)
                         }
-                        .onDelete(perform: deleteNotes)
-                        .onMove(perform: move)
+                        .listRowSeparator(.hidden)
                     }
-                    .listStyle(.plain)
+                    .onDelete(perform: deleteNotes)
+                    .onMove(perform: move)
+                }
+                .listStyle(.plain)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                }
+                .refreshable {
+                    withAnimation {
+                        updateData()
+                    }
                 }
                 
                 NavigationLink {
@@ -49,6 +57,7 @@ struct MainView: View {
                         .font(.title)
                         .padding()
                         .background(Color.secondary)
+                        .foregroundColor(.white)
                         .clipShape(Circle())
                 }
                 .simultaneousGesture(TapGesture().onEnded({
@@ -69,24 +78,27 @@ struct MainView: View {
                         }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
             }
         }
         .fullScreenCover(isPresented: $changeView) {
             WelcomeView()
         }
-        .onAppear {
-            updateData()
-        }
-        .onChange(of: firestoreManager.status) { _ in
-            updateData()
-        }
+        .onChange(of: firestoreManager.status, perform: { status in
+            switch(status) {
+            case .success:
+                noteList.notes = firestoreManager.notes
+            case .no_user:
+                changeView = true
+            case .failed:
+                fallthrough
+            case .loading:
+                break
+            }
+        })
     }
     
     func updateData() {
-        noteList.notes = firestoreManager.notes
+        firestoreManager.fetchNotes()
     }
     
     func addNote() {
@@ -96,8 +108,10 @@ struct MainView: View {
     }
     
     func deleteNotes(at offsets: IndexSet) {
-        for index in offsets {
-            noteList.remove(at: index, firestoreManager: firestoreManager)
+        withAnimation {
+            for index in offsets {
+                noteList.remove(at: index, firestoreManager: firestoreManager)
+            }
         }
     }
     
