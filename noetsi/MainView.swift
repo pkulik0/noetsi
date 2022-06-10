@@ -45,7 +45,10 @@ struct MainView: View {
             .navigationTitle("noetsi")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Sign out", action: firestoreManager.signOut)
+                    Button("Sign out") {
+                        firestoreManager.signOut()
+                        showWelcomeView = true
+                    }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()

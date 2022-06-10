@@ -123,6 +123,8 @@ class FirestoreManager: ObservableObject {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            self.notes = []
+            self.status = .no_user
         } catch {
             print(error.localizedDescription)
         }

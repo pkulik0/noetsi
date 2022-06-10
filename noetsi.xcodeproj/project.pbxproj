@@ -24,7 +24,18 @@
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
 		D6ABC5F6284E55C5007170A9 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */; };
+		D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D6AD2BA72853867E00BFE2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D696B3BA28440FA00018281D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D696B3C128440FA00018281D;
+			remoteInfo = noetsi;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D6601A4628456EBF00BB639F /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -43,6 +54,8 @@
 		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6A36B492844E4E700D11E71 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +68,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6AD2BA02853867E00BFE2C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				D696B3C428440FA00018281D /* noetsi */,
+				D6AD2BA42853867E00BFE2C3 /* noetsiTests */,
 				D696B3C328440FA00018281D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				D696B3C228440FA00018281D /* noetsi.app */,
+				D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +126,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		D6AD2BA42853867E00BFE2C3 /* noetsiTests */ = {
+			isa = PBXGroup;
+			children = (
+				D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */,
+			);
+			path = noetsiTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,6 +158,24 @@
 			productReference = D696B3C228440FA00018281D /* noetsi.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D6AD2BA22853867E00BFE2C3 /* noetsiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6AD2BA92853867E00BFE2C3 /* Build configuration list for PBXNativeTarget "noetsiTests" */;
+			buildPhases = (
+				D6AD2B9F2853867E00BFE2C3 /* Sources */,
+				D6AD2BA02853867E00BFE2C3 /* Frameworks */,
+				D6AD2BA12853867E00BFE2C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6AD2BA82853867E00BFE2C3 /* PBXTargetDependency */,
+			);
+			name = noetsiTests;
+			productName = noetsiTests;
+			productReference = D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -135,11 +183,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					D696B3C128440FA00018281D = {
 						CreatedOnToolsVersion = 13.3.1;
+					};
+					D6AD2BA22853867E00BFE2C3 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = D696B3C128440FA00018281D;
 					};
 				};
 			};
@@ -160,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				D696B3C128440FA00018281D /* noetsi */,
+				D6AD2BA22853867E00BFE2C3 /* noetsiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -172,6 +225,13 @@
 				D696B3CD28440FA10018281D /* Preview Assets.xcassets in Resources */,
 				D696B3CA28440FA10018281D /* Assets.xcassets in Resources */,
 				D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6AD2BA12853867E00BFE2C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +257,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6AD2B9F2853867E00BFE2C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D6AD2BA82853867E00BFE2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D696B3C128440FA00018281D /* noetsi */;
+			targetProxy = D6AD2BA72853867E00BFE2C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D696B3CE28440FA10018281D /* Debug */ = {
@@ -372,6 +448,44 @@
 			};
 			name = Release;
 		};
+		D6AD2BAA2853867E00BFE2C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q96DAPWJF3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pkulik.dev.noetsiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/noetsi.app/noetsi";
+			};
+			name = Debug;
+		};
+		D6AD2BAB2853867E00BFE2C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q96DAPWJF3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pkulik.dev.noetsiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/noetsi.app/noetsi";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -389,6 +503,15 @@
 			buildConfigurations = (
 				D696B3D128440FA10018281D /* Debug */,
 				D696B3D228440FA10018281D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6AD2BA92853867E00BFE2C3 /* Build configuration list for PBXNativeTarget "noetsiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6AD2BAA2853867E00BFE2C3 /* Debug */,
+				D6AD2BAB2853867E00BFE2C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
