@@ -6,48 +6,38 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     
-    @StateObject private var noteList: NoteList = NoteList()
     @State private var showWelcomeView = false
     @State private var showNewNote = false
-    
-    var firstNote: Note {
-        noteList.notes.first ?? Note()
-    }
 
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 List {
-                    ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
+                    ForEach($firestoreManager.notes) { $note in
                         ZStack {
                             NavigationLink {
-                                NoteView(noteList: noteList, noteIndex: noteIndex)
+                                NoteView(note: $note)
                             } label: {}
                                 .opacity(0)
-                            ListNoteView(note: note)
+                            ListNoteView(note: $note)
                                 .shadow(radius: 5)
+                                .onChange(of: note.deleteMe) { _ in
+                                    firestoreManager.deleteNote(id: note.id)
+                                }
                         }
                         .listRowSeparator(.hidden)
                     }
-                    .onDelete(perform: deleteNotes)
-                    .onMove(perform: move)
+                    .onDelete(perform: firestoreManager.deleteNotes)
+                    .onMove(perform: firestoreManager.move)
                 }
                 .listStyle(.plain)
-                .overlay {
-                    if firestoreManager.status == .loading {
-                        ProgressView()
-                    }
-                }
-                .animation(.default, value: noteList.notes)
+                .animation(.default, value: firestoreManager.notes)
                 .refreshable {
-                    withAnimation {
-                        updateData()
-                    }
+                    firestoreManager.updateData()
                 }
                 
                 addNoteButton
@@ -55,7 +45,7 @@ struct MainView: View {
             .navigationTitle("noetsi")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Sign out", action: signOut)
+                    Button("Sign out", action: firestoreManager.signOut)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -65,12 +55,11 @@ struct MainView: View {
         .fullScreenCover(isPresented: $showWelcomeView) {
             WelcomeView()
         }
-        .onChange(of: firestoreManager.status, perform: handleFirestoreStatus)
     }
     
     var addNoteButton: some View {
         NavigationLink {
-            NoteView(noteList: noteList, noteIndex: 0)
+            NoteView(note: $firestoreManager.notes.first ?? .constant(Note()))
         } label: {
             Image(systemName: "plus")
                 .font(.title)
@@ -80,55 +69,10 @@ struct MainView: View {
                 .clipShape(Circle())
         }
         .simultaneousGesture(TapGesture().onEnded({
-            addNote()
+            firestoreManager.addNote()
         }))
         .buttonStyle(.plain)
         .offset(x: -20, y: 0)
-    }
-    
-    func handleFirestoreStatus(status: FirestoreStatus) {
-        switch(status) {
-        case .success:
-            noteList.notes = firestoreManager.notes
-        case .no_user:
-            showWelcomeView = true
-        case .failed:
-            fallthrough
-        case .loading:
-            break
-        }
-    }
-    
-    func updateData() {
-        firestoreManager.fetchNotes()
-    }
-    
-    func addNote() {
-        withAnimation {
-            noteList.notes.insert(Note(), at: 0)
-        }
-    }
-    
-    func deleteNotes(at offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                noteList.remove(at: index, firestoreManager: firestoreManager)
-            }
-        }
-    }
-    
-    func move(from source: IndexSet, to destination: Int) {
-        noteList.notes.move(fromOffsets: source, toOffset: destination)
-        // TODO: save order in db
-    }
-    
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-            showWelcomeView = true
-        } catch {
-            print(error.localizedDescription)
-        }
     }
 }
 

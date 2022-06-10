@@ -38,7 +38,7 @@ class FirestoreManager: ObservableObject {
             if let error = error {
                 print("Could not write/update note \(note.id): \(error.localizedDescription)")
             } else {
-                if let index = self.notes.firstIndex(where: { n in n == note}) {
+                if let index = self.notes.firstIndex(where: { $0 == note }) {
                     self.notes[index] = note
                     print("Note updated: \(note.id)")
                 } else {
@@ -59,6 +59,10 @@ class FirestoreManager: ObservableObject {
                 print("Could not delete note \(id): \(error.localizedDescription)")
             } else {
                 print("Note deleted: \(id)")
+                guard let index = self.notes.firstIndex(where: { $0.id == id }) else {
+                    return
+                }
+                self.notes.remove(at: index)
             }
         }
     }
@@ -77,7 +81,7 @@ class FirestoreManager: ObservableObject {
                 return
             }
             
-            self.notes = []
+            var notes_buffer: [Note] = []
 
             for document in querySnapshot!.documents {
                 let note: Note = Note(id: document.documentID)
@@ -90,9 +94,37 @@ class FirestoreManager: ObservableObject {
                 let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
                 note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
                 
-                self.notes.append(note)
+                notes_buffer.append(note)
             }
+            self.notes = notes_buffer
             self.status = .success
+        }
+    }
+    
+    func updateData() {
+        self.fetchNotes()
+    }
+    
+    func addNote() {
+        self.notes.insert(Note(), at: 0)
+    }
+    
+    func deleteNotes(at offsets: IndexSet) {
+        for index in offsets {
+            self.deleteNote(id: notes[index].id)
+        }
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        self.notes.move(fromOffsets: source, toOffset: destination)
+        // TODO: save order in db
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

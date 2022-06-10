@@ -16,11 +16,15 @@ class Note: ObservableObject, Identifiable, Equatable {
     @Published var color: Color
     @Published var timestamp: Int
     
+    @Published var deleteMe: Bool
+    
     @Published var checklist: [String: Bool]?
     @Published var images: [Image]?
     @Published var location: CLLocation?
     
-    
+    var isEmpty: Bool {
+        title.isEmpty && body.isEmpty && tags.isEmpty && checklist == nil && images == nil
+    }
     
     init(id: String, title: String, body: String, tags: [String], timestamp: Int, color: Color) {
         self.id = id
@@ -29,6 +33,8 @@ class Note: ObservableObject, Identifiable, Equatable {
         self.tags = tags
         self.color = color
         self.timestamp = timestamp
+        
+        self.deleteMe = false
     }
 
     convenience init(id: String) {
@@ -47,22 +53,5 @@ class Note: ObservableObject, Identifiable, Equatable {
     func copy() -> Note {
         let copy = Note(id: self.id, title: self.title, body: self.body, tags: self.tags, timestamp: self.timestamp, color: self.color)
         return copy
-    }
-}
-
-class NoteList: ObservableObject {
-    @Published var notes: [Note]
-    
-    init(notes: [Note]) {
-        self.notes = notes
-    }
-    
-    convenience init() {
-        self.init(notes: [])
-    }
-    
-    func remove(at index: Int, firestoreManager: FirestoreManager) {
-        firestoreManager.deleteNote(id: notes[index].id)
-        notes.remove(at: index)
     }
 }

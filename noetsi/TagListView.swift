@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct TagListView: View {
+    @EnvironmentObject private var firestoreManager: FirestoreManager
+
     @State private var showTagEditor = false
     
-    @ObservedObject var note: Note
+    @Binding var note: Note
     var updateNote: Bool = false
     let showHeader: Bool
 
@@ -39,7 +41,10 @@ struct TagListView: View {
             }
         }
         .sheet(isPresented: $showTagEditor) {
-            TagEditorView(note: note, updateNote: updateNote)
+            TagEditorView(tags: $note.tags)
+                .onDisappear {
+                    firestoreManager.writeNote(note: note)
+                }
         }
     }
 }

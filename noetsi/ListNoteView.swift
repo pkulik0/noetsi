@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListNoteView: View {
-    @ObservedObject var note: Note
+    @Binding var note: Note
 
     private var bodyPlaceholder: String {
         if note.body.isEmpty {
@@ -41,7 +41,7 @@ struct ListNoteView: View {
                 .lineLimit(5)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
 
-            TagListView(note: note, updateNote: true, showHeader: false)
+            TagListView(note: $note, showHeader: false)
         }
         .padding()
         .background(note.color.opacity(0.4))

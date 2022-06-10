@@ -9,28 +9,18 @@ import SwiftUI
 
 struct NoteView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
-
-    @ObservedObject var noteList: NoteList
-    @ObservedObject var note: Note
-    private let noteUnmodified: Note
-    var noteIndex: Int
-    
     @Environment(\.dismiss) private var dismiss
     
+    @Binding var note: Note
+
+    @State private var noteCopy = Note()
+
     @State private var showMore: Bool = false
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     
     @FocusState private var isBodyFocused: Bool
     @FocusState private var isTitleFocused: Bool
-    
-    init(noteList: NoteList, noteIndex: Int) {
-        self.noteList = noteList
-        self.noteIndex = noteIndex
-        self.note = noteList.notes.count > noteIndex ? noteList.notes[noteIndex] : Note()
-        // TODO: Fix this bugged implementation of noteUnmodified, needs to overwrite the note in firestoreManager (or abandon not saving)
-        self.noteUnmodified = noteList.notes.count > noteIndex ? noteList.notes[noteIndex].copy() : Note()
-    }
 
     var body: some View {
         ZStack {
@@ -54,7 +44,7 @@ struct NoteView: View {
                         }
                 }
                 
-                TagListView(note: note, showHeader: true)
+                TagListView(note: $note, showHeader: true)
                 
                 if showChangeColor {
                     ColorPicker(selection: $note.color, isPresented: $showChangeColor, items: Color.noteColors)
@@ -75,7 +65,7 @@ struct NoteView: View {
             Button("Delete", role: .destructive, action: deleteNote)
         }
         .sheet(isPresented: $showTagEditor, content: {
-            TagEditorView(note: note, updateNote: false)
+            TagEditorView(tags: $note.tags)
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -96,20 +86,20 @@ struct NoteView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            noteCopy = note.copy()
+        }
         .onDisappear {
-            if note.title.isEmpty && note.body.isEmpty && note.tags.isEmpty {
-                noteList.remove(at: noteIndex, firestoreManager: firestoreManager)
-            } else if note != noteUnmodified {
+            if note.isEmpty {
+                note.deleteMe = true
+            } else if note != noteCopy {
                 firestoreManager.writeNote(note: note)
             }
         }
     }
     
     func deleteNote() {
-        note.title = ""
-        note.body = ""
-        note.tags = []
-
+        note.deleteMe = true
         dismiss()
     }
 }
