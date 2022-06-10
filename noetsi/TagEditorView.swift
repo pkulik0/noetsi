@@ -17,7 +17,7 @@ struct TagEditorView: View {
 
     var body: some View {
         NavigationView {
-            List {
+            Form {
                 Section {
                     ForEach(Array(note.tags.enumerated()), id: \.offset) { index, tag in
                         HStack {
@@ -26,16 +26,16 @@ struct TagEditorView: View {
                         }
                     }
                     .onDelete(perform: deleteTags)
+                    .animation(.default, value: note.tags)
                 } header: {
                     Text("Current tags:")
                 }
                 
                 Section {
                     TextField("Tag", text: $newTag)
+                    
                     Button {
-                        withAnimation {
-                            note.tags.append(newTag)
-                        }
+                        note.tags.append(newTag)
                         newTag = ""
                     } label: {
                         Label("Add", systemImage: "plus")

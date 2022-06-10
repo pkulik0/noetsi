@@ -22,31 +22,31 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                ZStack {
+                List {
+                    ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
+                        ZStack {
+                            NavigationLink {
+                                NoteView(noteList: noteList, noteIndex: noteIndex)
+                            } label: {}
+                                .opacity(0)
+                            ListNoteView(note: note)
+                                .shadow(radius: 5)
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                    .onDelete(perform: deleteNotes)
+                    .onMove(perform: move)
+                }
+                .listStyle(.plain)
+                .overlay {
                     if firestoreManager.status == .loading {
                         ProgressView()
                     }
-
-                    List {
-                        ForEach(Array(noteList.notes.enumerated()), id: \.offset) { noteIndex, note in
-                            ZStack {
-                                NavigationLink {
-                                    NoteView(noteList: noteList, noteIndex: noteIndex)
-                                } label: {}
-                                    .opacity(0)
-                                ListNoteView(note: note)
-                                    .shadow(radius: 5)
-                            }
-                            .listRowSeparator(.hidden)
-                        }
-                        .onDelete(perform: deleteNotes)
-                        .onMove(perform: move)
-                    }
-                    .listStyle(.plain)
-                    .refreshable {
-                        withAnimation {
-                            updateData()
-                        }
+                }
+                .animation(.default, value: noteList.notes)
+                .refreshable {
+                    withAnimation {
+                        updateData()
                     }
                 }
                 
