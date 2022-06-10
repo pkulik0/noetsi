@@ -6,14 +6,15 @@
 //
 
 import Firebase
+import SwiftUI
 
-enum UserStatus {
+enum FirestoreStatus {
     case loading, success, failed, no_user
 }
 
 class FirestoreManager: ObservableObject {
     @Published var notes: [Note] = []
-    @Published var status: UserStatus = .loading
+    @Published var status: FirestoreStatus = .loading
     
     let db = Firestore.firestore()
     
@@ -33,7 +34,7 @@ class FirestoreManager: ObservableObject {
             return
         }
 
-        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.colorName], merge: true) { error in
+        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description], merge: true) { error in
             if let error = error {
                 print("Could not write/update note \(note.id): \(error.localizedDescription)")
             } else {
@@ -85,7 +86,9 @@ class FirestoreManager: ObservableObject {
                 note.body = document.data()["body"] as? String ?? "Unknown content"
                 note.tags = document.data()["tags"] as? [String] ?? []
                 note.timestamp = document.data()["timestamp"] as? Int ?? 0
-                note.colorName = document.data()["color"] as? String ?? "white"
+                
+                let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
+                note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
                 
                 self.notes.append(note)
             }
