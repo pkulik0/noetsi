@@ -14,12 +14,14 @@ enum FirestoreStatus {
 
 class FirestoreManager: ObservableObject {
     @Published var notes: [Note] = []
+    @Published var layout: [String] = []
     @Published var status: FirestoreStatus = .loading
     
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
+    private var buffer: [Note] = []
     
     init() {
-        fetchNotes()
+        fetchData()
     }
 
     var uid: String? {
@@ -31,26 +33,45 @@ class FirestoreManager: ObservableObject {
 
     func writeNote(note: Note) {
         guard let uid = uid else {
+            status = .no_user
+            return
+        }
+        
+        let batch = db.batch()
+
+        let noteDocument = db.collection(uid).document(note.id)
+        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description], forDocument: noteDocument, merge: true)
+        
+        let userData = db.collection(uid).document("userData")
+        batch.setData(["layout": layout], forDocument: userData, merge: true)
+        
+        batch.commit() { error in
+            if let error = error {
+                print("Could not write note \(note.id): \(error.localizedDescription)")
+            } else {
+                print("Note \(note.id) written")
+            }
+        }
+    }
+    
+    func writeLayout() {
+        guard let uid = uid else {
+            status = .no_user
             return
         }
 
-        db.collection(uid).document(note.id).setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description], merge: true) { error in
+        db.collection(uid).document("userData").setData(["layout": layout], merge: true) { error in
             if let error = error {
-                print("Could not write/update note \(note.id): \(error.localizedDescription)")
+                print("Could not update layout: \(error.localizedDescription)")
             } else {
-                if let index = self.notes.firstIndex(where: { $0 == note }) {
-                    self.notes[index] = note
-                    print("Note updated: \(note.id)")
-                } else {
-                    self.notes.insert(note, at: 0)
-                    print("Note created: \(note.id)")
-                }
+                print("Layout updated")
             }
         }
     }
 
     func deleteNote(id: String) {
         guard let uid = uid else {
+            status = .no_user
             return
         }
 
@@ -63,11 +84,32 @@ class FirestoreManager: ObservableObject {
                     return
                 }
                 self.notes.remove(at: index)
+                self.layout.remove(at: index)
+                
+                self.writeLayout()
             }
         }
     }
     
-    func fetchNotes() {
+    func parseUserData(document: QueryDocumentSnapshot) {
+        layout = document.data()["layout"] as? [String] ?? []
+    }
+    
+    func parseNote(document: QueryDocumentSnapshot) {
+        let note: Note = Note(id: document.documentID)
+
+        note.title = document.data()["title"] as? String ?? "Unknown title"
+        note.body = document.data()["body"] as? String ?? "Unknown content"
+        note.tags = document.data()["tags"] as? [String] ?? []
+        note.timestamp = document.data()["timestamp"] as? Int ?? 0
+        
+        let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
+        note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
+        
+        self.buffer.append(note)
+    }
+    
+    func fetchData() {
         guard let uid = uid else {
             status = .no_user
             return
@@ -81,32 +123,29 @@ class FirestoreManager: ObservableObject {
                 return
             }
             
-            var notes_buffer: [Note] = []
+            self.buffer = []
 
             for document in querySnapshot!.documents {
-                let note: Note = Note(id: document.documentID)
-
-                note.title = document.data()["title"] as? String ?? "Unknown title"
-                note.body = document.data()["body"] as? String ?? "Unknown content"
-                note.tags = document.data()["tags"] as? [String] ?? []
-                note.timestamp = document.data()["timestamp"] as? Int ?? 0
-                
-                let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
-                note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
-                
-                notes_buffer.append(note)
+                if document.documentID == "userData" {
+                    self.parseUserData(document: document)
+                } else {
+                    self.parseNote(document: document)
+                }
             }
-            self.notes = notes_buffer
+            
+            self.buffer.sort { note1, note2 in
+                (self.layout.firstIndex(where: { $0 == note1.id}) ?? Int.max) < (self.layout.firstIndex(where: { $0 == note2.id}) ?? Int.max)
+            }
+
+            self.notes = self.buffer
             self.status = .success
         }
     }
     
-    func updateData() {
-        self.fetchNotes()
-    }
-    
     func addNote() {
-        self.notes.insert(Note(), at: 0)
+        let note = Note()
+        self.notes.insert(note, at: 0)
+        self.layout.insert(note.id, at: 0)
     }
     
     func deleteNotes(at offsets: IndexSet) {
@@ -117,7 +156,9 @@ class FirestoreManager: ObservableObject {
     
     func move(from source: IndexSet, to destination: Int) {
         self.notes.move(fromOffsets: source, toOffset: destination)
-        // TODO: save order in db
+        self.layout.move(fromOffsets: source, toOffset: destination)
+
+        self.writeLayout()
     }
     
     func signOut() {

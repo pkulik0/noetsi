@@ -14,14 +14,14 @@ class Note: ObservableObject, Identifiable, Equatable {
     @Published var body: String
     @Published var tags: [String]
     @Published var color: Color
-    @Published var timestamp: Int
-    
-    @Published var deleteMe: Bool
     
     @Published var checklist: [String: Bool]?
     @Published var images: [Image]?
     @Published var location: CLLocation?
     
+    var timestamp: Int
+    var deleteMe: Bool
+
     var isEmpty: Bool {
         title.isEmpty && body.isEmpty && tags.isEmpty && checklist == nil && images == nil
     }

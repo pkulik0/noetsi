@@ -90,7 +90,7 @@ struct WelcomeView: View {
             showingAlert = true
         } else {
             authSuccess = true
-            firestoreManager.fetchNotes()
+            firestoreManager.fetchData()
         }
     }
     

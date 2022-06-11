@@ -37,7 +37,7 @@ struct MainView: View {
                 .listStyle(.plain)
                 .animation(.default, value: firestoreManager.notes)
                 .refreshable {
-                    firestoreManager.updateData()
+                    firestoreManager.fetchData()
                 }
                 
                 addNoteButton
