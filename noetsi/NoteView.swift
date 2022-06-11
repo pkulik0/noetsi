@@ -34,8 +34,9 @@ struct NoteView: View {
                 ZStack(alignment: .topLeading) {
                     if note.body.isEmpty {
                         Text("...")
-                            .opacity(0.5)
+                            .opacity(0.3)
                             .padding(.top)
+                            .padding(.leading, 5)
                     }
                     TextEditor(text: $note.body)
                         .focused($isBodyFocused)
