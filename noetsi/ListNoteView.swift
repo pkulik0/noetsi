@@ -40,6 +40,11 @@ struct ListNoteView: View {
                 .padding(10)
                 .lineLimit(5)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
+            
+            if !note.checklist.isEmpty {
+                Text("+ Checklist (\(note.checklist.count))")
+                    .font(.caption)
+            }
 
             TagListView(note: $note, showHeader: false)
         }
