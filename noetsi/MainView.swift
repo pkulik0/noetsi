@@ -78,9 +78,3 @@ struct MainView: View {
         .offset(x: -20, y: 0)
     }
 }
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
