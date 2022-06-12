@@ -25,6 +25,7 @@
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
 		D6ABC5F6284E55C5007170A9 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */; };
 		D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
+		D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D6ABC5F5284E55C5007170A9 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiTests.swift; sourceTree = "<group>"; };
+		D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		D696B3B928440FA00018281D = {
 			isa = PBXGroup;
 			children = (
+				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 				D696B3C428440FA00018281D /* noetsi */,
 				D6AD2BA42853867E00BFE2C3 /* noetsiTests */,
 				D696B3C328440FA00018281D /* Products */,
@@ -224,6 +227,7 @@
 			files = (
 				D696B3CD28440FA10018281D /* Preview Assets.xcassets in Resources */,
 				D696B3CA28440FA10018281D /* Assets.xcassets in Resources */,
+				D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */,
 				D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +408,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -433,6 +438,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
