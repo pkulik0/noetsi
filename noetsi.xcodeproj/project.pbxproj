@@ -83,7 +83,6 @@
 		D696B3B928440FA00018281D = {
 			isa = PBXGroup;
 			children = (
-				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 				D696B3C428440FA00018281D /* noetsi */,
 				D6AD2BA42853867E00BFE2C3 /* noetsiTests */,
 				D696B3C328440FA00018281D /* Products */,
@@ -102,6 +101,7 @@
 		D696B3C428440FA00018281D /* noetsi */ = {
 			isa = PBXGroup;
 			children = (
+				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 				D696B3F628444EBB0018281D /* MainView.swift */,
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
 				D67E75362847D9FC00150062 /* ListNoteView.swift */,
