@@ -19,6 +19,7 @@ struct NoteView: View {
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     @State private var showShareView: Bool = false
+    @State private var showItemDrawer: Bool = false
     
     @FocusState private var isBodyFocused: Bool
     @FocusState private var isTitleFocused: Bool
@@ -53,12 +54,17 @@ struct NoteView: View {
                 .padding(.vertical)
             
             if showChangeColor {
-                ColorPicker(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
+                ColorPickerView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
+                    .shadow(radius: 5)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+            if showItemDrawer {
+                ItemDrawerView(isPresented: $showItemDrawer)
                     .shadow(radius: 5)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
-        .padding(.horizontal)
+        .padding()
         .alert("Are you sure?", isPresented: $showDeleteAlert, actions: {
             Button("Delete", role: .destructive, action: deleteNote)
             Button("Cancel", role: .cancel) {}
@@ -89,16 +95,20 @@ struct NoteView: View {
         Group {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
-                    // add smth
+                    withAnimation {
+                        showChangeColor = false
+                        showItemDrawer.toggle()
+                    }
                 } label: {
-                    Label("Add", systemImage: "plus")
+                    Label("Add", systemImage: showItemDrawer ? "xmark" : "plus")
                 }
                 Button {
                     withAnimation {
+                        showItemDrawer = false
                         showChangeColor.toggle()
                     }
                 } label: {
-                    Label("Change color", systemImage: "paintpalette")
+                    Label("Change color", systemImage: showChangeColor ? "paintpalette.fill" : "paintpalette")
                 }
                 Button {
                     showShareView = true

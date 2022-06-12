@@ -63,55 +63,10 @@ struct ColorPickerView: View {
             }
             .padding([.horizontal, .bottom])
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    Spacer()
-                    ForEach(Color.noteColors, id: \.self) { color in
-                        Button {
-                            withAnimation {
-                                selection = color
-                                isPresented = false
-                            }
-                        } label: {
-                            ZStack {
-                                Circle()
-                                    .fill(color)
-                                    .tag(color)
-                                    .frame(width: 50, height: 50)
-                                
-                                if color == selection {
-                                    Image(systemName: "checkmark")
-                                        .font(.title2.bold())
-                                        .opacity(0.5)
-                                }
-                            }
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+            HorizontalPickerView(items: Color.noteColors, selection: $selection, isPresented: $isPresented) { item in
+                item
             }
-            .padding(.vertical, 10)
-            .background(Color.secondary.opacity(0.3))
-            .clipShape(Capsule())
         }
-        .offset(offset)
-        .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)
-            .onChanged({ value in
-                let amountVertical = value.translation.height
-                if amountVertical > 0 {
-                    withAnimation {
-                        offset.height = amountVertical
-                    }
-                }
-            })
-            .onEnded({ value in
-                withAnimation {
-                    if value.translation.height > 40 {
-                        isPresented = false
-                    }
-                    offset = CGSize.zero
-                }
-            })
-        )
+        .hideOnDrag(offset: $offset, isPresented: $isPresented)
     }
 }
