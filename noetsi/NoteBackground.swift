@@ -22,9 +22,9 @@ struct NoteBackground: View {
             if pattern.type != .None {
                 GeometryReader { geo in
                     if pattern.type == .Grid {
-                        ForEach(0..<(Int(Int(geo.size.width) / patternSize) + 1), id: \.self) { i in
+                        ForEach(0..<Int(geo.size.width) / patternSize, id: \.self) { i in
                             Path { path in
-                                let x = i * patternSize
+                                let x = (i + 1) * patternSize
                                 path.move(to: CGPoint(x: x, y: 0))
                                 // Draw beyond max height to avoid buggy animations
                                 path.addLine(to: CGPoint(x: x, y: Int(geo.size.height * 2)))
@@ -34,9 +34,9 @@ struct NoteBackground: View {
                         }
                     }
                     
-                    ForEach(0..<(Int(Int(geo.size.height) / patternSize) + 1), id: \.self) { i in
+                    ForEach(0..<Int(geo.size.height) / patternSize, id: \.self) { i in
                         Path { path in
-                            let y = i * patternSize
+                            let y = (i + 1) * patternSize
                             path.move(to: CGPoint(x: 0, y: y))
                             // Draw beyond max width to avoid buggy animations
                             path.addLine(to: CGPoint(x: Int(geo.size.width * 2), y: y))
@@ -45,7 +45,6 @@ struct NoteBackground: View {
                         .stroke(color.opacity(0.25), lineWidth: 2)
                     }
                 }
-                .drawingGroup()
                 .ignoresSafeArea(.all, edges: .bottom)
             }
         }

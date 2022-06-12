@@ -10,11 +10,11 @@ import MapKit
 
 class Note: ObservableObject, Identifiable, Equatable {
     
-    enum PatternType: Int, Codable {
+    enum PatternType: Int {
         case None, Lines, Grid
     }
 
-    struct Pattern: Equatable, Codable {
+    struct Pattern: Equatable {
         var type: PatternType
         var size: Double
     }
