@@ -40,7 +40,7 @@ class FirestoreManager: ObservableObject {
         let batch = db.batch()
 
         let noteDocument = db.collection(uid).document(note.id)
-        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description], forDocument: noteDocument, merge: true)
+        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size]], forDocument: noteDocument, merge: true)
         
         let userData = db.collection(uid).document("userData")
         batch.setData(["layout": layout], forDocument: userData, merge: true)
@@ -105,6 +105,10 @@ class FirestoreManager: ObservableObject {
         
         let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
         note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
+        
+        let patternData = document.data()["pattern"] as? [String: Any] ?? [:]
+        note.pattern.type = Note.PatternType(rawValue: patternData["type"] as? Int ?? 0) ?? .None
+        note.pattern.size = patternData["size"] as? Double ?? 20.0
         
         self.buffer.append(note)
     }
