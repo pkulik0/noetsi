@@ -44,7 +44,7 @@ struct ListNoteView: View {
             TagListView(note: $note, showHeader: false)
         }
         .padding()
-        .background(note.color.opacity(0.4))
+        .background(NoteBackground(color: note.color, pattern: note.pattern))
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

@@ -33,6 +33,14 @@ class Note: ObservableObject, Identifiable, Equatable {
     
     var timestamp: Int
     var deleteMe: Bool
+    
+    var shareable: String {
+        """
+        noetsi note: "\(title.isEmpty ? "Untitled" : title)"
+        
+        \(body)
+        """
+    }
 
     var isEmpty: Bool {
         title.isEmpty && body.isEmpty && tags.isEmpty && checklist == nil && images == nil && location == nil

@@ -18,73 +18,39 @@ struct NoteView: View {
     @State private var showDeleteAlert: Bool = false
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
+    @State private var showShareView: Bool = false
     
     @FocusState private var isBodyFocused: Bool
     @FocusState private var isTitleFocused: Bool
-    
-    private var patternSize: Int {
-        Int(note.pattern.size)
-    }
 
     var body: some View {
         VStack {
-            ZStack {
-                note.color.opacity(0.4)
-                
-                if note.pattern.type != .None {
-                    GeometryReader { geo in
-                        if note.pattern.type == .Grid {
-                            ForEach(0..<(Int(Int(geo.size.width) / patternSize) + 1), id: \.self) { i in
-                                Path { path in
-                                    let x = i * patternSize
-                                    path.move(to: CGPoint(x: x, y: 0))
-                                    path.addLine(to: CGPoint(x: x, y: Int(geo.size.height)))
-                                    path.closeSubpath()
-                                }
-                                .stroke(note.color.opacity(0.25), lineWidth: 2)
-                            }
-                        }
-                        
-                        ForEach(0..<Int(Int(geo.size.height) / patternSize), id: \.self) { i in
-                            Path { path in
-                                let y = i * patternSize
-                                path.move(to: CGPoint(x: 0, y: y))
-                                path.addLine(to: CGPoint(x: Int(geo.size.width), y: y))
-                                path.closeSubpath()
-                            }
-                            .stroke(note.color.opacity(0.25), lineWidth: 2)
-                        }
+            VStack(alignment: .leading) {
+                TextField("Title", text: $note.title)
+                    .font(.title.bold())
+                    .focused($isTitleFocused)
+                                    
+                ZStack(alignment: .topLeading) {
+                    if note.body.isEmpty {
+                        Text("Empty")
+                            .opacity(0.5)
+                            .padding(.top, 10)
+                            .padding(.leading, 5)
                     }
-                    .drawingGroup()
-                    .ignoresSafeArea(.all, edges: .bottom)
-                }
-                
-                VStack(alignment: .leading) {
-                    TextField("Title", text: $note.title)
-                        .font(.title.bold())
-                        .focused($isTitleFocused)
-                                        
-                    ZStack(alignment: .topLeading) {
-                        if note.body.isEmpty {
-                            Text("Empty")
-                                .opacity(0.5)
-                                .padding(.top, 10)
-                                .padding(.leading, 5)
+                    TextEditor(text: $note.body)
+                        .focused($isBodyFocused)
+                        .onAppear {
+                            UITextView.appearance().backgroundColor = .clear
                         }
-                        TextEditor(text: $note.body)
-                            .focused($isBodyFocused)
-                            .onAppear {
-                                UITextView.appearance().backgroundColor = .clear
-                            }
-                    }
                 }
-                .padding([.top, .leading], 25)
             }
+            .padding([.top, .leading], 25)
+            .background(NoteBackground(color: note.color, pattern: note.pattern))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 5)
             
             TagListView(note: $note, showHeader: true)
-                .padding(.top)
+                .padding(.vertical)
             
             if showChangeColor {
                 ColorPicker(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
@@ -101,6 +67,26 @@ struct NoteView: View {
             TagEditorView(tags: $note.tags)
         })
         .toolbar {
+            toolbarItems
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showShareView, content: {
+            ShareItemsView(activityItems: [note.shareable], applicationActivites: nil)
+        })
+        .onAppear {
+            noteCopy = note.copy()
+        }
+        .onDisappear {
+            if note.isEmpty {
+                note.deleteMe = true
+            } else if note != noteCopy {
+                firestoreManager.writeNote(note: note)
+            }
+        }
+    }
+    
+    var toolbarItems: some ToolbarContent {
+        Group {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     // add smth
@@ -115,7 +101,7 @@ struct NoteView: View {
                     Label("Change color", systemImage: "paintpalette")
                 }
                 Button {
-                    // share a copy
+                    showShareView = true
                 } label: {
                     Label("Share", systemImage: "square.and.arrow.up")
                 }
@@ -134,17 +120,6 @@ struct NoteView: View {
                     isBodyFocused = false
                     isTitleFocused = false
                 }
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            noteCopy = note.copy()
-        }
-        .onDisappear {
-            if note.isEmpty {
-                note.deleteMe = true
-            } else if note != noteCopy {
-                firestoreManager.writeNote(note: note)
             }
         }
     }
