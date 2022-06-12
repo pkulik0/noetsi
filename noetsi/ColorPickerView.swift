@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ColorPicker: View {
+struct ColorPickerView: View {
     @Binding var selection: Color
     @Binding var pattern: Note.Pattern
     @Binding var isPresented: Bool
