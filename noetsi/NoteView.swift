@@ -19,7 +19,8 @@ struct NoteView: View {
     @State private var showChangeColor: Bool = false
     @State private var showTagEditor: Bool = false
     @State private var showShareView: Bool = false
-    @State private var showItemDrawer: Bool = false
+
+    @AppStorage("showChecklist") private var showChecklist: Bool = false
     
     @FocusState private var isBodyFocused: Bool
     @FocusState private var isTitleFocused: Bool
@@ -40,9 +41,21 @@ struct NoteView: View {
                     }
                     TextEditor(text: $note.body)
                         .focused($isBodyFocused)
-                        .onAppear {
-                            UITextView.appearance().backgroundColor = .clear
+                }
+                
+                if showChecklist {
+                    Divider()
+
+                    Group {
+                        Text("Checklist:")
+                            .font(.caption)
+                        
+                        ScrollView(.vertical, showsIndicators: false) {
+                            ChecklistView(checklist: $note.checklist)
                         }
+                        .frame(maxHeight: 150)
+                    }
+                    .padding(.vertical, 5)
                 }
             }
             .padding([.top, .leading], 25)
@@ -55,11 +68,6 @@ struct NoteView: View {
             
             if showChangeColor {
                 ThemeEditorView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
-                    .shadow(radius: 5)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
-            if showItemDrawer {
-                ItemDrawerView(isPresented: $showItemDrawer)
                     .shadow(radius: 5)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
@@ -81,6 +89,7 @@ struct NoteView: View {
         })
         .onAppear {
             noteCopy = note.copy()
+            UITextView.appearance().backgroundColor = .clear
         }
         .onDisappear {
             if note.isEmpty {
@@ -96,15 +105,17 @@ struct NoteView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     withAnimation {
-                        showChangeColor = false
-                        showItemDrawer.toggle()
+                        showChecklist.toggle()
                     }
                 } label: {
-                    Label("Add", systemImage: showItemDrawer ? "xmark" : "plus")
+                    HStack(spacing: 0) {
+                        Image(systemName: showChecklist ? "eye.fill" : "eye")
+                            .font(.caption2)
+                        Image(systemName: "checklist")
+                    }
                 }
                 Button {
                     withAnimation {
-                        showItemDrawer = false
                         showChangeColor.toggle()
                     }
                 } label: {

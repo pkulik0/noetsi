@@ -40,7 +40,7 @@ class FirestoreManager: ObservableObject {
         let batch = db.batch()
 
         let noteDocument = db.collection(uid).document(note.id)
-        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size]], forDocument: noteDocument, merge: true)
+        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size], "checklist": note.checklistFirebase], forDocument: noteDocument, merge: true)
         
         let userData = db.collection(uid).document("userData")
         batch.setData(["layout": layout], forDocument: userData, merge: true)
@@ -109,6 +109,13 @@ class FirestoreManager: ObservableObject {
         let patternData = document.data()["pattern"] as? [String: Any] ?? [:]
         note.pattern.type = Note.PatternType(rawValue: patternData["type"] as? Int ?? 0) ?? .None
         note.pattern.size = patternData["size"] as? Double ?? 20.0
+        
+        let checklistItems = document.data()["checklist"] as? [[String:Bool]] ?? []
+        for item in checklistItems {
+            let text = item.first?.key ?? " "
+            let isChecked = item.first?.value ?? false
+            note.checklist.append(Note.ChecklistItem(text: text, isChecked: isChecked))
+        }
         
         self.buffer.append(note)
     }
