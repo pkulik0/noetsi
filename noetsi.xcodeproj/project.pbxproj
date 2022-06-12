@@ -27,7 +27,7 @@
 		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
-		D6ABC5F6284E55C5007170A9 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ColorPickerView.swift */; };
+		D6ABC5F6284E55C5007170A9 /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */; };
 		D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
 		D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6A36B492844E4E700D11E71 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		D6ABC5F5284E55C5007170A9 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorView.swift; sourceTree = "<group>"; };
 		D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiTests.swift; sourceTree = "<group>"; };
 		D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
 				D67E75362847D9FC00150062 /* ListNoteView.swift */,
 				D66A6AD128497CF2009DB38F /* TagListView.swift */,
-				D6ABC5F5284E55C5007170A9 /* ColorPickerView.swift */,
+				D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */,
 				D65CC38B28564BC500D9A377 /* HorizontalPickerView.swift */,
 				D6601A4628456EBF00BB639F /* NoteView.swift */,
 				D65CC38928563A7200D9A377 /* ItemDrawerView.swift */,
@@ -265,7 +265,7 @@
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 				D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */,
 				D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */,
-				D6ABC5F6284E55C5007170A9 /* ColorPickerView.swift in Sources */,
+				D6ABC5F6284E55C5007170A9 /* ThemeEditorView.swift in Sources */,
 				D65CC38C28564BC500D9A377 /* HorizontalPickerView.swift in Sources */,
 				D66A6AD228497CF2009DB38F /* TagListView.swift in Sources */,
 				D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */,

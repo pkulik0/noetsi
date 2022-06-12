@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ColorPickerView: View {
+struct ThemeEditorView: View {
     @Binding var selection: Color
     @Binding var pattern: Note.Pattern
     @Binding var isPresented: Bool

@@ -54,7 +54,7 @@ struct NoteView: View {
                 .padding(.vertical)
             
             if showChangeColor {
-                ColorPickerView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
+                ThemeEditorView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
                     .shadow(radius: 5)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
