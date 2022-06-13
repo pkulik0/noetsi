@@ -11,6 +11,8 @@ struct NoteBackground: View {
     let color: Color
     let pattern: Note.Pattern
     
+    private let patternOpacity = 0.1
+    
     private var patternSize: Int {
         Int(pattern.size)
     }
