@@ -6,14 +6,44 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
+    @AppStorage("enableAuth") private var enableAuth = false
     
     @State private var showWelcomeView = false
     @State private var showNewNote = false
+    @State private var showOptions = false
+    @State private var isUnlocked = false
 
     var body: some View {
+        VStack {
+            if isUnlocked {
+                mainViewBody
+            } else {
+                Button {
+                    authenticate()
+                } label: {
+                    Label("Unlock notes", systemImage: "lock.fill")
+                        .font(.headline)
+                        .labelStyle(.titleAndIcon)
+                }
+                .padding()
+                .background(Capsule().strokeBorder(Color.accentColor, lineWidth: 3))
+                
+                Button("Sign out", action: signOut)
+                    .font(.headline)
+                    .padding()
+                    .opacity(0.8)
+            }
+        }
+        .onAppear {
+            authenticate()
+        }
+    }
+    
+    var mainViewBody: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 List {
@@ -45,6 +75,11 @@ struct MainView: View {
             .navigationTitle("noetsi")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showOptions.toggle()
+                    } label: {
+                        Label("More", systemImage: "ellipsis")
+                    }
                     Button("Sign out") {
                         firestoreManager.signOut()
                         showWelcomeView = true
@@ -54,9 +89,17 @@ struct MainView: View {
                     EditButton()
                 }
             }
-        }
-        .fullScreenCover(isPresented: $showWelcomeView) {
-            WelcomeView()
+            .fullScreenCover(isPresented: $showWelcomeView) {
+                WelcomeView()
+            }
+            .confirmationDialog("More", isPresented: $showOptions) {
+                Button("\(enableAuth ? "Unlock" : "Lock") noetsi") {
+                    enableAuth.toggle()
+                }
+                Button("Sign out", role: .destructive) {
+                    signOut()
+                }
+            }
         }
     }
     
@@ -76,5 +119,29 @@ struct MainView: View {
         }))
         .buttonStyle(.plain)
         .offset(x: -20, y: 0)
+    }
+    
+    func authenticate() {
+        if enableAuth == false {
+            isUnlocked = true
+            return
+        }
+
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your notes") { authResult, authError in
+                if authResult {
+                    isUnlocked = true
+                }
+            }
+        }
+    }
+    
+    func signOut() {
+        firestoreManager.signOut()
+        enableAuth = false
+        showWelcomeView = true
     }
 }
