@@ -10,6 +10,7 @@ import Firebase
 
 struct WelcomeView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
+    @State private var feedback = UINotificationFeedbackGenerator()
 
     @State private var email = ""
     @State private var password = ""
@@ -63,18 +64,22 @@ struct WelcomeView: View {
                     .padding(.bottom, 25)
                 
                 HStack {
-                    Button("sign up", action: signup)
-                        .disabled(!isValid)
-                        .font(.title.bold())
-                        .foregroundColor(isValid ? .primary : .primary.opacity(0.25))
-                        .padding(10)
+                    Button("sign up") {
+                        firestoreManager.signUp(email: email, password: password, onFinished: handleAuthResult)
+                    }
+                    .disabled(!isValid)
+                    .font(.title.bold())
+                    .foregroundColor(isValid ? .primary : .primary.opacity(0.25))
+                    .padding(10)
                     
-                    Button("sign in", action: signin)
-                        .disabled(!isValid)
-                        .font(.title.bold())
-                        .foregroundColor(isValid ? systemBackground : .white)
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(isValid ? Color.primary : .primary.opacity(0.25)))
+                    Button("sign in") {
+                        firestoreManager.signIn(email: email, password: password, onFinished: handleAuthResult)
+                    }
+                    .disabled(!isValid)
+                    .font(.title.bold())
+                    .foregroundColor(isValid ? systemBackground : .white)
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(isValid ? Color.primary : .primary.opacity(0.25)))
                 }
                 .animation(.easeInOut, value: isValid)
             }
@@ -92,23 +97,13 @@ struct WelcomeView: View {
     
     func handleAuthResult(error: Error?) {
         if let error = error {
+            feedback.notificationOccurred(.error)
             alertMessage = error.localizedDescription
             showingAlert = true
         } else {
+            feedback.notificationOccurred(.success)
             authSuccess = true
             firestoreManager.fetchData()
-        }
-    }
-    
-    func signup() {
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            handleAuthResult(error: error)
-        }
-    }
-    
-    func signin() {
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            handleAuthResult(error: error)
         }
     }
 }

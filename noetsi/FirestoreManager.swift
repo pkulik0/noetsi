@@ -181,4 +181,16 @@ class FirestoreManager: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func signUp(email: String, password: String, onFinished: @escaping (_ error: Error?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            onFinished(error)
+        }
+    }
+    
+    func signIn(email: String, password: String, onFinished: @escaping (_ error: Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            onFinished(error)
+        }
+    }
 }
