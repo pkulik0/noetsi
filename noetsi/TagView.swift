@@ -9,16 +9,17 @@ import SwiftUI
 
 struct TagView: View {
     let tag: String
+    var color: Color = .secondary
     
     var body: some View {
         HStack(spacing: 0) {
             Text("#")
                 .bold()
-                .foregroundColor(.secondary)
+                .foregroundColor(color)
             Text(tag)
         }
         .padding(10)
-        .background(Capsule().strokeBorder(.secondary, lineWidth: 3))
+        .background(Capsule().strokeBorder(color, lineWidth: 3).opacity(0.75))
     }
 }
 

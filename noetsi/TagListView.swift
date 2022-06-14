@@ -25,7 +25,7 @@ struct TagListView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(note.tags, id: \.self) { tag in
-                        TagView(tag: tag)
+                        TagView(tag: tag, color: note.color)
                             .font(.caption)
                     }
                     Button {
@@ -34,7 +34,7 @@ struct TagListView: View {
                         Image(systemName: note.tags.count > 0 ? "pencil" : "plus")
                             .foregroundColor(.white)
                             .padding(5)
-                            .background(Circle().fill(.secondary))
+                            .background(Circle().fill(note.color).opacity(0.75))
                     }
                     .buttonStyle(.plain)
                 }
