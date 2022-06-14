@@ -66,6 +66,10 @@ struct MainView: View {
                                     }
                                     .tint(.blue)
                                 }
+                                .onDrag {
+                                    UISelectionFeedbackGenerator().selectionChanged()
+                                    return NSItemProvider(item: nil, typeIdentifier: nil)
+                                }
                         }
                         .listRowSeparator(.hidden)
                     }
@@ -81,22 +85,6 @@ struct MainView: View {
                 addNoteButton
             }
             .navigationTitle("noetsi")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        showOptions.toggle()
-                    } label: {
-                        Label("More", systemImage: "ellipsis")
-                    }
-                    Button("Sign out") {
-                        firestoreManager.signOut()
-                        showWelcomeView = true
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
             .fullScreenCover(isPresented: $showWelcomeView) {
                 WelcomeView()
             }
@@ -116,6 +104,13 @@ struct MainView: View {
                 }
                 Button("Sign out", role: .destructive) {
                     signOut()
+                }
+            }
+            .toolbar {
+                Button {
+                    showOptions.toggle()
+                } label: {
+                    Label("More", systemImage: "ellipsis")
                 }
             }
         }

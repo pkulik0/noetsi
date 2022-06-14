@@ -181,6 +181,7 @@ class FirestoreManager: ObservableObject {
         self.layout.move(fromOffsets: source, toOffset: destination)
 
         self.writeLayout()
+        UIImpactFeedbackGenerator().impactOccurred()
     }
     
     func signOut() {
