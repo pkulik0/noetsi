@@ -24,7 +24,7 @@ struct WelcomeView: View {
     private let systemBackground = Color(uiColor: UIColor.systemBackground)
     
     private var isValid: Bool {
-        return email.contains("@") && email.count > 5 && !password.isEmpty
+        return email.contains("@") && email.contains(".") && email.count > 5 && password.count > 7
     }
 
     var body: some View {
@@ -84,6 +84,11 @@ struct WelcomeView: View {
                 .animation(.easeInOut, value: isValid)
             }
             .padding()
+            .onSubmit {
+                if isValid {
+                    firestoreManager.signIn(email: email, password: password, onFinished: handleAuthResult)
+                }
+            }
         }
         .fullScreenCover(isPresented: $authSuccess, content: {
             MainView()
