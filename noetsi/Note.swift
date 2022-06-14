@@ -82,7 +82,7 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
-        (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.color == rhs.color) && (lhs.pattern == lhs.pattern) && (lhs.checklist == rhs.checklist)
+        (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.color == rhs.color) && (lhs.pattern == rhs.pattern) && (lhs.checklist == rhs.checklist)
     }
     
     func copy() -> Note {
