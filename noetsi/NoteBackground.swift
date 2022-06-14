@@ -32,7 +32,7 @@ struct NoteBackground: View {
                                 path.addLine(to: CGPoint(x: x, y: Int(geo.size.height * 2)))
                                 path.closeSubpath()
                             }
-                            .stroke(color.opacity(0.25), lineWidth: 2)
+                            .stroke(color.opacity(patternOpacity), lineWidth: 2)
                         }
                     }
                     
@@ -44,7 +44,7 @@ struct NoteBackground: View {
                             path.addLine(to: CGPoint(x: Int(geo.size.width * 2), y: y))
                             path.closeSubpath()
                         }
-                        .stroke(color.opacity(0.25), lineWidth: 2)
+                        .stroke(color.opacity(patternOpacity), lineWidth: 2)
                     }
                 }
                 .ignoresSafeArea(.all, edges: .bottom)
