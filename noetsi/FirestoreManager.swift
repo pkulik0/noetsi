@@ -40,7 +40,7 @@ class FirestoreManager: ObservableObject {
         let batch = db.batch()
 
         let noteDocument = db.collection(uid).document(note.id)
-        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size], "checklist": note.checklistFirebase], forDocument: noteDocument, merge: true)
+        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size], "checklist": convertChecklist(checklist: note.checklist)], forDocument: noteDocument, merge: true)
         
         let userData = db.collection(uid).document("userData")
         batch.setData(["layout": layout], forDocument: userData, merge: true)
@@ -110,10 +110,10 @@ class FirestoreManager: ObservableObject {
         note.pattern.type = Note.PatternType(rawValue: patternData["type"] as? Int ?? 0) ?? .None
         note.pattern.size = patternData["size"] as? Double ?? 20.0
         
-        let checklistItems = document.data()["checklist"] as? [[String:Bool]] ?? []
+        let checklistItems = document.data()["checklist"] as? [String] ?? []
         for item in checklistItems {
-            let text = item.first?.key ?? " "
-            let isChecked = item.first?.value ?? false
+            let isChecked = (item.first ?? "0" == "1") ? true : false
+            let text: String = String(item[item.index(after: item.startIndex)...])
             note.checklist.append(Note.ChecklistItem(text: text, isChecked: isChecked))
         }
         
@@ -151,6 +151,17 @@ class FirestoreManager: ObservableObject {
             self.notes = self.buffer
             self.status = .success
         }
+    }
+    
+    func convertChecklist(checklist: [Note.ChecklistItem]) -> [String] {
+        var firebaseChecklist: [String] = []
+        for item in checklist {
+            if item.text.isEmpty {
+                continue
+            }
+            firebaseChecklist.append("\(item.isChecked ? "1" : "0")\(item.text)")
+        }
+        return firebaseChecklist
     }
     
     func addNote() {

@@ -32,17 +32,6 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     @Published var checklist: [ChecklistItem]
-    
-    var checklistFirebase: [[String:Bool]] {
-        var firebaseChecklist: [[String:Bool]] = []
-        for item in checklist {
-            if item.text.isEmpty {
-                continue
-            }
-            firebaseChecklist.append([item.text:item.isChecked])
-        }
-        return firebaseChecklist
-    }
 
     var timestamp: Int
     var deleteMe: Bool
