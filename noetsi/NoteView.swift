@@ -140,6 +140,9 @@ struct NoteView: View {
                 Button("Done") {
                     isBodyFocused = false
                     isTitleFocused = false
+                    withAnimation {
+                        showChecklist = false
+                    }
                 }
             }
         }
