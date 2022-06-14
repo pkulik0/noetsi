@@ -20,6 +20,7 @@ struct HorizontalPickerView<ItemType: Hashable, Content: View>: View {
                 ForEach(items, id: \.self) { item in
                     Button {
                         withAnimation {
+                            UISelectionFeedbackGenerator().selectionChanged()
                             selection = item
                             isPresented = false
                         }

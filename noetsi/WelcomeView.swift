@@ -10,7 +10,6 @@ import Firebase
 
 struct WelcomeView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
-    @State private var feedback = UINotificationFeedbackGenerator()
 
     @State private var email = ""
     @State private var password = ""
@@ -101,6 +100,7 @@ struct WelcomeView: View {
     }
     
     func handleAuthResult(error: Error?) {
+        let feedback = UINotificationFeedbackGenerator()
         if let error = error {
             feedback.notificationOccurred(.error)
             alertMessage = error.localizedDescription
