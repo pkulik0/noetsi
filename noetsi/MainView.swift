@@ -20,24 +20,11 @@ struct MainView: View {
     @State private var showAuthError = false
 
     var body: some View {
-        VStack {
+        Group {
             if isUnlocked {
                 mainViewBody
             } else {
-                Button {
-                    authenticate()
-                } label: {
-                    Label("Unlock notes", systemImage: "lock.fill")
-                        .font(.headline)
-                        .labelStyle(.titleAndIcon)
-                }
-                .padding()
-                .background(Capsule().strokeBorder(Color.accentColor, lineWidth: 3))
-                
-                Button("Sign out", action: signOut)
-                    .font(.headline)
-                    .padding()
-                    .opacity(0.8)
+                authBody
             }
         }
         .onAppear {
@@ -112,6 +99,25 @@ struct MainView: View {
                     signOut()
                 }
             }
+        }
+    }
+    
+    var authBody: some View {
+        VStack {
+            Button {
+                authenticate()
+            } label: {
+                Label("Unlock notes", systemImage: "lock.fill")
+                    .font(.headline)
+                    .labelStyle(.titleAndIcon)
+            }
+            .padding()
+            .background(Capsule().strokeBorder(Color.accentColor, lineWidth: 3))
+            
+            Button("Sign out", action: signOut)
+                .font(.headline)
+                .padding()
+                .opacity(0.8)
         }
     }
     
