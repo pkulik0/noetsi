@@ -15,7 +15,9 @@ struct MainView: View {
     @State private var showWelcomeView = false
     @State private var showNewNote = false
     @State private var showOptions = false
+    
     @State private var isUnlocked = false
+    @State private var showAuthError = false
 
     var body: some View {
         VStack {
@@ -92,9 +94,19 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showWelcomeView) {
                 WelcomeView()
             }
+            .alert("Cannot enable authentication", isPresented: $showAuthError, actions: {
+                Button("OK") {}
+            }, message: {
+                Text("Your device  does not support local authentication.")
+            })
             .confirmationDialog("More", isPresented: $showOptions) {
                 Button("\(enableAuth ? "Unlock" : "Lock") noetsi") {
-                    enableAuth.toggle()
+                    if LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+                        enableAuth.toggle()
+                    } else {
+                        enableAuth = false
+                        showAuthError = true
+                    }
                 }
                 Button("Sign out", role: .destructive) {
                     signOut()
@@ -128,12 +140,13 @@ struct MainView: View {
         }
 
         let context = LAContext()
-        var error: NSError?
         
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your notes") { authResult, authError in
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your notes") { authResult, _ in
                 if authResult {
-                    isUnlocked = true
+                    withAnimation {
+                        isUnlocked = true
+                    }
                 }
             }
         }
