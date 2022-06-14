@@ -57,9 +57,12 @@ struct MainView: View {
                                 }
                                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                     Button {
-                                        print("pin")
+                                        guard let index = firestoreManager.notes.firstIndex(of: note) else {
+                                            return
+                                        }
+                                        firestoreManager.move(from: IndexSet(integer: Int(index)), to: 0)
                                     } label: {
-                                        Label("Pin", systemImage: "pin.fill")
+                                        Label("Top", systemImage: "arrow.up")
                                     }
                                     .tint(.blue)
                                 }
