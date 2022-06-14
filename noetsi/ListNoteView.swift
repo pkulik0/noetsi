@@ -38,7 +38,7 @@ struct ListNoteView: View {
             Text("\(bodyPlaceholder)\(note.body)")
                 .font(.body)
                 .padding(10)
-                .lineLimit(5)
+                .lineLimit(4)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
             
             if !note.checklist.isEmpty {
