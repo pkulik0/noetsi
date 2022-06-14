@@ -47,6 +47,14 @@ struct MainView: View {
                                 .onChange(of: note.deleteMe) { _ in
                                     firestoreManager.deleteNote(id: note.id)
                                 }
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    Button {
+                                        print("pin")
+                                    } label: {
+                                        Label("Pin", systemImage: "pin.fill")
+                                    }
+                                    .tint(.blue)
+                                }
                         }
                         .listRowSeparator(.hidden)
                     }
