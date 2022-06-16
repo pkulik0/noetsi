@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D607CF59285B9DF0007CF67B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D607CF58285B9DF0007CF67B /* README.md */; };
+		D607CF5B285BA326007CF67B /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5A285BA326007CF67B /* ReminderView.swift */; };
+		D607CF5D285BB4F9007CF67B /* ReminderCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5C285BB4F9007CF67B /* ReminderCreatorView.swift */; };
 		D6574830285B68A700DE1C6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* AuthView.swift */; };
 		D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC3832856252600D9A377 /* ShareItemsView.swift */; };
 		D65CC38828562D4000D9A377 /* NoteBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC38728562D4000D9A377 /* NoteBackground.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		D607CF58285B9DF0007CF67B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D607CF5A285BA326007CF67B /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
+		D607CF5C285BB4F9007CF67B /* ReminderCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCreatorView.swift; sourceTree = "<group>"; };
 		D657482F285B68A700DE1C6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
 		D65CC38728562D4000D9A377 /* NoteBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBackground.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				D696B3C528440FA00018281D /* noetsiApp.swift */,
 				D6A36B472844DD0500D11E71 /* FirestoreManager.swift */,
 				D6A36B492844E4E700D11E71 /* Note.swift */,
+				D607CF5A285BA326007CF67B /* ReminderView.swift */,
+				D607CF5C285BB4F9007CF67B /* ReminderCreatorView.swift */,
 				D696B3C928440FA10018281D /* Assets.xcassets */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 				D696B3CB28440FA10018281D /* Preview Content */,
@@ -281,7 +287,9 @@
 				D66A6ACC284920E1009DB38F /* TagView.swift in Sources */,
 				D6574830285B68A700DE1C6B /* AuthView.swift in Sources */,
 				D66A6AD028497193009DB38F /* ColorExtension.swift in Sources */,
+				D607CF5D285BB4F9007CF67B /* ReminderCreatorView.swift in Sources */,
 				D65CC38828562D4000D9A377 /* NoteBackground.swift in Sources */,
+				D607CF5B285BA326007CF67B /* ReminderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,8 +63,14 @@ struct NoteView: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 5)
             
-            TagListView(note: $note, showHeader: true)
-                .padding(.vertical)
+            HStack {
+                TagListView(note: $note, showHeader: true)
+                    .padding(.vertical)
+                
+                Spacer()
+                
+                ReminderView(note: $note, showHeader: true)
+            }
             
             if showChangeColor {
                 ThemeEditorView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
