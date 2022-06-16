@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-    public static let noteColors: [Color] = [.red, .green, .blue, .pink, .yellow, .purple, .orange, .secondary]
+    public static let noteColors: [Color] = [.red, .orange, .green, .blue, .purple, .secondary]
 
     public static let noteColorByName: [String: Color] = {
         var result: [String: Color] = [:]
