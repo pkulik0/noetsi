@@ -46,9 +46,9 @@ class Note: ObservableObject, Identifiable, Equatable {
     
     var bodyCompact: String {
         var result = body
-        // Remove consecutive new lines
-        while result != result.replacingOccurrences(of: "\n\n", with: "\n") {
-            result = result.replacingOccurrences(of: "\n\n", with: "\n")
+        // Allow max 1 blank line between text
+        while result != result.replacingOccurrences(of: "\n\n\n", with: "\n") {
+            result = result.replacingOccurrences(of: "\n\n\n", with: "\n")
         }
         return result
     }
