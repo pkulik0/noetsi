@@ -43,6 +43,15 @@ class Note: ObservableObject, Identifiable, Equatable {
         \(body)
         """
     }
+    
+    var bodyCompact: String {
+        var result = body
+        // Remove consecutive new lines
+        while result != result.replacingOccurrences(of: "\n\n", with: "\n") {
+            result = result.replacingOccurrences(of: "\n\n", with: "\n")
+        }
+        return result
+    }
 
     var isEmpty: Bool {
         title.isEmpty && body.isEmpty && tags.isEmpty && checklist.isEmpty

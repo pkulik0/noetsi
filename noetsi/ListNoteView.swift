@@ -34,12 +34,13 @@ struct ListNoteView: View {
                     .font(.subheadline)
             }
             .frame(maxWidth: .infinity)
-    
-            Text("\(bodyPlaceholder)\(note.body)")
+
+            Text("\(bodyPlaceholder)\(note.bodyCompact)")
                 .font(.body)
-                .padding(10)
                 .lineLimit(4)
+                .padding(10)
                 .foregroundColor(bodyPlaceholder.count > 0 ? .secondary : .primary)
+                .fixedSize(horizontal: false, vertical: true)
             
             if !note.checklist.isEmpty {
                 Text("+ Checklist (\(note.checklist.count))")
