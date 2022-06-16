@@ -188,6 +188,8 @@ class FirestoreManager: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.notes = []
+            self.buffer = []
+            self.layout = []
             self.status = .no_user
         } catch {
             print(error.localizedDescription)

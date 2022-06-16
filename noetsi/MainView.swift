@@ -10,29 +10,14 @@ import LocalAuthentication
 
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
+    @Environment(\.dismiss) private var dismiss
     @AppStorage("enableAuth") private var enableAuth = false
     
-    @State private var showWelcomeView = false
     @State private var showNewNote = false
     @State private var showOptions = false
-    
-    @State private var isUnlocked = false
     @State private var showAuthError = false
 
     var body: some View {
-        Group {
-            if isUnlocked {
-                mainViewBody
-            } else {
-                authBody
-            }
-        }
-        .onAppear {
-            authenticate()
-        }
-    }
-    
-    var mainViewBody: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 List {
@@ -71,6 +56,7 @@ struct MainView: View {
                                     return NSItemProvider(item: nil, typeIdentifier: nil)
                                 }
                         }
+                        .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                         .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: firestoreManager.deleteNotes)
@@ -85,9 +71,6 @@ struct MainView: View {
                 addNoteButton
             }
             .navigationTitle("noetsi")
-            .fullScreenCover(isPresented: $showWelcomeView) {
-                WelcomeView()
-            }
             .alert("Cannot enable authentication", isPresented: $showAuthError, actions: {
                 Button("OK") {}
             }, message: {
@@ -116,25 +99,6 @@ struct MainView: View {
         }
     }
     
-    var authBody: some View {
-        VStack {
-            Button {
-                authenticate()
-            } label: {
-                Label("Unlock notes", systemImage: "lock.fill")
-                    .font(.headline)
-                    .labelStyle(.titleAndIcon)
-            }
-            .padding()
-            .background(Capsule().strokeBorder(Color.accentColor, lineWidth: 3))
-            
-            Button("Sign out", action: signOut)
-                .font(.headline)
-                .padding()
-                .opacity(0.8)
-        }
-    }
-    
     var addNoteButton: some View {
         NavigationLink {
             NoteView(note: $firestoreManager.notes.first ?? .constant(Note()))
@@ -153,28 +117,9 @@ struct MainView: View {
         .offset(x: -20, y: 0)
     }
     
-    func authenticate() {
-        if enableAuth == false {
-            isUnlocked = true
-            return
-        }
-
-        let context = LAContext()
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your notes") { authResult, _ in
-                if authResult {
-                    withAnimation {
-                        isUnlocked = true
-                    }
-                }
-            }
-        }
-    }
-    
     func signOut() {
         firestoreManager.signOut()
         enableAuth = false
-        showWelcomeView = true
+        dismiss()
     }
 }
