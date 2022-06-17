@@ -30,27 +30,36 @@ struct AuthView: View {
             Color.black
                 .opacity(0.6)
             
-            Button {
-                authenticate()
-            } label: {
-                VStack {
-                    Image(systemName: imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(.white)
-                        .padding()
-                    Text("Unlock noetsi")
-                        .font(.body.bold())
-                        .foregroundColor(.white)
-                    
-                    // TODO: add sign out
+            VStack {
+                Button {
+                    authenticate()
+                } label: {
+                    VStack {
+                        Image(systemName: imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 70, height: 70)
+                            .foregroundColor(.white)
+                            .padding()
+                        Text("Unlock noetsi")
+                            .font(.body.bold())
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(Color.secondary.opacity(0.4))
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                }
+                .buttonStyle(.plain)
+                
+                Button(action: firestoreManager.signOut) {
+                    Label("Sign Out", systemImage: "person.crop.circle.badge.xmark")
+                        .labelStyle(.titleAndIcon)
+                        .foregroundColor(.secondary)
                 }
                 .padding()
-                .background(Color.secondary.opacity(0.4))
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .buttonStyle(.plain)
+                .opacity(0.75)
             }
-            .buttonStyle(.plain)
         }
         .onAppear {
             authenticate()
