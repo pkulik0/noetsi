@@ -1,5 +1,5 @@
 //
-//  DragToHide.swift
+//  DragToHideModifier.swift
 //  noetsi
 //
 //  Created by pkulik0 on 16/06/2022.
