@@ -6,30 +6,23 @@
 //
 
 import SwiftUI
-import UserNotifications
 
 struct ReminderView: View {
     @Binding var note: Note
     let showHeader: Bool
     
-    let center = UNUserNotificationCenter.current()
     @State var request: UNNotificationRequest?
-    
-    @State private var showCreator: Bool = false
+    @State private var showAddReminder = false
     
     private var trigger: UNCalendarNotificationTrigger {
         guard let request = self.request else {
             return UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
         }
         
-        guard let trigger = request.trigger else {
-            return UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
-        }
-        
-        return trigger as? UNCalendarNotificationTrigger ?? UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
+        return request.trigger as? UNCalendarNotificationTrigger ?? UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
     }
     
-    private var date: String {
+    private var dateString: String {
         let dateComponents = trigger.dateComponents
         let date = Calendar.current.date(from: dateComponents) ?? Date()
         
@@ -52,7 +45,7 @@ struct ReminderView: View {
                         if trigger.repeats {
                             Image(systemName: "arrow.triangle.2.circlepath")
                         }
-                        Text(date)
+                        Text(dateString)
                     }
                     .font(.caption)
                     .padding(10)
@@ -61,9 +54,9 @@ struct ReminderView: View {
                 }
                 
                 Button {
-                    showCreator = true
+                    showAddReminder = true
                 } label: {
-                    Image(systemName: request != nil ? "bell.fill" : "plus")
+                    Image(systemName: request != nil ? "pencil" : "plus")
                         .foregroundColor(.white)
                         .padding(5)
                         .background(note.color.opacity(0.75))
@@ -72,16 +65,17 @@ struct ReminderView: View {
                 .buttonStyle(.plain)
             }
             .onAppear {
-                getNotification()
+                getNotificationRequest()
+                
             }
         }
-        .sheet(isPresented: $showCreator) {
-            ReminderCreatorView(note: note, request: $request)
+        .sheet(isPresented: $showAddReminder) {
+            ReminderFormView(id: note.id, title: note.title, subtitle: note.bodyInline, request: $request)
         }
     }
     
-    func getNotification() {
-        center.getPendingNotificationRequests { requests in
+    func getNotificationRequest() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
                 if request.identifier == note.id {
                     self.request = request
