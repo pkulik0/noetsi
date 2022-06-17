@@ -19,6 +19,8 @@ struct WelcomeView: View {
     @State private var noetsiText = "noetsi"
     
     @State private var authSuccess = false
+
+    @FocusState private var passwordFocused
     
     private let systemBackground = Color(uiColor: UIColor.systemBackground)
     
@@ -50,17 +52,28 @@ struct WelcomeView: View {
             
                 
             VStack {
-                TextField("email", text: $email)
-                    .textContentType(.emailAddress)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
-                    .padding(.bottom)
+                VStack {
+                    TextField("email", text: $email)
+                        .textContentType(.emailAddress)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
+                        .padding(.bottom)
+                        .onSubmit {
+                            passwordFocused = true
+                        }
 
-                SecureField("password", text: $password)
-                    .textContentType(.password)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
-                    .padding(.bottom, 25)
+                    SecureField("password", text: $password)
+                        .textContentType(.password)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 5))
+                        .focused($passwordFocused)
+                        .onSubmit {
+                            if isValid {
+                                firestoreManager.signIn(email: email, password: password, onFinished: handleAuthResult)
+                            }
+                        }
+                }
+                .padding([.horizontal, .bottom], 25)
                 
                 HStack {
                     Button("sign up") {
@@ -76,18 +89,13 @@ struct WelcomeView: View {
                     }
                     .disabled(!isValid)
                     .font(.title.bold())
-                    .foregroundColor(isValid ? systemBackground : .white)
+                    .foregroundColor(isValid ? systemBackground : .white.opacity(0.25))
                     .padding(10)
                     .background(RoundedRectangle(cornerRadius: 10).fill(isValid ? Color.primary : .primary.opacity(0.25)))
                 }
                 .animation(.easeInOut, value: isValid)
             }
             .padding()
-            .onSubmit {
-                if isValid {
-                    firestoreManager.signIn(email: email, password: password, onFinished: handleAuthResult)
-                }
-            }
         }
         .fullScreenCover(isPresented: $authSuccess, content: {
             MainView()
