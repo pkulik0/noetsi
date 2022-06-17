@@ -16,6 +16,7 @@ struct MainView: View {
     @State private var showNewNote = false
     @State private var showOptions = false
     @State private var showAuthError = false
+    @State private var isUnlocked = false
 
     var body: some View {
         NavigationView {
@@ -55,6 +56,7 @@ struct MainView: View {
                                     UISelectionFeedbackGenerator().selectionChanged()
                                     return NSItemProvider(item: nil, typeIdentifier: nil)
                                 }
+                                .transition(.opacity)
                         }
                         .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                         .listRowSeparator(.hidden)
@@ -97,6 +99,7 @@ struct MainView: View {
                 }
             }
         }
+        .authenticationDialog(isUnlocked: $isUnlocked)
     }
     
     var addNoteButton: some View {

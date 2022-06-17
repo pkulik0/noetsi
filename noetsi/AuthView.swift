@@ -10,30 +10,47 @@ import LocalAuthentication
 
 struct AuthView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
-    @AppStorage("enableAuth") private var enableAuth = false
     @Environment(\.dismiss) private var dismiss
+    
     @Binding var isUnlocked: Bool
+    
+    var imageName: String {
+        switch(LAContext().biometryType){
+        case .faceID:
+            return "faceid"
+        case .touchID:
+            return "touchid"
+        default:
+            return "lock.fill"
+        }
+    }
 
     var body: some View {
-        VStack {
+        ZStack {
+            Color.black
+                .opacity(0.6)
+            
             Button {
                 authenticate()
             } label: {
-                Label("Unlock notes", systemImage: "lock.fill")
-                    .font(.headline)
-                    .labelStyle(.titleAndIcon)
+                VStack {
+                    Image(systemName: imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.white)
+                        .padding()
+                    Text("Unlock noetsi")
+                        .font(.body.bold())
+                        .foregroundColor(.white)
+                    
+                    // TODO: add sign out
+                }
+                .padding()
+                .background(Color.secondary.opacity(0.4))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            .padding()
-            .background(Capsule().strokeBorder(Color.accentColor, lineWidth: 3))
-            
-            Button("Sign out") {
-                firestoreManager.signOut()
-                enableAuth = false
-                dismiss()
-            }
-            .font(.headline)
-            .padding()
-            .opacity(0.8)
+            .buttonStyle(.plain)
         }
         .onAppear {
             authenticate()
@@ -41,19 +58,13 @@ struct AuthView: View {
     }
     
     func authenticate() {
-        if enableAuth == false {
-            isUnlocked = true
-            return
-        }
-
         let context = LAContext()
-        
+
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Unlock your notes") { authResult, _ in
                 if authResult {
                     withAnimation {
                         isUnlocked = true
-                        dismiss()
                     }
                 }
             }

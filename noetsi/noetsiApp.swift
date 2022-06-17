@@ -11,8 +11,6 @@ import Firebase
 @main
 struct noetsiApp: App {
     @StateObject private var firestoreManager = FirestoreManager()
-    @AppStorage("enableAuth") private var enableAuth = false
-    @State private var isUnlocked = false
 
     init() {
         FirebaseApp.configure()
@@ -21,11 +19,7 @@ struct noetsiApp: App {
         WindowGroup {
             Group {
                 if Auth.auth().currentUser != nil {
-                    if enableAuth && !isUnlocked {
-                        AuthView(isUnlocked: $isUnlocked)
-                    } else {
-                        MainView()
-                    }
+                    MainView()
                 } else {
                     WelcomeView()
                 }
