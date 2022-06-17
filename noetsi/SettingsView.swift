@@ -7,12 +7,16 @@
 
 import SwiftUI
 import LocalAuthentication
+import Firebase
 
 struct SettingsView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @AppStorage("enableAuth") private var enableAuth = false
 
     @State private var showAuthError = false
+    
+    @State private var userEmail = "Unknown"
+    @State private var userID = "Unknown"
     
     private var versionString: String {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -55,6 +59,15 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    VStack(alignment: .leading) {
+                        Text("Email: \(userEmail)")
+                            .font(.headline)
+                        Text("UserID: \(userID)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.bottom, 5)
+                    
                     Button("Change password") {}
                     Button("Remove my account") {}
                     Button("Sign Out", role: .destructive, action: firestoreManager.signOut)
@@ -69,6 +82,9 @@ struct SettingsView: View {
         }, message: {
             Text("Your device  does not support local authentication.")
         })
+        .onAppear {
+            getUserData()
+        }
     }
     
     func enableLA() {
@@ -78,5 +94,13 @@ struct SettingsView: View {
             enableAuth = false
             showAuthError = true
         }
+    }
+    
+    func getUserData() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        userEmail = user.email ?? "Unknown"
+        userID = String(user.uid)
     }
 }
