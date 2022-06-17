@@ -90,6 +90,9 @@ struct ReminderFormView: View {
         
         repeating = trigger.repeats
         date = Calendar.current.date(from: trigger.dateComponents) ?? Date()
+        
+        includeDate = trigger.dateComponents.day != nil
+        includeTime = trigger.dateComponents.hour != nil
     }
     
     func addNotification() {

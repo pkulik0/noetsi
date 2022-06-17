@@ -122,7 +122,6 @@ struct MainView: View {
     
     func signOut() {
         firestoreManager.signOut()
-        enableAuth = false
         dismiss()
     }
 }
