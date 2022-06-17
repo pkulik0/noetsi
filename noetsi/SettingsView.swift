@@ -77,6 +77,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
         }
+        .navigationViewStyle(.stack)
         .alert("Cannot enable authentication", isPresented: $showAuthError, actions: {
             Button("OK") {}
         }, message: {

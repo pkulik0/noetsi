@@ -77,5 +77,6 @@ struct NoteListView: View {
 
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
