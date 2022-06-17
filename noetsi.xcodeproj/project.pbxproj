@@ -21,7 +21,7 @@
 		D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6ACD28492C4F009DB38F /* TagEditorView.swift */; };
 		D66A6AD028497193009DB38F /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6ACF28497193009DB38F /* ColorExtension.swift */; };
 		D66A6AD228497CF2009DB38F /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6AD128497CF2009DB38F /* TagListView.swift */; };
-		D67E75372847D9FC00150062 /* ListNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E75362847D9FC00150062 /* ListNoteView.swift */; };
+		D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E75362847D9FC00150062 /* NoteListRowView.swift */; };
 		D696B3C628440FA00018281D /* noetsiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C528440FA00018281D /* noetsiApp.swift */; };
 		D696B3C828440FA00018281D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* WelcomeView.swift */; };
 		D696B3CA28440FA10018281D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3C928440FA10018281D /* Assets.xcassets */; };
@@ -63,7 +63,7 @@
 		D66A6ACD28492C4F009DB38F /* TagEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEditorView.swift; sourceTree = "<group>"; };
 		D66A6ACF28497193009DB38F /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		D66A6AD128497CF2009DB38F /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
-		D67E75362847D9FC00150062 /* ListNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteView.swift; sourceTree = "<group>"; };
+		D67E75362847D9FC00150062 /* NoteListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRowView.swift; sourceTree = "<group>"; };
 		D696B3C228440FA00018281D /* noetsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noetsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D696B3C528440FA00018281D /* noetsiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiApp.swift; sourceTree = "<group>"; };
 		D696B3C728440FA00018281D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				D657482F285B68A700DE1C6B /* AuthView.swift */,
 				D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */,
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
-				D67E75362847D9FC00150062 /* ListNoteView.swift */,
+				D67E75362847D9FC00150062 /* NoteListRowView.swift */,
 				D66A6AD128497CF2009DB38F /* TagListView.swift */,
 				D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */,
 				D65CC38B28564BC500D9A377 /* HorizontalPickerView.swift */,
@@ -291,7 +291,7 @@
 				D607CF5F285BD3A2007CF67B /* DragToHide.swift in Sources */,
 				D66A6AD228497CF2009DB38F /* TagListView.swift in Sources */,
 				D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */,
-				D67E75372847D9FC00150062 /* ListNoteView.swift in Sources */,
+				D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */,
 				D66A6ACC284920E1009DB38F /* TagView.swift in Sources */,
 				D6574830285B68A700DE1C6B /* AuthView.swift in Sources */,
 				D66A6AD028497193009DB38F /* ColorExtension.swift in Sources */,

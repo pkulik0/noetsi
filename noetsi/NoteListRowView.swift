@@ -1,5 +1,5 @@
 //
-//  ListNoteView.swift
+//  ListListRowView.swift
 //  noetsi
 //
 //  Created by qurrie on 01/06/2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListNoteView: View {
+struct NoteListRowView: View {
     @Binding var note: Note
 
     private var bodyPlaceholder: String {

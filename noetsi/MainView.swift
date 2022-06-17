@@ -28,7 +28,7 @@ struct MainView: View {
                                 NoteView(note: $note)
                             } label: {}
                                 .opacity(0)
-                            ListNoteView(note: $note)
+                            NoteListRowView(note: $note)
                                 .shadow(radius: 5)
                                 .onChange(of: note.deleteMe) { _ in
                                     firestoreManager.deleteNote(id: note.id)
