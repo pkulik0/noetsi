@@ -27,6 +27,5 @@ struct CircleButton<Content: View>: View {
             onClick()
         }))
         .buttonStyle(.plain)
-        .offset(x: -20, y: 0)
     }
 }

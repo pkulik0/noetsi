@@ -66,7 +66,7 @@ struct NoteListView: View {
             } onClick: {
                 firestoreManager.addNote()
             }
-
+            .offset(x: -15, y: -15)
         }
     }
 }
