@@ -52,6 +52,10 @@ class Note: ObservableObject, Identifiable, Equatable {
         }
         return result
     }
+    
+    var bodyInline: String {
+        bodyCompact.replacingOccurrences(of: "\n", with: " ")
+    }
 
     var isEmpty: Bool {
         title.isEmpty && body.isEmpty && tags.isEmpty && checklist.isEmpty
