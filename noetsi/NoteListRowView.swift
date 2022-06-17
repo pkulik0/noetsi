@@ -47,7 +47,7 @@ struct NoteListRowView: View {
                     .font(.caption)
             }
 
-            TagListView(note: $note, showHeader: false)
+            TagsView(note: $note, showHeader: false)
         }
         .padding()
         .background(NoteBackground(color: note.color, pattern: note.pattern))

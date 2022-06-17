@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TagListView: View {
+struct TagsView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
 
     @State private var showTagEditor = false
