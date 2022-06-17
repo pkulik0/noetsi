@@ -32,6 +32,8 @@
 		D696B3F3284420F10018281D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F2284420F10018281D /* FirebaseFirestore */; };
 		D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D696B3F4284421E80018281D /* GoogleService-Info.plist */; };
 		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
+		D69A03D3285CE51500B07BA1 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D2285CE51500B07BA1 /* SearchView.swift */; };
+		D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D4285CE71E00B07BA1 /* SettingsView.swift */; };
 		D6A2FC4A285C049C0082AE57 /* AuthViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */; };
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
@@ -75,6 +77,8 @@
 		D696B3CC28440FA10018281D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D69A03D2285CE51500B07BA1 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		D69A03D4285CE71E00B07BA1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModifier.swift; sourceTree = "<group>"; };
 		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6A36B492844E4E700D11E71 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 			children = (
 				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 				D696B3F628444EBB0018281D /* MainView.swift */,
+				D69A03D4285CE71E00B07BA1 /* SettingsView.swift */,
+				D69A03D2285CE51500B07BA1 /* SearchView.swift */,
 				D657482F285B68A700DE1C6B /* AuthView.swift */,
 				D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */,
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
@@ -287,6 +293,7 @@
 				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
 				D6601A4728456EBF00BB639F /* NoteView.swift in Sources */,
 				D65CC38E2856619D00D9A377 /* ChecklistView.swift in Sources */,
+				D69A03D3285CE51500B07BA1 /* SearchView.swift in Sources */,
 				D696B3F728444EBB0018281D /* MainView.swift in Sources */,
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 				D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */,
@@ -297,6 +304,7 @@
 				D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */,
 				D66A6AD228497CF2009DB38F /* TagListView.swift in Sources */,
 				D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */,
+				D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */,
 				D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */,
 				D66A6ACC284920E1009DB38F /* TagView.swift in Sources */,
 				D6574830285B68A700DE1C6B /* AuthView.swift in Sources */,
