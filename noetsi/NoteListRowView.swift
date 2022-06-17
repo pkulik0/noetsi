@@ -2,7 +2,7 @@
 //  NoteListRowView.swift
 //  noetsi
 //
-//  Created by qurrie on 01/06/2022.
+//  Created by pkulik0 on 01/06/2022.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  DragToHide.swift
 //  noetsi
 //
-//  Created by qurrie on 16/06/2022.
+//  Created by pkulik0 on 16/06/2022.
 //
 
 import SwiftUI

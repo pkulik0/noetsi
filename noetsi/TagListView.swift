@@ -2,7 +2,7 @@
 //  TagListView.swift
 //  noetsi
 //
-//  Created by qurrie on 03/06/2022.
+//  Created by pkulik0 on 03/06/2022.
 //
 
 import SwiftUI

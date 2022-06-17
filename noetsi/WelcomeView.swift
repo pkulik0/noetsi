@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  noetsi
 //
-//  Created by qurrie on 29/05/2022.
+//  Created by pkulik0 on 29/05/2022.
 //
 
 import SwiftUI

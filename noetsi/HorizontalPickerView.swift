@@ -2,7 +2,7 @@
 //  HorizontalPickerView.swift
 //  noetsi
 //
-//  Created by qurrie on 12/06/2022.
+//  Created by pkulik0 on 12/06/2022.
 //
 
 import SwiftUI

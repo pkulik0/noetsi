@@ -2,7 +2,7 @@
 //  Note.swift
 //  noetsi
 //
-//  Created by qurrie on 30/05/2022.
+//  Created by pkulik0 on 30/05/2022.
 //
 
 import SwiftUI

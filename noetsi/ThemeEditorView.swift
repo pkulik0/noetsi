@@ -2,7 +2,7 @@
 //  ColorPicker.swift
 //  noetsi
 //
-//  Created by qurrie on 06/06/2022.
+//  Created by pkulik0 on 06/06/2022.
 //
 
 import SwiftUI
