@@ -1,5 +1,5 @@
 //
-//  ListListRowView.swift
+//  NoteListRowView.swift
 //  noetsi
 //
 //  Created by qurrie on 01/06/2022.
