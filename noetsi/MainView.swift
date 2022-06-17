@@ -23,11 +23,11 @@ struct MainView: View {
                 }
                 .tag("list")
             
-            SearchView()
+            TagListView()
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Tags", systemImage: "number")
                 }
-                .tag("search")
+                .tag("tags")
             
             SettingsView()
                 .tabItem {

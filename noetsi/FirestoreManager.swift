@@ -153,6 +153,14 @@ class FirestoreManager: ObservableObject {
         }
     }
     
+    func fetchTags() -> [String] {
+        var tags: Set<String> = []
+        for note in notes {
+            tags = tags.union(note.tags)
+        }
+        return Array(tags)
+    }
+    
     func convertChecklist(checklist: [Note.ChecklistItem]) -> [String] {
         var firebaseChecklist: [String] = []
         for item in checklist {
