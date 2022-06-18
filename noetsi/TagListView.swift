@@ -124,7 +124,7 @@ struct TagListRowView: View {
                 Text(tag)
                     .font(.headline)
                     .padding(.trailing, 5)
-                Text("(\(noteCount) notes)")
+                Text("(\(noteCount) \(noteCount == 1 ? "note" : "notes"))")
                     .font(.headline)
                     .foregroundColor(.secondary)
             }
