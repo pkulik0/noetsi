@@ -29,7 +29,6 @@
 		D696B3C628440FA00018281D /* noetsiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C528440FA00018281D /* noetsiApp.swift */; };
 		D696B3C828440FA00018281D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* WelcomeView.swift */; };
 		D696B3CA28440FA10018281D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3C928440FA10018281D /* Assets.xcassets */; };
-		D696B3CD28440FA10018281D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3CC28440FA10018281D /* Preview Assets.xcassets */; };
 		D696B3F1284420F10018281D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F0284420F10018281D /* FirebaseAuth */; };
 		D696B3F3284420F10018281D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D696B3F2284420F10018281D /* FirebaseFirestore */; };
 		D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D696B3F4284421E80018281D /* GoogleService-Info.plist */; };
@@ -78,7 +77,6 @@
 		D696B3C528440FA00018281D /* noetsiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiApp.swift; sourceTree = "<group>"; };
 		D696B3C728440FA00018281D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		D696B3C928440FA10018281D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D696B3CC28440FA10018281D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D69A03D2285CE51500B07BA1 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
@@ -228,17 +226,8 @@
 				D696B3C528440FA00018281D /* noetsiApp.swift */,
 				D696B3C928440FA10018281D /* Assets.xcassets */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
-				D696B3CB28440FA10018281D /* Preview Content */,
 			);
 			path = noetsi;
-			sourceTree = "<group>";
-		};
-		D696B3CB28440FA10018281D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				D696B3CC28440FA10018281D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		D6AD2BA42853867E00BFE2C3 /* noetsiTests */ = {
@@ -337,7 +326,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D696B3CD28440FA10018281D /* Preview Assets.xcassets in Resources */,
 				D696B3CA28440FA10018281D /* Assets.xcassets in Resources */,
 				D607CF59285B9DF0007CF67B /* README.md in Resources */,
 				D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */,
