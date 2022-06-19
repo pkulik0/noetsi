@@ -62,11 +62,13 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         Text("Email: \(userEmail)")
                             .font(.headline)
+                        
                         Text("UserID: \(userID)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
-                    .padding(.bottom, 5)
+                    .lineLimit(1)
+                    .padding(.vertical, 10)
                     
                     Button("Change password") {}
                     Button("Remove my account") {}
