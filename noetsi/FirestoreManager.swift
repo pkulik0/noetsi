@@ -8,14 +8,9 @@
 import Firebase
 import SwiftUI
 
-enum FirestoreStatus {
-    case loading, success, failed, no_user
-}
-
 class FirestoreManager: ObservableObject {
     @Published var notes: [Note] = []
     @Published var layout: [String] = []
-    @Published var status: FirestoreStatus = .loading
     
     private let db = Firestore.firestore()
     private var buffer: [Note] = []
@@ -33,7 +28,6 @@ class FirestoreManager: ObservableObject {
 
     func writeNote(note: Note) {
         guard let uid = uid else {
-            status = .no_user
             return
         }
         
@@ -48,30 +42,24 @@ class FirestoreManager: ObservableObject {
         batch.commit() { error in
             if let error = error {
                 print("Could not write note \(note.id): \(error.localizedDescription)")
-            } else {
-                print("Note \(note.id) written")
             }
         }
     }
     
     func writeLayout() {
         guard let uid = uid else {
-            status = .no_user
             return
         }
 
         db.collection(uid).document("userData").setData(["layout": layout], merge: true) { error in
             if let error = error {
                 print("Could not update layout: \(error.localizedDescription)")
-            } else {
-                print("Layout updated")
             }
         }
     }
 
     func deleteNote(id: String) {
         guard let uid = uid else {
-            status = .no_user
             return
         }
 
@@ -79,7 +67,6 @@ class FirestoreManager: ObservableObject {
             if let error = error {
                 print("Could not delete note \(id): \(error.localizedDescription)")
             } else {
-                print("Note deleted: \(id)")
                 guard let index = self.notes.firstIndex(where: { $0.id == id }) else {
                     return
                 }
@@ -122,14 +109,11 @@ class FirestoreManager: ObservableObject {
     
     func fetchData() {
         guard let uid = uid else {
-            status = .no_user
             return
         }
-        self.status = .loading
 
         db.collection(uid).getDocuments { (querySnapshot, error) in
             if let error = error {
-                self.status = .failed
                 print(error.localizedDescription)
                 return
             }
@@ -147,9 +131,7 @@ class FirestoreManager: ObservableObject {
             self.buffer.sort { note1, note2 in
                 (self.layout.firstIndex(where: { $0 == note1.id}) ?? Int.max) < (self.layout.firstIndex(where: { $0 == note2.id}) ?? Int.max)
             }
-
             self.notes = self.buffer
-            self.status = .success
         }
     }
     
@@ -191,7 +173,6 @@ class FirestoreManager: ObservableObject {
             self.notes = []
             self.buffer = []
             self.layout = []
-            self.status = .no_user
             enableAuth = false
         } catch {
             print(error.localizedDescription)
