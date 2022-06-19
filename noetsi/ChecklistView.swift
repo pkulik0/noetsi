@@ -11,76 +11,53 @@ struct ChecklistView: View {
     @Binding var checklist: [Note.ChecklistItem]
     
     @State private var newItem: String = ""
+    @FocusState var focusedField: String?
 
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(Array($checklist.enumerated()), id: \.offset) { index, item in
                 HStack {
-                    Checkbox(isOn: item.isChecked)
+                    CheckboxView(isOn: item.isChecked)
                     
-                    TextField("Item", text: item.text)
-                        .font(.subheadline)
-                        .fixedSize()
+                    Text(item.text.wrappedValue)
+                        .font(.body)
+                        .strikethrough(item.isChecked.wrappedValue, color: .primary)
                     
                     Image(systemName: "xmark")
                         .font(.caption)
-                        .padding(.horizontal, 1)
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 2)
                         .onTapGesture {
                             checklist.remove(at: index)
                         }
                 }
-                .padding(.bottom, 5)
             }
-            
-            HStack {
-                Button(action: addItem) {
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
-                        .frame(width: 25, height: 25)
-                        .background(Color.secondary)
-                        .clipShape(Circle())
-                }
-                TextField("Add Item", text: $newItem)
-                    .font(.subheadline)
-                    .fixedSize()
-                    .onSubmit {
-                        addItem()
-                    }
-            }
-            .padding(.bottom)
+            .animation(.default, value: checklist)
         }
+        HStack {
+            Button(action: addItem) {
+                Image(systemName: "plus")
+                    .foregroundColor(.white)
+                    .frame(width: 25, height: 25)
+                    .background(Color.secondary)
+                    .clipShape(Circle())
+            }
+            TextField("Add Item", text: $newItem)
+                .font(.headline)
+                .focused($focusedField, equals: "addItem")
+                .onSubmit {
+                    addItem()
+                }
+        }
+        .padding(.top, 5)
     }
     
     func addItem() {
-        if !newItem.isEmpty && newItem.trimmingCharacters(in: .whitespaces).rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil {
+        if !newItem.trimmingCharacters(in: .whitespaces).isEmpty {
             checklist.append(Note.ChecklistItem(text: newItem, isChecked: false))
             newItem = ""
         }
     }
 }
 
-struct Checkbox: View {
-    @Binding var isOn: Bool
-    
-    var body: some View {
-        Button {
-            withAnimation {
-                isOn.toggle()
-            }
-        } label: {
-            ZStack {
-                if isOn {
-                    Image(systemName: "checkmark")
-                        .foregroundColor(.primary)
-                        .font(.caption)
-                }
-                
-                isOn ? Color.secondary : Color.clear
-            }
-            .frame(width: 25, height: 25)
-            .clipShape(Circle())
-            .background(Circle().strokeBorder(Color.secondary, lineWidth: 3))
-        }
-        .buttonStyle(.plain)
-    }
-}
+
