@@ -102,9 +102,6 @@ struct NoteView: View {
                 firestoreManager.writeNote(note: note)
             }
         }
-        .onChange(of: focusedField) { newValue in
-            print("filde \(newValue ?? "err")")
-        }
     }
     
     var fixedTextEditor: some View {
