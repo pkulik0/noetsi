@@ -22,6 +22,10 @@ struct NoteView: View {
     @State private var showChecklist: Bool = false
     
     @FocusState private var focusedField: String?
+    
+    private var showDropdown: Bool {
+        !note.checklist.isEmpty || showChecklist
+    }
 
     var body: some View {
         ScrollViewReader { reader in
@@ -51,12 +55,12 @@ struct NoteView: View {
                                 
                                 Spacer()
                                 
-                                ReminderView(note: $note, showHeader: true)
+                                ReminderView(note: $note, compact: false)
                             }
                             .transition(.move(edge: .bottom).combined(with: .opacity))
                         }
                         
-                        if !note.checklist.isEmpty || showChecklist {
+                        if showDropdown {
                             DropdownView(isShown: $showChecklist) {
                                 ChecklistView(checklist: $note.checklist, focusedField: _focusedField)
                             } label: {
@@ -116,7 +120,7 @@ struct NoteView: View {
                 .foregroundColor(.clear)
                 .padding(8)
                 .frame(maxWidth: .infinity)
-                .frame(height: UIScreen.main.bounds.height * 0.45)
+                .frame(height: UIScreen.main.bounds.height * 0.5)
                 .overlay {
                     TextEditor(text: $note.body)
                         .focused($focusedField, equals: "body")

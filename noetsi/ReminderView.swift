@@ -9,13 +9,12 @@ import SwiftUI
 
 struct ReminderView: View {
     @Binding var note: Note
-    let showHeader: Bool
+    let compact: Bool
     
-    @State var request: UNNotificationRequest?
     @State private var showAddReminder = false
     
     private var trigger: UNCalendarNotificationTrigger {
-        guard let request = self.request else {
+        guard let request = self.note.reminder else {
             return UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
         }
         
@@ -35,12 +34,12 @@ struct ReminderView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if showHeader {
+            if !compact {
                 Text("Reminder:")
                     .font(.headline)
             }
             HStack {
-                if let _ = request {
+                if let _ = note.reminder {
                     HStack(spacing: 0) {
                         if trigger.repeats {
                             Image(systemName: "arrow.triangle.2.circlepath")
@@ -53,35 +52,22 @@ struct ReminderView: View {
                        
                 }
                 
-                Button {
-                    showAddReminder = true
-                } label: {
-                    Image(systemName: request != nil ? "pencil" : "plus")
-                        .foregroundColor(.white)
-                        .padding(5)
-                        .background(note.color.opacity(0.75))
-                        .clipShape(Circle())
+                if !compact {
+                    Button {
+                        showAddReminder = true
+                    } label: {
+                        Image(systemName: note.reminder != nil ? "pencil" : "plus")
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .background(note.color.opacity(0.75))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
-            }
-            .onAppear {
-                getNotificationRequest()
-                
             }
         }
         .sheet(isPresented: $showAddReminder) {
-            ReminderFormView(id: note.id, title: note.title, subtitle: note.bodyInline, request: $request)
-        }
-    }
-    
-    func getNotificationRequest() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            for request in requests {
-                if request.identifier == note.id {
-                    self.request = request
-                    break
-                }
-            }
+            ReminderFormView(id: note.id, title: note.title, subtitle: note.bodyInline, request: $note.reminder)
         }
     }
 }

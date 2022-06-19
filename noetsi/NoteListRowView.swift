@@ -47,7 +47,17 @@ struct NoteListRowView: View {
                     .font(.caption)
             }
 
-            TagsView(note: $note, showHeader: false)
+            HStack {
+                TagsView(note: $note, showHeader: false)
+                
+                Spacer()
+                
+                if note.reminder != nil {
+                    Image(systemName: "alarm.fill")
+                        .font(.headline)
+                        .opacity(0.5)
+                }
+            }
         }
         .padding()
         .background(NoteBackground(color: note.color, pattern: note.pattern))

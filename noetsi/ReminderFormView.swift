@@ -117,7 +117,9 @@ struct ReminderFormView: View {
         
         let runOnSuccess = {
             notifCenter.add(request)
-            self.request = request
+            DispatchQueue.main.async {
+                self.request = request
+            }
             dismiss()
         }
         

@@ -14,6 +14,7 @@ class FirestoreManager: ObservableObject {
     
     private let db = Firestore.firestore()
     private var buffer: [Note] = []
+    private var reminders: [String: UNNotificationRequest?] = [:]
     
     init() {
         fetchData()
@@ -104,13 +105,26 @@ class FirestoreManager: ObservableObject {
             note.checklist.append(Note.ChecklistItem(text: text, isChecked: isChecked))
         }
         
+        note.reminder = reminders[note.id] ?? nil
+        
         self.buffer.append(note)
+    }
+    
+    func fetchReminders() {
+        reminders = [:]
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                self.reminders[request.identifier] = request
+            }
+        }
     }
     
     func fetchData() {
         guard let uid = uid else {
             return
         }
+        
+        fetchReminders()
 
         db.collection(uid).getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -132,6 +146,7 @@ class FirestoreManager: ObservableObject {
                 (self.layout.firstIndex(where: { $0 == note1.id}) ?? Int.max) < (self.layout.firstIndex(where: { $0 == note2.id}) ?? Int.max)
             }
             self.notes = self.buffer
+            self.buffer = []
         }
     }
     

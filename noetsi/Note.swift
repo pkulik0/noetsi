@@ -32,6 +32,7 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     @Published var checklist: [ChecklistItem]
+    @Published var reminder: UNNotificationRequest?
 
     var timestamp: Int
     var deleteMe: Bool
@@ -61,7 +62,7 @@ class Note: ObservableObject, Identifiable, Equatable {
         title.isEmpty && body.isEmpty && tags.isEmpty && checklist.isEmpty
     }
     
-    init(id: String, title: String, body: String, tags: [String], timestamp: Int, color: Color, pattern: Pattern, checklist: [ChecklistItem]) {
+    init(id: String, title: String, body: String, tags: [String], timestamp: Int, color: Color, pattern: Pattern, checklist: [ChecklistItem], notificationRequest: UNNotificationRequest?) {
         self.id = id
         self.title = title
         self.body = body
@@ -70,13 +71,14 @@ class Note: ObservableObject, Identifiable, Equatable {
         self.pattern = pattern
         self.timestamp = timestamp
         self.checklist = checklist
+        self.reminder = notificationRequest
         
         self.deleteMe = false
     }
 
     convenience init(id: String) {
         let randomColor = Color.noteColors.randomElement() ?? .blue
-        self.init(id: id, title: "", body: "", tags: [], timestamp: Int(Date().timeIntervalSince1970), color: randomColor, pattern: Pattern(type: .None, size: 20), checklist: [])
+        self.init(id: id, title: "", body: "", tags: [], timestamp: Int(Date().timeIntervalSince1970), color: randomColor, pattern: Pattern(type: .None, size: 20), checklist: [], notificationRequest: nil)
     }
     
     convenience init() {
@@ -84,11 +86,11 @@ class Note: ObservableObject, Identifiable, Equatable {
     }
     
     static func == (lhs: Note, rhs: Note) -> Bool {
-        (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.color == rhs.color) && (lhs.pattern == rhs.pattern) && (lhs.checklist == rhs.checklist)
+        (lhs.id == rhs.id) && (lhs.title == rhs.title) && (lhs.body == rhs.body) && (lhs.tags == rhs.tags) && (lhs.timestamp == rhs.timestamp) && (lhs.color == rhs.color) && (lhs.pattern == rhs.pattern) && (lhs.checklist == rhs.checklist) && (lhs.reminder == rhs.reminder)
     }
     
     func copy() -> Note {
-        let copy = Note(id: self.id, title: self.title, body: self.body, tags: self.tags, timestamp: self.timestamp, color: self.color, pattern: self.pattern, checklist: self.checklist)
+        let copy = Note(id: self.id, title: self.title, body: self.body, tags: self.tags, timestamp: self.timestamp, color: self.color, pattern: self.pattern, checklist: self.checklist, notificationRequest: self.reminder)
         return copy
     }
 }
