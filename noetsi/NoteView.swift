@@ -31,17 +31,8 @@ struct NoteView: View {
                         TextField("Title", text: $note.title)
                             .font(.title.bold())
                             .focused($focusedField, equals: "title")
-                                  
-                        Text(note.body)
-                            .foregroundColor(.clear)
-                            .padding(8)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: UIScreen.main.bounds.height * 0.45)
-                            .overlay {
-                                TextEditor(text: $note.body)
-                                    .focused($focusedField, equals: "body")
-                            }
-                            .padding(.bottom)
+                                
+                        fixedTextEditor
                     }
                     .id("note")
                     .padding([.leading, .top], 25)
@@ -113,6 +104,27 @@ struct NoteView: View {
         }
         .onChange(of: focusedField) { newValue in
             print("filde \(newValue ?? "err")")
+        }
+    }
+    
+    var fixedTextEditor: some View {
+        ZStack(alignment: .topLeading) {
+            if note.body.isEmpty {
+                Text("Empty")
+                    .opacity(0.5)
+                    .padding(.top, 10)
+                    .padding(.leading, 5)
+            }
+            Text(note.body)
+                .foregroundColor(.clear)
+                .padding(8)
+                .frame(maxWidth: .infinity)
+                .frame(height: UIScreen.main.bounds.height * 0.45)
+                .overlay {
+                    TextEditor(text: $note.body)
+                        .focused($focusedField, equals: "body")
+                }
+                .padding(.bottom)
         }
     }
     
