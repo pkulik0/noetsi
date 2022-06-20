@@ -21,15 +21,6 @@ class noetsiUITests: XCTestCase {
         try logoutUser()
     }
     
-    func randomText(length: Int) -> String {
-        let availableCharacters = "abcdefghijklmnopqrstuvwxyz 0123456789 .!?"
-        var text = ""
-        for _ in 0..<length  {
-            text.append(availableCharacters.randomElement() ?? "a")
-        }
-        return text
-    }
-    
     func loginUser() throws {
         app.textFields["email"].tap()
         app.typeText("Test@test.com")

@@ -14,6 +14,11 @@
 		D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614C9D4285FB5D90089DF38 /* TagListRowView.swift */; };
 		D61E917E2860AA76000FFCFA /* noetsiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */; };
 		D6574830285B68A700DE1C6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* AuthView.swift */; };
+		D65B8F3928613AE00062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
+		D65B8F3A28613AE10062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
+		D65B8F3B28613C4D0062E6BD /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
+		D65B8F3F28613D200062E6BD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D65B8F3E28613D200062E6BD /* FirebaseAuth */; };
+		D65B8F4128613D200062E6BD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D65B8F4028613D200062E6BD /* FirebaseFirestore */; };
 		D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC3832856252600D9A377 /* ShareItemsView.swift */; };
 		D65CC38828562D4000D9A377 /* NoteBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC38728562D4000D9A377 /* NoteBackground.swift */; };
 		D65CC38C28564BC500D9A377 /* HorizontalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC38B28564BC500D9A377 /* HorizontalPickerView.swift */; };
@@ -40,7 +45,6 @@
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
 		D6ABC5F6284E55C5007170A9 /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */; };
-		D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
 		D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +74,7 @@
 		D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiUITests.swift; sourceTree = "<group>"; };
 		D614C9D4285FB5D90089DF38 /* TagListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListRowView.swift; sourceTree = "<group>"; };
 		D657482F285B68A700DE1C6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D65B8F3728613ABD0062E6BD /* testingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingHelpers.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
 		D65CC38728562D4000D9A377 /* NoteBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBackground.swift; sourceTree = "<group>"; };
 		D65CC38B28564BC500D9A377 /* HorizontalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPickerView.swift; sourceTree = "<group>"; };
@@ -113,6 +118,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D696B3F1284420F10018281D /* FirebaseAuth in Frameworks */,
+				D65B8F4128613D200062E6BD /* FirebaseFirestore in Frameworks */,
+				D65B8F3F28613D200062E6BD /* FirebaseAuth in Frameworks */,
 				D696B3F3284420F10018281D /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +222,24 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		D65B8F3428613A500062E6BD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */,
+				D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */,
+				D65B8F3728613ABD0062E6BD /* testingHelpers.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D65B8F3628613A620062E6BD /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		D696B3B928440FA00018281D = {
 			isa = PBXGroup;
 			children = (
@@ -237,12 +262,11 @@
 		D696B3C428440FA00018281D /* noetsi */ = {
 			isa = PBXGroup;
 			children = (
+				D65B8F3628613A620062E6BD /* Storyboards */,
+				D65B8F3428613A500062E6BD /* Tests */,
 				D614C9DF285FB9750089DF38 /* Data */,
 				D614C9DC285FB8260089DF38 /* Views */,
-				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 				D696B3C528440FA00018281D /* noetsiApp.swift */,
-				D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */,
-				D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */,
 				D696B3C928440FA10018281D /* Assets.xcassets */,
 				D696B3F4284421E80018281D /* GoogleService-Info.plist */,
 			);
@@ -286,6 +310,8 @@
 			packageProductDependencies = (
 				D696B3F0284420F10018281D /* FirebaseAuth */,
 				D696B3F2284420F10018281D /* FirebaseFirestore */,
+				D65B8F3E28613D200062E6BD /* FirebaseAuth */,
+				D65B8F4028613D200062E6BD /* FirebaseFirestore */,
 			);
 			productName = noetsi;
 			productReference = D696B3C228440FA00018281D /* noetsi.app */;
@@ -343,6 +369,7 @@
 			mainGroup = D696B3B928440FA00018281D;
 			packageReferences = (
 				D696B3EF284420F10018281D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D65B8F3D28613D200062E6BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D696B3C328440FA00018281D /* Products */;
 			projectDirPath = "";
@@ -389,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D61E917E2860AA76000FFCFA /* noetsiUITests.swift in Sources */,
+				D65B8F3A28613AE10062E6BD /* testingHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +458,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6AD2BA62853867E00BFE2C3 /* noetsiTests.swift in Sources */,
+				D65B8F3928613AE00062E6BD /* testingHelpers.swift in Sources */,
+				D65B8F3B28613C4D0062E6BD /* noetsiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +771,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D65B8F3D28613D200062E6BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		D696B3EF284420F10018281D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -753,6 +790,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D65B8F3E28613D200062E6BD /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D696B3EF284420F10018281D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D65B8F4028613D200062E6BD /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D696B3EF284420F10018281D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		D696B3F0284420F10018281D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D696B3EF284420F10018281D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
