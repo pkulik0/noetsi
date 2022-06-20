@@ -16,14 +16,31 @@ class FirestoreManager: ObservableObject {
     private var buffer: [Note] = []
     private var reminders: [String: UNNotificationRequest?] = [:]
     
+    private let debugMode: Bool = ProcessInfo.processInfo.environment["unit_testing"] == "true"
+    
     init() {
+        if debugMode {
+            print("Running Firestore locally.")
+
+            let settings = db.settings
+            settings.host = "localhost:8080"
+            settings.isPersistenceEnabled = false
+            settings.isSSLEnabled = false
+
+            db.settings = settings
+        }
         fetchData()
     }
 
     var uid: String? {
+        if debugMode {
+            return "testUserID"
+        }
+
         if let user = Auth.auth().currentUser {
             return String(user.uid)
         }
+
         return nil
     }
 
