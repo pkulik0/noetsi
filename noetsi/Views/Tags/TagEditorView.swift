@@ -25,10 +25,11 @@ struct TagEditorView: View {
             Form {
                 Section {
                     ForEach(Array(tags.enumerated()), id: \.offset) { index, tag in
-                        HStack {
-                            Image(systemName: "\(index).circle")
-                            Text(tag)
-                        }
+                        Text("#")
+                            .foregroundColor(.secondary)
+                        +
+                        Text(tag)
+                            .bold()
                     }
                     .onDelete(perform: deleteTags)
                     .animation(.default, value: tags)

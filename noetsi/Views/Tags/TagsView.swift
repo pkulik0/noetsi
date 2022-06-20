@@ -38,6 +38,7 @@ struct TagsView: View {
                             .background(Circle().fill(note.color).opacity(0.75))
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("editTagsButton")
                 }
             }
         }
