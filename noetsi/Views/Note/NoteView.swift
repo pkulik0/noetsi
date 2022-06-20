@@ -51,7 +51,7 @@ struct NoteView: View {
                                 .transition(.move(edge: .bottom).combined(with: .opacity))
                         } else {
                             HStack {
-                                TagsView(note: $note, showHeader: true)
+                                TagsView(note: $note, compact: false)
                                 
                                 Spacer()
                                 

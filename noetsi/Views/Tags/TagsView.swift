@@ -14,11 +14,11 @@ struct TagsView: View {
     
     @Binding var note: Note
     var updateNote: Bool = false
-    let showHeader: Bool
+    let compact: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
-            if showHeader {
+            if !compact {
                 Text("Tags:")
                     .font(.headline)
             }
@@ -31,7 +31,8 @@ struct TagsView: View {
                     Button {
                         showTagEditor = true
                     } label: {
-                        Image(systemName: note.tags.count > 0 ? "pencil" : "plus")
+                        Label("Edit tags", systemImage: note.tags.count > 0 ? "pencil" : "plus")
+                            .labelStyle(.iconOnly)
                             .foregroundColor(.white)
                             .padding(5)
                             .background(Circle().fill(note.color).opacity(0.75))

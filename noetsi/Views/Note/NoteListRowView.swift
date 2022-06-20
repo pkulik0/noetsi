@@ -48,7 +48,7 @@ struct NoteListRowView: View {
             }
 
             HStack {
-                TagsView(note: $note, showHeader: false)
+                TagsView(note: $note, compact: true)
                 
                 Spacer()
                 
