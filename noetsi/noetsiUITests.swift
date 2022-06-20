@@ -1,6 +1,6 @@
 //
 //  noetsiUITests.swift
-//  noetsiUITests
+//  noetsi (noetsiUITests)
 //
 //  Created by pkulik0 on 20/06/2022.
 //
@@ -75,18 +75,13 @@ class noetsiUITests: XCTestCase {
         
         app.tables.textFields["Tag"].tap()
         app.typeText(tagName)
+        
+        let addButton = app.tables.buttons["Add"]
+        XCTAssert(addButton.waitForExistence(timeout: 1))
         app.tables.buttons["Add"].tap()
         
         XCTAssert(app.tables.cells["#\(tagName)"].exists)
         
         app.navigationBars["Tag Editor"].buttons["Save"].tap()
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
     }
 }
