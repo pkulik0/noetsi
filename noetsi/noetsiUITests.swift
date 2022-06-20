@@ -10,7 +10,6 @@ import XCTest
 class noetsiUITests: XCTestCase {
 
     let app = XCUIApplication()
-    let availableCharacters = "abcdefghijklmnopqrstuvwxyz 0123456789 .!?"
     
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -23,6 +22,7 @@ class noetsiUITests: XCTestCase {
     }
     
     func randomText(length: Int) -> String {
+        let availableCharacters = "abcdefghijklmnopqrstuvwxyz 0123456789 .!?"
         var text = ""
         for _ in 0..<length  {
             text.append(availableCharacters.randomElement() ?? "a")
