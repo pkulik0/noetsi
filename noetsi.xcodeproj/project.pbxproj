@@ -11,6 +11,7 @@
 		D607CF5B285BA326007CF67B /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5A285BA326007CF67B /* ReminderView.swift */; };
 		D607CF5D285BB4F9007CF67B /* ReminderFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5C285BB4F9007CF67B /* ReminderFormView.swift */; };
 		D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */; };
+		D608FC1B285FEB5E00CEA24A /* noetsiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */; };
 		D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614C9D4285FB5D90089DF38 /* TagListRowView.swift */; };
 		D6574830285B68A700DE1C6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* AuthView.swift */; };
 		D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65CC3832856252600D9A377 /* ShareItemsView.swift */; };
@@ -44,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D608FC1E285FEB5E00CEA24A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D696B3BA28440FA00018281D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D696B3C128440FA00018281D;
+			remoteInfo = noetsi;
+		};
 		D6AD2BA72853867E00BFE2C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D696B3BA28440FA00018281D /* Project object */;
@@ -58,6 +66,8 @@
 		D607CF5A285BA326007CF67B /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
 		D607CF5C285BB4F9007CF67B /* ReminderFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFormView.swift; sourceTree = "<group>"; };
 		D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToHideModifier.swift; sourceTree = "<group>"; };
+		D608FC18285FEB5E00CEA24A /* noetsiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiUITests.swift; sourceTree = "<group>"; };
 		D614C9D4285FB5D90089DF38 /* TagListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListRowView.swift; sourceTree = "<group>"; };
 		D657482F285B68A700DE1C6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
@@ -91,6 +101,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D608FC15285FEB5E00CEA24A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D696B3BF28440FA00018281D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D608FC19285FEB5E00CEA24A /* noetsiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */,
+			);
+			path = noetsiUITests;
+			sourceTree = "<group>";
+		};
 		D614C9D7285FB6D60089DF38 /* Note */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +229,7 @@
 				D607CF58285B9DF0007CF67B /* README.md */,
 				D696B3C428440FA00018281D /* noetsi */,
 				D6AD2BA42853867E00BFE2C3 /* noetsiTests */,
+				D608FC19285FEB5E00CEA24A /* noetsiUITests */,
 				D696B3C328440FA00018281D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -213,6 +239,7 @@
 			children = (
 				D696B3C228440FA00018281D /* noetsi.app */,
 				D6AD2BA32853867E00BFE2C3 /* noetsiTests.xctest */,
+				D608FC18285FEB5E00CEA24A /* noetsiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,6 +268,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D608FC17285FEB5E00CEA24A /* noetsiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D608FC20285FEB5E00CEA24A /* Build configuration list for PBXNativeTarget "noetsiUITests" */;
+			buildPhases = (
+				D608FC14285FEB5E00CEA24A /* Sources */,
+				D608FC15285FEB5E00CEA24A /* Frameworks */,
+				D608FC16285FEB5E00CEA24A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D608FC1F285FEB5E00CEA24A /* PBXTargetDependency */,
+			);
+			name = noetsiUITests;
+			productName = noetsiUITests;
+			productReference = D608FC18285FEB5E00CEA24A /* noetsiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D696B3C128440FA00018281D /* noetsi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D696B3D028440FA10018281D /* Build configuration list for PBXNativeTarget "noetsi" */;
@@ -290,6 +335,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					D608FC17285FEB5E00CEA24A = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = D696B3C128440FA00018281D;
+					};
 					D696B3C128440FA00018281D = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -317,11 +366,19 @@
 			targets = (
 				D696B3C128440FA00018281D /* noetsi */,
 				D6AD2BA22853867E00BFE2C3 /* noetsiTests */,
+				D608FC17285FEB5E00CEA24A /* noetsiUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D608FC16285FEB5E00CEA24A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D696B3C028440FA00018281D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -343,6 +400,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D608FC14285FEB5E00CEA24A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D608FC1B285FEB5E00CEA24A /* noetsiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D696B3BE28440FA00018281D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,6 +453,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D608FC1F285FEB5E00CEA24A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D696B3C128440FA00018281D /* noetsi */;
+			targetProxy = D608FC1E285FEB5E00CEA24A /* PBXContainerItemProxy */;
+		};
 		D6AD2BA82853867E00BFE2C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D696B3C128440FA00018281D /* noetsi */;
@@ -396,6 +466,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D608FC21285FEB5E00CEA24A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q96DAPWJF3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pkulik.dev.noetsiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = noetsi;
+			};
+			name = Debug;
+		};
+		D608FC22285FEB5E00CEA24A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q96DAPWJF3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pkulik.dev.noetsiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = noetsi;
+			};
+			name = Release;
+		};
 		D696B3CE28440FA10018281D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -517,7 +623,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"noetsi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q96DAPWJF3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -548,7 +654,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"noetsi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q96DAPWJF3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -613,6 +719,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D608FC20285FEB5E00CEA24A /* Build configuration list for PBXNativeTarget "noetsiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D608FC21285FEB5E00CEA24A /* Debug */,
+				D608FC22285FEB5E00CEA24A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D696B3BD28440FA00018281D /* Build configuration list for PBXProject "noetsi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
