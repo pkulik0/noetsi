@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-class Note: ObservableObject, Identifiable, Equatable {
-    
+class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
     enum PatternType: Int {
         case None, Lines, Grid
     }
@@ -36,6 +35,8 @@ class Note: ObservableObject, Identifiable, Equatable {
 
     var timestamp: Int
     var deleteMe: Bool
+    
+    var description: String { id }
     
     var shareable: String {
         """
