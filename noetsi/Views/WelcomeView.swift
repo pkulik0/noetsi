@@ -17,8 +17,6 @@ struct WelcomeView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var noetsiText = "noetsi"
-    
-    @State private var authSuccess = false
 
     @FocusState private var passwordFocused
     
@@ -97,9 +95,6 @@ struct WelcomeView: View {
             }
             .padding()
         }
-        .fullScreenCover(isPresented: $authSuccess, content: {
-            MainView()
-        })
         .alert("Error", isPresented: $showingAlert, actions: {
             Button("OK") {}
         }, message: {
@@ -115,7 +110,6 @@ struct WelcomeView: View {
             showingAlert = true
         } else {
             feedback.notificationOccurred(.success)
-            authSuccess = true
             firestoreManager.fetchData()
         }
     }
