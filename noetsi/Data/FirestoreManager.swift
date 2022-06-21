@@ -8,14 +8,36 @@
 import Firebase
 import SwiftUI
 
+///
+///Manages the connection between the application and Google Firebase.
+///
+///FirestoreManager is the main and only entry point of data to the appication in the current version of noetsi.
+///It provides functions to write and delete ``Note``, fetch user's notes and keeps track of their layout.
+///Handles authenticating the user with FirebaseAuth.
+///
+///When used with the environment variable "unit_testing" set to "true" it connects to a local instance.
+///
 class FirestoreManager: ObservableObject {
+
+    /// User's notes fetched from database.
     @Published var notes: [Note] = []
+    
+    /// Buffer used to make sure the user always sees notes on the screen.
+    private var buffer: [Note] = []
+    
+    /// Layout of the notes in the user interface.
+    ///
+    /// Each note is represented by its unique identifer.
+    ///
     @Published var layout: [String] = []
     
+    /// Connection to the Firestore Database.
     private let db = Firestore.firestore()
-    private var buffer: [Note] = []
+
+    /// Map of all the application's pending notifications.
     private var reminders: [String: UNNotificationRequest?] = [:]
     
+    /// Value used for detecting if the application is currently running automated tests.
     private let debugMode: Bool = ProcessInfo.processInfo.environment["unit_testing"] == "true"
     
     init() {
@@ -32,6 +54,12 @@ class FirestoreManager: ObservableObject {
         fetchData()
     }
 
+    ///
+    /// Wrapper around FirebaseAuth's user identifier.
+    ///
+    /// Used as an authentication guard at the beginning of functions interracting with the database.
+    /// Allows to circumvent authentication during automated testing.
+    ///
     var uid: String? {
         if debugMode {
             return "testUserID"
@@ -44,6 +72,10 @@ class FirestoreManager: ObservableObject {
         return nil
     }
 
+    ///
+    /// Writes ``Note`` to the database and updates the layout.
+    /// - Parameter note: the ``Note`` to write.
+    ///
     func writeNote(note: Note) {
         guard let uid = uid else {
             return
@@ -64,6 +96,7 @@ class FirestoreManager: ObservableObject {
         }
     }
     
+    /// Write a user's layout to the database.
     func writeLayout() {
         guard let uid = uid else {
             return
@@ -76,6 +109,10 @@ class FirestoreManager: ObservableObject {
         }
     }
 
+    ///
+    /// Delete a ``Note`` from the database.
+    /// - Parameter id: the identifier of the ``Note`` to delete.
+    ///
     func deleteNote(id: String) {
         guard let uid = uid else {
             return
@@ -96,11 +133,13 @@ class FirestoreManager: ObservableObject {
         }
     }
     
-    func parseUserData(document: QueryDocumentSnapshot) {
+    /// Parse document data received from Firestore as a layout of notes.
+    private func parseUserData(document: QueryDocumentSnapshot) {
         layout = document.data()["layout"] as? [String] ?? []
     }
     
-    func parseNote(document: QueryDocumentSnapshot) {
+    /// Parse document data received from Firestore as ``Note``.
+    private func parseNote(document: QueryDocumentSnapshot) {
         let note: Note = Note(id: document.documentID)
 
         note.title = document.data()["title"] as? String ?? "Unknown title"
@@ -127,7 +166,12 @@ class FirestoreManager: ObservableObject {
         self.buffer.append(note)
     }
     
-    func fetchReminders() {
+    ///
+    /// Find the application's pending notifications.
+    ///
+    /// Save all the application's notification requests in a map to look through them efficiently during assembly of a ``Note``.
+    ///
+    private func fetchReminders() {
         reminders = [:]
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             for request in requests {
@@ -136,6 +180,13 @@ class FirestoreManager: ObservableObject {
         }
     }
     
+    ///
+    /// Fetch data corresponding to a ``uid`` from the database.
+    ///
+    /// Requests and parses all of user's notes and their account's additional data.
+    ///
+    /// Works on a buffer to avoid overwritten data currently displayed to the user.
+    ///
     func fetchData() {
         guard let uid = uid else {
             return
@@ -167,6 +218,18 @@ class FirestoreManager: ObservableObject {
         }
     }
     
+    ///
+    /// Convert a checklist from the format used by noetsi iOS to the database's format.
+    ///
+    /// Convert an array of ``Note.ChecklistItem`` to the format of checklists used in Firestore.
+    ///
+    /// - "abc" set to *false* becomes 0abc
+    /// - "123" set to *true* becomes 1123
+    ///
+    /// This method of data representation has been chosen because it provides good balance between ease of representation and use in NoSQL and Swift.
+    ///
+    /// - Returns: A checklist in the database's format.
+    ///
     func convertChecklist(checklist: [Note.ChecklistItem]) -> [String] {
         var firebaseChecklist: [String] = []
         for item in checklist {
@@ -178,18 +241,34 @@ class FirestoreManager: ObservableObject {
         return firebaseChecklist
     }
     
+    ///
+    /// Create a new ``Note`` without writing it to the database.
+    ///
+    /// Create a ``Note`` and save it in ``notes`` and ``layout``.
+    ///
     func addNote() {
         let note = Note()
         self.notes.insert(note, at: 0)
         self.layout.insert(note.id, at: 0)
     }
     
+    ///
+    /// Delete notes from ``notes`` at offsets.
+    /// - Parameter offsets: positions at which notes will be deleted.
+    ///
     func deleteNotes(at offsets: IndexSet) {
         for index in offsets {
             self.deleteNote(id: notes[index].id)
         }
     }
     
+    ///
+    /// Move notes located at source to destination and write changes to the database.
+    ///
+    /// Move entries corresponding to the elements in ``notes`` and ``layout``, write changes to the database and generate feedback.
+    /// - Parameter source: origins of the elements.
+    /// - Parameter destination: position to which the elements should be moved.
+    ///
     func move(from source: IndexSet, to destination: Int) {
         self.notes.move(fromOffsets: source, toOffset: destination)
         self.layout.move(fromOffsets: source, toOffset: destination)
@@ -198,6 +277,7 @@ class FirestoreManager: ObservableObject {
         UIImpactFeedbackGenerator().impactOccurred()
     }
     
+    /// Sign out user from FirebaseAuth and disable local authentication.
     func signOut() {
         @AppStorage("enableAuth") var enableAuth = false
         do {
@@ -211,12 +291,14 @@ class FirestoreManager: ObservableObject {
         }
     }
     
+    /// Try to create a new account using FirebaseAuth.
     func signUp(email: String, password: String, onFinished: @escaping (_ error: Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             onFinished(error)
         }
     }
     
+    /// Try to sign in with existing user's credentials.
     func signIn(email: String, password: String, onFinished: @escaping (_ error: Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             onFinished(error)
