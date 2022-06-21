@@ -7,12 +7,22 @@
 
 import SwiftUI
 
+/// Contains a ``Note`` pattern editor and a background color picker.
 struct ThemeEditorView: View {
+    
+    /// Currently selected background color.
     @Binding var selection: Color
+    
+    /// The ``Note``'s background pattern.
     @Binding var pattern: Note.Pattern
+    
+    /// Controls the view's visibility.
     @Binding var isPresented: Bool
     
+    /// Pattern size picker is shown only if pattern is not set to none.
     @State private var showSizePicker: Bool
+    
+    /// The view's offset used for the ``DragToHide`` modifier.
     @State private var offset: CGSize
     
     init(selection: Binding<Color>, pattern: Binding<Note.Pattern>, isPresented: Binding<Bool>) {

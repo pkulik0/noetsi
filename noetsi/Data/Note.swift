@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Represents the base of the application - a Note.
+/// Represents the essential data type of the application - a Note.
 class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
     
     /// Represents ``Note``'s background pattern.
@@ -19,7 +19,7 @@ class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
         var size: Double
     }
     
-    /// Used to switch between available types of ``Note.Pattern``.
+    /// Used to switch between available types of ``Pattern-swift.struct``.
     enum PatternType: Int {
         /// No pattern
         case None

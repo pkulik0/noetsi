@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// ``NoteListRowView`` displays a ``Note`` in a format suitable for lists.
 struct NoteListRowView: View {
+
+    /// The displayed note.
     @Binding var note: Note
 
     private var bodyPlaceholder: String {

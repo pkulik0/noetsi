@@ -7,25 +7,40 @@
 
 import SwiftUI
 
+/// ``NoteView`` presents all the available information about a ``Note`` to the user and enables modification.
 struct NoteView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
-    @Environment(\.dismiss) private var dismiss
-    
+
+    /// This view's main source of data.
     @Binding var note: Note
-
+    
+    /// The displayed ``Note``'s copy used to detect changes.
     @State private var noteCopy = Note()
+    
+    /// Keeps track of the focused field to dismiss the keyboard after the user presses *Done* on the toolbar.
+    @FocusState private var focusedField: String?
 
+    /// Value responsible for showing a warning to the user before queuing ``note`` for deletion.
     @State private var showDeleteAlert: Bool = false
-    @State private var showChangeColor: Bool = false
+    
+    /// Controls the visibility of ``ThemeEditorView``.
+    @State private var showThemeEditor: Bool = false
+    
+    /// Controls the visiblity of a sheet with ``TagEditorView``.
     @State private var showTagEditor: Bool = false
+    
+    /// Show a view allowing the user to share the note. (``ShareItemsView``)
     @State private var showShareView: Bool = false
+    
+    /// Toggle the visibility of the checklist section.
     @State private var showChecklist: Bool = false
     
-    @FocusState private var focusedField: String?
-    
+    /// Returns true if either there are checklist elements or the user has specifically requested to show the checklist.
     private var showDropdown: Bool {
         !note.checklist.isEmpty || showChecklist
     }
+    
+    @EnvironmentObject private var firestoreManager: FirestoreManager
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ScrollViewReader { reader in
@@ -45,8 +60,8 @@ struct NoteView: View {
                     .shadow(radius: 5)
                     
                     VStack(alignment: .leading) {
-                        if showChangeColor {
-                            ThemeEditorView(selection: $note.color, pattern: $note.pattern, isPresented: $showChangeColor)
+                        if showThemeEditor {
+                            ThemeEditorView(selection: $note.color, pattern: $note.pattern, isPresented: $showThemeEditor)
                                 .shadow(radius: 5)
                                 .transition(.move(edge: .bottom).combined(with: .opacity))
                         } else {
@@ -108,6 +123,7 @@ struct NoteView: View {
         }
     }
     
+    /// SwiftUI TextEditor wrapped around with other views to add a placeholder and fix its size issue.
     var fixedTextEditor: some View {
         ZStack(alignment: .topLeading) {
             if note.body.isEmpty {
@@ -129,6 +145,7 @@ struct NoteView: View {
         }
     }
     
+    /// The items displayed on the toolbars.
     var toolbarItems: some ToolbarContent {
         Group {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -147,10 +164,10 @@ struct NoteView: View {
                 }
                 Button {
                     withAnimation {
-                        showChangeColor.toggle()
+                        showThemeEditor.toggle()
                     }
                 } label: {
-                    Label("Change color", systemImage: showChangeColor ? "paintpalette.fill" : "paintpalette")
+                    Label("Change color", systemImage: showThemeEditor ? "paintpalette.fill" : "paintpalette")
                 }
                 Button {
                     showShareView = true
@@ -174,6 +191,7 @@ struct NoteView: View {
         }
     }
     
+    /// Queue ``note`` for deletion.
     func deleteNote() {
         note.deleteMe = true
         dismiss()

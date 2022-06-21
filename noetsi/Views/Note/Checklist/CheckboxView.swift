@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// Toggable checkbox in the shape of a cirle.
 struct CheckboxView: View {
+
+    /// The checkbox's state
     @Binding var isOn: Bool
     
     var body: some View {

@@ -7,12 +7,23 @@
 
 import SwiftUI
 
+///
+/// Shows a ``Note``'s reminder if it has one.
+///
+/// ``ReminderView`` shows enables users to initiate adding a new reminder and displays the information about the current one if it exists.
+///
 struct ReminderView: View {
+    
+    /// Currently displayed ``Note``.
     @Binding var note: Note
+    
+    /// Enables a version of the view that only displays *existing* reminders without a header or a button.
     let compact: Bool
     
+    /// Controls the visiblity of ``ReminderFormView``
     @State private var showAddReminder = false
     
+    /// Wrapper around the ``Note``'s notification request trigger which casts it to a Calendar trigger.
     private var trigger: UNCalendarNotificationTrigger {
         guard let request = self.note.reminder else {
             return UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
@@ -21,6 +32,7 @@ struct ReminderView: View {
         return request.trigger as? UNCalendarNotificationTrigger ?? UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
     }
     
+    /// Converts the trigger's dateComponents to a string.
     private var dateString: String {
         let dateComponents = trigger.dateComponents
         let date = Calendar.current.date(from: dateComponents) ?? Date()

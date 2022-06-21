@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+///
+/// Displays all synced notes in an interactable and editable list.
+///
+///  ``NoteListView`` is used as one of the main views of the app.
+///  It allows the users to view, move (by dragging), delete and add notes.
+///
+///  The data is modified by interracing with ``FirestoreManager``.
+///
 struct NoteListView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
 

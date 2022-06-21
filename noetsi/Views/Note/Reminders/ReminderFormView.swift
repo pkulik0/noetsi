@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Form used to create a new ``Note`` reminder.
 struct ReminderFormView: View {
     @Environment(\.dismiss) private var dismiss
     
@@ -16,11 +17,21 @@ struct ReminderFormView: View {
     @State private var includeDate: Bool = false
     @State private var includeTime: Bool = true
 
+    ///
+    /// The notification's identifier.
+    ///
+    /// Noetsi uses the id of a ``Note`` as the ``id`` of its notification to keep only one notification for every ``Note``.
+    ///
     let id: String
+    
+    /// The text to display as the title of the notification.
     let title: String
+    
+    /// The notifications content.
     let subtitle: String
     @Binding var request: UNNotificationRequest?
     
+    /// Used to block saving reminders if there is not enough data to create a trigger.
     private var isSaveDisabled: Bool {
         !includeDate && !includeTime
     }
@@ -79,6 +90,7 @@ struct ReminderFormView: View {
         }
     }
     
+    /// Retrieve data from an existing notification request and display it in the view.
     func retrieveData() {
         guard let request = request else {
             return
@@ -95,6 +107,7 @@ struct ReminderFormView: View {
         includeTime = trigger.dateComponents.hour != nil
     }
     
+    /// Create a new notification with the view's data.
     func addNotification() {
         let notifCenter = UNUserNotificationCenter.current()
         

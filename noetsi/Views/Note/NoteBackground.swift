@@ -7,8 +7,13 @@
 
 import SwiftUI
 
+/// The view used as the background of ``Note``.
 struct NoteBackground: View {
+    
+    /// The ``Note``'s color.
     let color: Color
+    
+    /// Background pattern.
     let pattern: Note.Pattern
     
     private let patternOpacity = 0.15
