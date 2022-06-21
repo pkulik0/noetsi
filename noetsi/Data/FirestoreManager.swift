@@ -76,7 +76,7 @@ class FirestoreManager: ObservableObject {
     }
 
     ///
-    /// Writes ``Note`` to the database and updates the layout.
+    /// Write a ``Note`` to the database and update the layout.
     /// - Parameter note: the ``Note`` to write.
     ///
     func writeNote(note: Note) {
