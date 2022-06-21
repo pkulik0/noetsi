@@ -9,13 +9,13 @@ import Firebase
 import SwiftUI
 
 ///
-///Manages the connection between the application and Google Firebase.
+/// Manages the connection between the application and Google Firebase.
 ///
-///FirestoreManager is the main and only entry point of data to the appication in the current version of noetsi.
-///It provides functions to write and delete ``Note``, fetch user's notes and keeps track of their layout.
-///Handles authenticating the user with FirebaseAuth.
+/// FirestoreManager is the main and only entry point of data to the appication in the current version of noetsi.
+/// It provides functions to write and delete ``Note``, fetch user's notes and keeps track of their layout.
+/// Handles authenticating the user with FirebaseAuth.
 ///
-///When used with the environment variable "unit_testing" set to "true" it connects to a local instance.
+/// When used with the environment variable "unit_testing" set to "true" it connects to a local instance.
 ///
 class FirestoreManager: ObservableObject {
 
