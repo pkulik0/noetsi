@@ -14,7 +14,7 @@ struct NoteBackground: View {
     let color: Color
     
     /// Background pattern.
-    let pattern: Note.Pattern
+    let pattern: Pattern
     
     private let patternOpacity = 0.15
     

@@ -12,10 +12,13 @@ Notes app with support for tags, checklists and reminders.
 
 ## Topics
 
-### Data classes and controllers
-
+### Data controllers
 - ``FirestoreManager``
+
+### Data classes/structs
 - ``Note``
+- ``Pattern``
+- ``ChecklistItem``
 
 ### Entry point
 - ``noetsiApp``

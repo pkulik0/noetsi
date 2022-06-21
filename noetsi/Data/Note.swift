@@ -10,25 +10,6 @@ import SwiftUI
 /// Represents the essential data type of the application - a Note.
 class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConvertible {
     
-    /// Represents ``Note``'s background pattern.
-    struct Pattern: Equatable, Codable {
-        /// The selected type of pattern
-        var type: PatternType
-        
-        /// The distance between lines of the pattern.
-        var size: Double
-    }
-    
-    /// Used to switch between available types of ``Pattern-swift.struct``.
-    enum PatternType: Int, Codable {
-        /// No pattern
-        case None
-        /// Horizontal lines
-        case Lines
-        /// Horizontal and vertical lines
-        case Grid
-    }
-    
     ///
     /// The ``Note``'s unique UUID identifier
     ///
@@ -59,12 +40,6 @@ class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConv
     
     /// Pattern displayed on top of  the ``Note``'s ``color``.
     @Published var pattern: Pattern
-    
-    /// Represents an entry in a checklist.
-    struct ChecklistItem: Equatable, Codable {
-        var text: String
-        var isChecked: Bool
-    }
     
     /// Checklist attached to ``Note``.
     @Published var checklist: [ChecklistItem]

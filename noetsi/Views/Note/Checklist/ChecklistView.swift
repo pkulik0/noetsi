@@ -11,7 +11,7 @@ import SwiftUI
 struct ChecklistView: View {
     
     /// The checklist to display.
-    @Binding var checklist: [Note.ChecklistItem]
+    @Binding var checklist: [ChecklistItem]
     
     /// Currently focused field, can be passed down from the parent.
     @FocusState var focusedField: String?
@@ -61,7 +61,7 @@ struct ChecklistView: View {
     /// Add a new item to the checklist.
     func addItem() {
         if !newItem.trimmingCharacters(in: .whitespaces).isEmpty {
-            checklist.append(Note.ChecklistItem(text: newItem, isChecked: false))
+            checklist.append(ChecklistItem(text: newItem, isChecked: false))
             newItem = ""
         }
     }

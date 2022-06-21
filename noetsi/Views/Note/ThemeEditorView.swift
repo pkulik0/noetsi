@@ -14,7 +14,7 @@ struct ThemeEditorView: View {
     @Binding var selection: Color
     
     /// The ``Note``'s background pattern.
-    @Binding var pattern: Note.Pattern
+    @Binding var pattern: Pattern
     
     /// Controls the view's visibility.
     @Binding var isPresented: Bool
@@ -25,7 +25,7 @@ struct ThemeEditorView: View {
     /// The view's offset used for the ``DragToHide`` modifier.
     @State private var offset: CGSize
     
-    init(selection: Binding<Color>, pattern: Binding<Note.Pattern>, isPresented: Binding<Bool>) {
+    init(selection: Binding<Color>, pattern: Binding<Pattern>, isPresented: Binding<Bool>) {
         _selection = selection
         _pattern = pattern
         _isPresented = isPresented
@@ -42,11 +42,11 @@ struct ThemeEditorView: View {
                     
                     Picker("Size", selection: $pattern.type) {
                         Label("None", systemImage: "square.slash")
-                            .tag(Note.PatternType.None)
+                            .tag(Pattern.PatternType.None)
                         Label("Lines", systemImage: "line.3.horizontal")
-                            .tag(Note.PatternType.Lines)
+                            .tag(Pattern.PatternType.Lines)
                         Label("Grid", systemImage: "grid")
-                            .tag(Note.PatternType.Grid)
+                            .tag(Pattern.PatternType.Grid)
                     }
                     .labelStyle(.iconOnly)
                     .pickerStyle(.segmented)
