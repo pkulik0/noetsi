@@ -1,14 +1,21 @@
 # ``noetsi``
 
-Notes app with support for tags, checklists and reminders.
+Version 1.0 by pkulik0
 
-### Built using:
+## Description
+
+Noetsi is a cloud synchronized notes app with support for various backgrounds and attachments.
+
+## Technology
+
 - Swift
 - SwiftUI
+- XCTest
 - LocalAuthentication
-- Firestore (NoSQL) Database
-- Firestore Auth
-- DocC
+- UserNotifications
+- Firestore Authentication
+- Firestore Cloud Database (NoSQL)
+- XCode DocC (Documentation Compiler)
 
 ## Topics
 
@@ -16,7 +23,7 @@ Notes app with support for tags, checklists and reminders.
 - ``FirestoreManager``
 
 ### Data classes/structs
-- ``Note``
+- <doc:Note>
 - ``Pattern``
 - ``ChecklistItem``
 

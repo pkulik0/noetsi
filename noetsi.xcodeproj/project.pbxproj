@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D607CF59285B9DF0007CF67B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D607CF58285B9DF0007CF67B /* README.md */; };
 		D607CF5B285BA326007CF67B /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5A285BA326007CF67B /* ReminderView.swift */; };
 		D607CF5D285BB4F9007CF67B /* ReminderFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5C285BB4F9007CF67B /* ReminderFormView.swift */; };
 		D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */; };
@@ -68,7 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D607CF58285B9DF0007CF67B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D607CF5A285BA326007CF67B /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
 		D607CF5C285BB4F9007CF67B /* ReminderFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFormView.swift; sourceTree = "<group>"; };
 		D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToHideModifier.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				D651C57A2862288A00EBCCC8 /* docs.docc */,
-				D607CF58285B9DF0007CF67B /* README.md */,
 				D696B3C428440FA00018281D /* noetsi */,
 				D696B3C328440FA00018281D /* Products */,
 			);
@@ -408,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D696B3CA28440FA10018281D /* Assets.xcassets in Resources */,
-				D607CF59285B9DF0007CF67B /* README.md in Resources */,
 				D6F87CA82855424E0033E6FC /* Launch Screen.storyboard in Resources */,
 				D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */,
 			);
