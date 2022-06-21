@@ -1,5 +1,5 @@
 //
-//  TagListView.swift
+//  TagRollView.swift
 //  noetsi
 //
 //  Created by pkulik0 on 03/06/2022.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Displays a ``Note``'s tags in a scrollable horizontal view.
-struct TagsView: View {
+struct TagRollView: View {
     
     /// The ``Note`` that is the source of the data.
     @Binding var note: Note

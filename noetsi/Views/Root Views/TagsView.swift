@@ -1,5 +1,5 @@
 //
-//  TagListView.swift
+//  TagsView.swift
 //  noetsi
 //
 //  Created by pkulik0 on 17/06/2022.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-/// ``TagListView`` is one of the application's main views. It is used to display all ``Note``s with a given tag.
-struct TagListView: View {
+/// ``TagsView`` is one of the application's main views. It is used to display all ``Note``s with a given tag.
+struct TagsView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
 
     /// The available tags.
@@ -24,7 +24,7 @@ struct TagListView: View {
     @State private var showSortingOptions = false
     
     /// Available sorting criteria.
-    enum SortingCriteria {
+    private enum SortingCriteria {
         case nameIncreasing, nameDecreasing, sizeIncreasing, sizeDecreasing
     }
     

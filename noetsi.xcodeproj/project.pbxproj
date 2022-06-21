@@ -13,6 +13,7 @@
 		D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */; };
 		D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614C9D4285FB5D90089DF38 /* TagListRowView.swift */; };
 		D61E917E2860AA76000FFCFA /* noetsiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */; };
+		D651C57B2862288B00EBCCC8 /* docs.docc in Sources */ = {isa = PBXBuildFile; fileRef = D651C57A2862288A00EBCCC8 /* docs.docc */; };
 		D6574830285B68A700DE1C6B /* LocalAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* LocalAuthView.swift */; };
 		D65B8F3928613AE00062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
 		D65B8F3A28613AE10062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
@@ -30,15 +31,15 @@
 		D66A6ACC284920E1009DB38F /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6ACB284920E1009DB38F /* TagView.swift */; };
 		D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6ACD28492C4F009DB38F /* TagEditorView.swift */; };
 		D66A6AD028497193009DB38F /* NoteColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6ACF28497193009DB38F /* NoteColor.swift */; };
-		D66A6AD228497CF2009DB38F /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6AD128497CF2009DB38F /* TagsView.swift */; };
+		D66A6AD228497CF2009DB38F /* TagRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A6AD128497CF2009DB38F /* TagRollView.swift */; };
 		D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E75362847D9FC00150062 /* NoteListRowView.swift */; };
-		D683EDAC285CC8010091E13F /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683EDAB285CC8000091E13F /* NoteListView.swift */; };
+		D683EDAC285CC8010091E13F /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D683EDAB285CC8000091E13F /* NotesView.swift */; };
 		D696B3C628440FA00018281D /* noetsiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C528440FA00018281D /* noetsiApp.swift */; };
 		D696B3C828440FA00018281D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3C728440FA00018281D /* WelcomeView.swift */; };
 		D696B3CA28440FA10018281D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696B3C928440FA10018281D /* Assets.xcassets */; };
 		D696B3F5284421E80018281D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D696B3F4284421E80018281D /* GoogleService-Info.plist */; };
 		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
-		D69A03D3285CE51500B07BA1 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D2285CE51500B07BA1 /* TagListView.swift */; };
+		D69A03D3285CE51500B07BA1 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D2285CE51500B07BA1 /* TagsView.swift */; };
 		D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D4285CE71E00B07BA1 /* SettingsView.swift */; };
 		D6A2FC4A285C049C0082AE57 /* LocalAuthViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2FC49285C049C0082AE57 /* LocalAuthViewModifier.swift */; };
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
@@ -72,6 +73,7 @@
 		D608FC18285FEB5E00CEA24A /* noetsiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiUITests.swift; sourceTree = "<group>"; };
 		D614C9D4285FB5D90089DF38 /* TagListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListRowView.swift; sourceTree = "<group>"; };
+		D651C57A2862288A00EBCCC8 /* docs.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = docs.docc; sourceTree = "<group>"; };
 		D657482F285B68A700DE1C6B /* LocalAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthView.swift; sourceTree = "<group>"; };
 		D65B8F3728613ABD0062E6BD /* testingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingHelpers.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
@@ -84,16 +86,16 @@
 		D66A6ACB284920E1009DB38F /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		D66A6ACD28492C4F009DB38F /* TagEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEditorView.swift; sourceTree = "<group>"; };
 		D66A6ACF28497193009DB38F /* NoteColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteColor.swift; sourceTree = "<group>"; };
-		D66A6AD128497CF2009DB38F /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
+		D66A6AD128497CF2009DB38F /* TagRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRollView.swift; sourceTree = "<group>"; };
 		D67E75362847D9FC00150062 /* NoteListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRowView.swift; sourceTree = "<group>"; };
-		D683EDAB285CC8000091E13F /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		D683EDAB285CC8000091E13F /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		D696B3C228440FA00018281D /* noetsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noetsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D696B3C528440FA00018281D /* noetsiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiApp.swift; sourceTree = "<group>"; };
 		D696B3C728440FA00018281D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		D696B3C928440FA10018281D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D696B3F4284421E80018281D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		D69A03D2285CE51500B07BA1 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		D69A03D2285CE51500B07BA1 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		D69A03D4285CE71E00B07BA1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D6A2FC49285C049C0082AE57 /* LocalAuthViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthViewModifier.swift; sourceTree = "<group>"; };
 		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -138,7 +140,6 @@
 				D614C9DB285FB7E10089DF38 /* Reminders */,
 				D614C9DD285FB8610089DF38 /* Checklist */,
 				D6601A4628456EBF00BB639F /* NoteView.swift */,
-				D683EDAB285CC8000091E13F /* NoteListView.swift */,
 				D67E75362847D9FC00150062 /* NoteListRowView.swift */,
 				D65CC38728562D4000D9A377 /* NoteBackground.swift */,
 				D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */,
@@ -160,8 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				D66A6ACB284920E1009DB38F /* TagView.swift */,
-				D66A6AD128497CF2009DB38F /* TagsView.swift */,
-				D69A03D2285CE51500B07BA1 /* TagListView.swift */,
+				D66A6AD128497CF2009DB38F /* TagRollView.swift */,
 				D614C9D4285FB5D90089DF38 /* TagListRowView.swift */,
 				D66A6ACD28492C4F009DB38F /* TagEditorView.swift */,
 			);
@@ -180,10 +180,8 @@
 		D614C9DC285FB8260089DF38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D651C57C28622A2900EBCCC8 /* Root Views */,
 				D614C9DE285FB8A30089DF38 /* Utility */,
-				D696B3C728440FA00018281D /* WelcomeView.swift */,
-				D69A03D4285CE71E00B07BA1 /* SettingsView.swift */,
-				D696B3F628444EBB0018281D /* MainView.swift */,
 				D614C9D7285FB6D60089DF38 /* Note */,
 				D614C9DA285FB7DA0089DF38 /* Tags */,
 				D614C9D9285FB7030089DF38 /* Auth */,
@@ -220,6 +218,18 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		D651C57C28622A2900EBCCC8 /* Root Views */ = {
+			isa = PBXGroup;
+			children = (
+				D696B3C728440FA00018281D /* WelcomeView.swift */,
+				D69A03D4285CE71E00B07BA1 /* SettingsView.swift */,
+				D683EDAB285CC8000091E13F /* NotesView.swift */,
+				D69A03D2285CE51500B07BA1 /* TagsView.swift */,
+				D696B3F628444EBB0018281D /* MainView.swift */,
+			);
+			path = "Root Views";
+			sourceTree = "<group>";
+		};
 		D65B8F3428613A500062E6BD /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +251,7 @@
 		D696B3B928440FA00018281D = {
 			isa = PBXGroup;
 			children = (
+				D651C57A2862288A00EBCCC8 /* docs.docc */,
 				D607CF58285B9DF0007CF67B /* README.md */,
 				D696B3C428440FA00018281D /* noetsi */,
 				D696B3C328440FA00018281D /* Products */,
@@ -424,7 +435,7 @@
 				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
 				D6601A4728456EBF00BB639F /* NoteView.swift in Sources */,
 				D65CC38E2856619D00D9A377 /* ChecklistView.swift in Sources */,
-				D69A03D3285CE51500B07BA1 /* TagListView.swift in Sources */,
+				D69A03D3285CE51500B07BA1 /* TagsView.swift in Sources */,
 				D696B3F728444EBB0018281D /* MainView.swift in Sources */,
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 				D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */,
@@ -435,14 +446,15 @@
 				D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */,
 				D660AB66285F54EF00F9D76E /* DropdownView.swift in Sources */,
 				D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */,
-				D66A6AD228497CF2009DB38F /* TagsView.swift in Sources */,
+				D66A6AD228497CF2009DB38F /* TagRollView.swift in Sources */,
 				D65CC3842856252600D9A377 /* ShareItemsView.swift in Sources */,
+				D651C57B2862288B00EBCCC8 /* docs.docc in Sources */,
 				D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */,
 				D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */,
 				D66A6ACC284920E1009DB38F /* TagView.swift in Sources */,
 				D6574830285B68A700DE1C6B /* LocalAuthView.swift in Sources */,
 				D66A6AD028497193009DB38F /* NoteColor.swift in Sources */,
-				D683EDAC285CC8010091E13F /* NoteListView.swift in Sources */,
+				D683EDAC285CC8010091E13F /* NotesView.swift in Sources */,
 				D607CF5D285BB4F9007CF67B /* ReminderFormView.swift in Sources */,
 				D65CC38828562D4000D9A377 /* NoteBackground.swift in Sources */,
 				D660AB64285F54C900F9D76E /* CheckboxView.swift in Sources */,

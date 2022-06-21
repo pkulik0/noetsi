@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 ///
-/// ``WelcomeView`` is the landing page for unauthenticated users.
+/// Root view for unauthenticated users.
 ///
 /// ``WelcomeView`` handles both signing in existing users and creating new accounts.
 ///

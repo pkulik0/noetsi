@@ -12,8 +12,8 @@ import LocalAuthentication
 /// Root view for authorized users.
 ///
 /// ``MainView`` allows users to switch between the application's tabs:
-/// - ``NoteListView``
-/// - ``TagListView``
+/// - ``NotesView``
+/// - ``TagsView``
 /// - ``SettingsView``
 ///
 /// Displays ``LocalAuthView`` if local authentication is enabled and the application has not been unlocked.
@@ -27,13 +27,13 @@ struct MainView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            NoteListView()
+            NotesView()
                 .tabItem {
                     Label("Notes", systemImage: "note.text")
                 }
                 .tag("list")
             
-            TagListView()
+            TagsView()
                 .tabItem {
                     Label("Tags", systemImage: "number")
                 }
