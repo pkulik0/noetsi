@@ -223,7 +223,7 @@ class FirestoreManager: ObservableObject {
     ///
     /// Convert a checklist from the format used by noetsi iOS to the database's format.
     ///
-    /// Convert an array of ``Note.ChecklistItem`` to the format of checklists used in Firestore.
+    /// Convert an array of ``Note/ChecklistItem`` to the format of checklists used in Firestore.
     ///
     /// - "abc" set to *false* becomes 0abc
     /// - "123" set to *true* becomes 1123
