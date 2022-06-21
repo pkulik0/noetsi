@@ -8,10 +8,12 @@
 import SwiftUI
 import LocalAuthentication
 
+/// ``LocalAuthView`` orchestrates local authentication.
 struct LocalAuthView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) private var dismiss
     
+    /// Keeps track of the user's authentication status.
     @Binding var isUnlocked: Bool
     
     var imageName: String {
@@ -66,6 +68,7 @@ struct LocalAuthView: View {
         }
     }
     
+    /// Authenticate the user LocalAuthentication.
     func authenticate() {
         let context = LAContext()
 

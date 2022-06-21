@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+/// Covers the underlying view and displays ``LocalAuthView`` over it.
 struct LocalAuthViewModifier: ViewModifier {
-    @AppStorage("enableAuth") private var enableAuth = false
+    
+    /// Keeps track of the user's authentication status.
     @Binding var isUnlocked: Bool
+    
+    /// Read the user's local authentication preferences (*disabled* by default)
+    @AppStorage("enableAuth") private var enableAuth = false
 
     func body(content: Content) -> some View {
         Group {
@@ -28,6 +33,7 @@ struct LocalAuthViewModifier: ViewModifier {
 }
 
 extension View {
+    /// Apply ``LocalAuthViewModifier`` to the view.
     func localAuthenticationDialog(isUnlocked: Binding<Bool>) -> some View {
         modifier(LocalAuthViewModifier(isUnlocked: isUnlocked))
     }
