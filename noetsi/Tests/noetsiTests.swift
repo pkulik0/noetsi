@@ -172,4 +172,19 @@ class noetsiTests: XCTestCase {
         XCTAssert(notesSnapshot[1] == firestoreManager.notes.first!)
         XCTAssert(layoutSnapshot[1] == firestoreManager.layout.first!)
     }
+    
+    func testConvertChecklist() throws {
+        var checklistInternal: [Note.ChecklistItem] = [
+            Note.ChecklistItem(text: "a", isChecked: false),
+            Note.ChecklistItem(text: "b", isChecked: true),
+            Note.ChecklistItem(text: "c", isChecked: false)
+        ]
+        var converted = firestoreManager.convertChecklist(checklist: checklistInternal)
+        XCTAssert(converted == ["0a", "1b", "0c"])
+        
+        checklistInternal[0].isChecked = true
+        checklistInternal[2].text = "LoremIpsum"
+        converted = firestoreManager.convertChecklist(checklist: checklistInternal)
+        XCTAssert(converted == ["1a", "1b", "0LoremIpsum"])
+    }
 }
