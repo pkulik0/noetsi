@@ -16,7 +16,7 @@ import LocalAuthentication
 /// - ``TagListView``
 /// - ``SettingsView``
 ///
-/// Displays ``AuthView`` if local authentication is enabled and the application has not been unlocked.
+/// Displays ``LocalAuthView`` if local authentication is enabled and the application has not been unlocked.
 ///
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
