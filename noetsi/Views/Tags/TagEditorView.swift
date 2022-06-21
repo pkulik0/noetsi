@@ -7,18 +7,28 @@
 
 import SwiftUI
 
+/// ``TagEditorView`` displays a ``Note``'s tags and allows users to edit them and add new ones.
 struct TagEditorView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
-    @Environment(\.dismiss) var dismiss
     
+    /// The object containing a ``Note``'s tags
     @Binding var tags: [String]
+    
+    /// The value currently sitting in the text field used for new tags.
     @State private var newTag: String = ""
+    
+    /// Holds a list of unique tags that are not a part of this ``Note``'s tags.
     @State private var uniqueTags: [String] = []
     
+    /// Controls the visiblity of the suggestion bar.
     @State private var showSuggestions = false
+    
+    /// Holds a list of all uniqueTags that contain the text put into newTag.
     private var suggestedTags: [String] {
         uniqueTags.filter({ $0.lowercased().contains(newTag.lowercased()) })
     }
+    
+    @EnvironmentObject private var firestoreManager: FirestoreManager
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationView {
@@ -107,6 +117,7 @@ struct TagEditorView: View {
         }
     }
     
+    /// Updates the tag suggestions based on the currently stored ``Note``s
     func updateSuggestions() {
         firestoreManager.notes.forEach { note in
             uniqueTags += note.tags
@@ -122,11 +133,13 @@ struct TagEditorView: View {
         }
     }
     
+    /// Delete a tag from the collection and update suggestions.
     func deleteTags(at offsets: IndexSet) {
         tags.remove(atOffsets: offsets)
         updateSuggestions()
     }
 
+    /// Check if a tag is valid.
     func isTagValid(_ tag: String) -> Bool {
         return !tag.isEmpty && tag.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil && !tags.contains(tag)
     }

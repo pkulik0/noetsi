@@ -7,8 +7,13 @@
 
 import SwiftUI
 
+/// Displays a single tag inside a capsule-shaped stroke border.
 struct TagView: View {
+    
+    /// The text to display inside the view
     let tag: String
+    
+    /// The view's foreground color. 
     var color: Color = .secondary
     
     var body: some View {

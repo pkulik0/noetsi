@@ -7,33 +7,44 @@
 
 import SwiftUI
 
+/// ``TagListView`` is one of the application's main views. It is used to display all ``Note``s with a given tag.
 struct TagListView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
 
+    /// The available tags.
     @State private var tags: [String] = []
+    
+    /// Currently searched text.
     @State private var searchText = ""
+    
+    /// Currently selected tag. Only one tag at a time can be expanded.
     @State private var selectedTag = ""
     
+    /// Show a confirmation dialog with sorting options.
     @State private var showSortingOptions = false
     
+    /// Available sorting criteria.
     enum SortingCriteria {
         case nameIncreasing, nameDecreasing, sizeIncreasing, sizeDecreasing
     }
     
+    /// Selected sorting option
     @State private var sortingCriteria: SortingCriteria = .sizeDecreasing
     
+    /// Counts of ``Note``s with a given tag.
     private var counts: [String: Int] {
         var counts: [String: Int] = [:]
         tags.forEach({ counts[$0, default: 0] += 1 })
         return counts
     }
     
-    @State private var filteredTags: [String] = []
+    /// Tags sorted by the selected ``SortingCriteria``.
+    @State private var sortedTags: [String] = []
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(filteredTags, id: \.self) { tag in
+                ForEach(sortedTags, id: \.self) { tag in
                     TagListRowView(tag: tag, noteCount: counts[tag, default: 0], selectedTag: $selectedTag)
                 }
             }
@@ -55,7 +66,7 @@ struct TagListView: View {
             fetchTags(notes: notes)
         }
         .onChange(of: sortingCriteria, perform: { _ in
-            filteredTags = getFilteredTags()
+            sortedTags = getSortedTags()
         })
         .confirmationDialog("Sort By", isPresented: $showSortingOptions) {
             Button("Name - A to Z") {
@@ -74,16 +85,18 @@ struct TagListView: View {
         }
     }
     
+    /// Fetch a list of all existing tags.
     func fetchTags(notes: [Note]) {
         tags = []
         for note in notes {
             tags += note.tags
         }
-        filteredTags = getFilteredTags()
+        sortedTags = getSortedTags()
     }
     
-    func getFilteredTags() -> [String] {
-        let filtertedTags = Array(Set(tags)).sorted(by: {
+    /// Sort tags by the selected ``SortingCriteria``.
+    func getSortedTags() -> [String] {
+        let sortedTags = Array(Set(tags)).sorted(by: {
             switch sortingCriteria {
             case .nameIncreasing:
                 return $0 < $1
@@ -96,9 +109,9 @@ struct TagListView: View {
             }
         })
         if searchText.isEmpty {
-            return filtertedTags
+            return sortedTags
         } else {
-            return filtertedTags.filter({ $0.contains(searchText) })
+            return sortedTags.filter({ $0.contains(searchText) })
         }
     }
 }

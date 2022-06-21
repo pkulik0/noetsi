@@ -7,14 +7,19 @@
 
 import SwiftUI
 
+/// Displays a ``Note``'s tags in a scrollable horizontal view.
 struct TagsView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
+    
+    /// The ``Note`` that is the source of the data.
+    @Binding var note: Note
 
+    /// Setting this to true disables the header.
+    var compact: Bool = false
+    
+    /// Controls the visiblity of ``TagEditorView``.
     @State private var showTagEditor = false
     
-    @Binding var note: Note
-    var updateNote: Bool = false
-    let compact: Bool
+    @EnvironmentObject private var firestoreManager: FirestoreManager
 
     var body: some View {
         VStack(alignment: .leading) {

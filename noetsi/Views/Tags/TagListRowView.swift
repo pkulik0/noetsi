@@ -7,13 +7,22 @@
 
 import SwiftUI
 
+/// ``TagListRowView`` displays a list row contaning all ``Note``s with a given tag.
 struct TagListRowView: View {
-    @EnvironmentObject private var firestoreManager: FirestoreManager
 
+    /// The tag displayed in this row.
     let tag: String
+    
+    /// The amount of notes with ``tag``.
     let noteCount: Int
+    
+    /// The list's element that is currently expanded.
     @Binding var selectedTag: String
+    
+    /// Controls the visiblity of ``Note``s  with the selected tag.
     @State private var showDetails = false
+    
+    @EnvironmentObject private var firestoreManager: FirestoreManager
 
     var body: some View {
         VStack(alignment: .leading) {
