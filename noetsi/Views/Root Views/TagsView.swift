@@ -24,12 +24,15 @@ struct TagsView: View {
     @State private var showSortingOptions = false
     
     /// Available sorting criteria.
-    private enum SortingCriteria {
+    enum SortingCriteria {
         case nameIncreasing, nameDecreasing, sizeIncreasing, sizeDecreasing
     }
     
     /// Selected sorting option
     @State private var sortingCriteria: SortingCriteria = .sizeDecreasing
+    
+    /// Tags sorted by the selected ``SortingCriteria``.
+    @State private var sortedTags: [String] = []
     
     /// Counts of ``Note``s with a given tag.
     private var counts: [String: Int] {
@@ -37,9 +40,6 @@ struct TagsView: View {
         tags.forEach({ counts[$0, default: 0] += 1 })
         return counts
     }
-    
-    /// Tags sorted by the selected ``SortingCriteria``.
-    @State private var sortedTags: [String] = []
 
     var body: some View {
         NavigationView {
