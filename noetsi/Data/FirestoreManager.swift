@@ -171,7 +171,6 @@ class FirestoreManager: ObservableObject {
                 } else {
                     do {
                         let note = try document.data(as: Note.self)
-                        print(note)
                         self.buffer.append(note)
                     } catch {
                         print("Decoding error. DocumentID: \(document.documentID)")
