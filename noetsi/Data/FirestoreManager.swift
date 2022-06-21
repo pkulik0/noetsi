@@ -187,11 +187,7 @@ class FirestoreManager: ObservableObject {
         }
     }
     
-    ///
-    /// Create a new ``Note`` without writing it to the database.
-    ///
     /// Create a ``Note`` and save it in ``notes`` and ``layout``.
-    ///
     func addNote() {
         let note = Note()
         self.notes.insert(note, at: 0)
