@@ -8,10 +8,10 @@
 import SwiftUI
 
 /// Represents the essential data type of the application - a Note.
-class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
+class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConvertible {
     
     /// Represents ``Note``'s background pattern.
-    struct Pattern: Equatable {
+    struct Pattern: Equatable, Codable {
         /// The selected type of pattern
         var type: PatternType
         
@@ -20,7 +20,7 @@ class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
     }
     
     /// Used to switch between available types of ``Pattern-swift.struct``.
-    enum PatternType: Int {
+    enum PatternType: Int, Codable {
         /// No pattern
         case None
         /// Horizontal lines
@@ -123,6 +123,51 @@ class Note: ObservableObject, Identifiable, Equatable, CustomStringConvertible {
         self.reminder = notificationRequest
         
         self.deleteMe = false
+    }
+    
+    private enum CodingKeys: CodingKey {
+        case id, title, body, tags, color, pattern, timestamp, checklist
+    }
+    
+    /// Create a ``Note`` from JSON / Firestore data
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let decodedID = try container.decode(String.self, forKey: .id)
+        id = decodedID
+        title = try container.decode(String.self, forKey: .title)
+        body = try container.decode(String.self, forKey: .body)
+        tags = try container.decode([String].self, forKey: .tags)
+        pattern = try container.decode(Pattern.self, forKey: .pattern)
+        timestamp = try container.decode(Int.self, forKey: .timestamp)
+        checklist = try container.decode([ChecklistItem].self, forKey: .checklist)
+
+        let colorName = try container.decode(String.self, forKey: .color)
+        color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
+
+        deleteMe = false
+
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                if request.identifier == decodedID {
+                    self.reminder = request
+                    break
+                }
+            }
+        }
+    }
+
+    /// Encode all revelant fields for Firestore.
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(body, forKey: .body)
+        try container.encode(tags, forKey: .tags)
+        try container.encode(color.description, forKey: .color)
+        try container.encode(pattern, forKey: .pattern)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(checklist, forKey: .checklist)
     }
 
     /// Initializer for building a ``Note`` from Firestore data.

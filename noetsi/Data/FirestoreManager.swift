@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseFirestoreSwift
 import SwiftUI
 
 ///
@@ -86,7 +87,11 @@ class FirestoreManager: ObservableObject {
         let batch = db.batch()
 
         let noteDocument = db.collection(uid).document(note.id)
-        batch.setData(["title": note.title, "body": note.body, "tags": note.tags, "timestamp": note.timestamp, "color": note.color.description, "pattern": ["type": note.pattern.type.rawValue, "size": note.pattern.size], "checklist": convertChecklist(checklist: note.checklist)], forDocument: noteDocument, merge: true)
+        do {
+            try batch.setData(from: note, forDocument: noteDocument)
+        } catch {
+            print(error.localizedDescription)
+        }
         
         let userData = db.collection(uid).document("userData")
         batch.setData(["layout": layout], forDocument: userData, merge: true)
@@ -139,49 +144,7 @@ class FirestoreManager: ObservableObject {
     private func parseUserData(document: QueryDocumentSnapshot) {
         layout = document.data()["layout"] as? [String] ?? []
     }
-    
-    /// Parse document data received from Firestore as ``Note``.
-    private func parseNote(document: QueryDocumentSnapshot) {
-        let note: Note = Note(id: document.documentID)
 
-        note.title = document.data()["title"] as? String ?? "Unknown title"
-        note.body = document.data()["body"] as? String ?? "Unknown content"
-        note.tags = document.data()["tags"] as? [String] ?? []
-        note.timestamp = document.data()["timestamp"] as? Int ?? 0
-        
-        let colorName = document.data()["color"] as? String ?? Color.noteColors[0].description
-        note.color = Color.noteColorByName[colorName] ?? Color.noteColors[0]
-        
-        let patternData = document.data()["pattern"] as? [String: Any] ?? [:]
-        note.pattern.type = Note.PatternType(rawValue: patternData["type"] as? Int ?? 0) ?? .None
-        note.pattern.size = patternData["size"] as? Double ?? 20.0
-        
-        let checklistItems = document.data()["checklist"] as? [String] ?? []
-        for item in checklistItems {
-            let isChecked = (item.first ?? "0" == "1") ? true : false
-            let text: String = String(item[item.index(after: item.startIndex)...])
-            note.checklist.append(Note.ChecklistItem(text: text, isChecked: isChecked))
-        }
-        
-        note.reminder = reminders[note.id] ?? nil
-        
-        self.buffer.append(note)
-    }
-    
-    ///
-    /// Find the application's pending notifications.
-    ///
-    /// Save all the application's notification requests in a map to look through them efficiently during assembly of a ``Note``.
-    ///
-    private func fetchReminders() {
-        reminders = [:]
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            for request in requests {
-                self.reminders[request.identifier] = request
-            }
-        }
-    }
-    
     ///
     /// Fetch data corresponding to a ``uid`` from the database.
     ///
@@ -193,8 +156,6 @@ class FirestoreManager: ObservableObject {
         guard let uid = uid else {
             return
         }
-        
-        fetchReminders()
 
         db.collection(uid).getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -208,7 +169,14 @@ class FirestoreManager: ObservableObject {
                 if document.documentID == "userData" {
                     self.parseUserData(document: document)
                 } else {
-                    self.parseNote(document: document)
+                    do {
+                        let note = try document.data(as: Note.self)
+                        print(note)
+                        self.buffer.append(note)
+                    } catch {
+                        print("Decoding error. DocumentID: \(document.documentID)")
+                        print(error.localizedDescription)
+                    }
                 }
             }
             
@@ -218,29 +186,6 @@ class FirestoreManager: ObservableObject {
             self.notes = self.buffer
             self.buffer = []
         }
-    }
-    
-    ///
-    /// Convert a checklist from the format used by noetsi iOS to the database's format.
-    ///
-    /// Convert an array of ``Note/ChecklistItem`` to the format of checklists used in Firestore.
-    ///
-    /// - "abc" set to *false* becomes 0abc
-    /// - "123" set to *true* becomes 1123
-    ///
-    /// This method of data representation has been chosen because it provides good balance between ease of representation and use in NoSQL and Swift.
-    ///
-    /// - Returns: A checklist in the database's format.
-    ///
-    func convertChecklist(checklist: [Note.ChecklistItem]) -> [String] {
-        var firebaseChecklist: [String] = []
-        for item in checklist {
-            if item.text.isEmpty {
-                continue
-            }
-            firebaseChecklist.append("\(item.isChecked ? "1" : "0")\(item.text)")
-        }
-        return firebaseChecklist
     }
     
     ///
