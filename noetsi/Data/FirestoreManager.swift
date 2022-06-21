@@ -13,7 +13,7 @@ import SwiftUI
 ///
 /// FirestoreManager is the main and only entry point of data to the appication in the current version of noetsi.
 /// It provides functions to write and delete ``Note``, fetch user's notes and keeps track of their layout.
-/// Handles authenticating the user with FirebaseAuth.
+/// This class also handles authenticating the user with FirebaseAuth.
 ///
 /// When used with the environment variable "unit_testing" set to "true" it connects to a local instance.
 ///
@@ -25,6 +25,7 @@ class FirestoreManager: ObservableObject {
     /// Buffer used to make sure the user always sees notes on the screen.
     private var buffer: [Note] = []
     
+    ///
     /// Layout of the notes in the user interface.
     ///
     /// Each note is represented by its unique identifer.
