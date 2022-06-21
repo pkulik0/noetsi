@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+/// Allows the view it modifies to be dragged down to dismiss it.
 struct DragToHide: ViewModifier {
+    /// The view's offset from its original position.
     @Binding var offset: CGSize
+    
+    /// Controls the modified view's visiblity.
     @Binding var isPresented: Bool
 
     func body(content: Content) -> some View {
@@ -36,6 +40,7 @@ struct DragToHide: ViewModifier {
 }
 
 extension View {
+    /// Applies the ``DragToHide`` modifier to the view.
     func hideOnDrag(offset: Binding<CGSize>, isPresented: Binding<Bool>) -> some View {
         modifier(DragToHide(offset: offset, isPresented: isPresented))
     }

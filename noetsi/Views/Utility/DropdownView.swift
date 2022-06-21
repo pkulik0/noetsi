@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+/// Container with a chevron next to its label which expands on tap.
 struct DropdownView<Content: View>: View {
+    /// Controls the visibility of the content.
     @Binding var isShown: Bool
+    
+    /// View to be shown when expanded.
     var content: () -> Content
+
+    /// Text displayed next to a chevron at the top of the view.
     var label: () -> String
 
     var body: some View {

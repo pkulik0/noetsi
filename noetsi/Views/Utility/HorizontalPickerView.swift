@@ -7,10 +7,23 @@
 
 import SwiftUI
 
+/// Custom picker which displays the items clipped as circles in a horizontal picker in the shape of a capsule.
 struct HorizontalPickerView<ItemType: Hashable, Content: View>: View {
+
+    /// Array of the items to display inside the picker.
     let items: [ItemType]
+    
+    /// Currently chosen element of ``items``.
     @Binding var selection: ItemType
+    
+    /// Controls the view's visiblity.
     @Binding var isPresented: Bool
+    
+    ///
+    /// View displayed inside each item's circle.
+    /// - Parameter item: The item displayed in this particular circle.
+    /// - Returns: The content of the picker's element built using the item.
+    ///
     let content: (_ item: ItemType) -> Content
     
     var body: some View {

@@ -8,6 +8,13 @@
 import SwiftUI
 import Firebase
 
+///
+/// ``WelcomeView`` is the landing page for unauthenticated users.
+///
+/// ``WelcomeView`` handles both signing in existing users and creating new accounts.
+///
+/// When a user presses a button the view runs the corresponding function from ``FirestoreManager``.
+///
 struct WelcomeView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
 
@@ -102,6 +109,7 @@ struct WelcomeView: View {
         })
     }
     
+    /// Generate haptic and/or visual feedback for the user based on the authentication result.
     func handleAuthResult(error: Error?) {
         let feedback = UINotificationFeedbackGenerator()
         if let error = error {

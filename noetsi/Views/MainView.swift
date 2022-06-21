@@ -8,6 +8,16 @@
 import SwiftUI
 import LocalAuthentication
 
+///
+/// Root view for authorized users.
+///
+/// ``MainView`` allows users to switch between the application's tabs:
+/// - ``NoteListView``
+/// - ``TagListView``
+/// - ``SettingsView``
+///
+/// Displays ``AuthView`` if local authentication is enabled and the application has not been unlocked.
+///
 struct MainView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) private var dismiss

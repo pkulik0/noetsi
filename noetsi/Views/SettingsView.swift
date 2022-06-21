@@ -9,6 +9,11 @@ import SwiftUI
 import LocalAuthentication
 import Firebase
 
+///
+/// Contains information about the app and the account.
+///
+/// ``SettingsView`` allows the user to manage their account, enable/disable local authentication and displays the current app version.
+///
 struct SettingsView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @AppStorage("enableAuth") private var enableAuth = false
@@ -90,6 +95,7 @@ struct SettingsView: View {
         }
     }
     
+    /// Enable local authentication if the device supports it.
     func enableLA() {
         if LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
             enableAuth.toggle()
@@ -99,6 +105,7 @@ struct SettingsView: View {
         }
     }
     
+    /// Prepare information about the user for the account information section.
     func getUserData() {
         guard let user = Auth.auth().currentUser else {
             return

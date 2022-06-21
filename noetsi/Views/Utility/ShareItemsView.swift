@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+/// SwiftUI wrapper around UIKit's UIActivityViewController.
 struct ShareItemsView: UIViewControllerRepresentable {
+    /// Items to share.
     let activityItems: [Any]
+
     let applicationActivites: [UIActivity]?
     
     func makeUIViewController(context: Context) -> some UIViewController {
