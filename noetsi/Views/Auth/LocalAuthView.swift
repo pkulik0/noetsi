@@ -1,5 +1,5 @@
 //
-//  AuthView.swift
+//  LocalAuthView.swift
 //  noetsi
 //
 //  Created by pkulik0 on 16/06/2022.
@@ -8,7 +8,7 @@
 import SwiftUI
 import LocalAuthentication
 
-struct AuthView: View {
+struct LocalAuthView: View {
     @EnvironmentObject private var firestoreManager: FirestoreManager
     @Environment(\.dismiss) private var dismiss
     

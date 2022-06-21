@@ -1,5 +1,5 @@
 //
-//  AuthViewModifier.swift
+//  LocalAuthViewModifier.swift
 //  noetsi
 //
 //  Created by pkulik0 on 17/06/2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AuthViewModifier: ViewModifier {
+struct LocalAuthViewModifier: ViewModifier {
     @AppStorage("enableAuth") private var enableAuth = false
     @Binding var isUnlocked: Bool
 
@@ -17,7 +17,7 @@ struct AuthViewModifier: ViewModifier {
                 content
                     .blur(radius: 15)
                     .overlay {
-                        AuthView(isUnlocked: $isUnlocked.animation())
+                        LocalAuthView(isUnlocked: $isUnlocked.animation())
                             .ignoresSafeArea()
                     }
             } else {
@@ -28,7 +28,7 @@ struct AuthViewModifier: ViewModifier {
 }
 
 extension View {
-    func authenticationDialog(isUnlocked: Binding<Bool>) -> some View {
-        modifier(AuthViewModifier(isUnlocked: isUnlocked))
+    func localAuthenticationDialog(isUnlocked: Binding<Bool>) -> some View {
+        modifier(LocalAuthViewModifier(isUnlocked: isUnlocked))
     }
 }

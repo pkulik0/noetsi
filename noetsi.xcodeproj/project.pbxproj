@@ -13,7 +13,7 @@
 		D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607CF5E285BD3A2007CF67B /* DragToHideModifier.swift */; };
 		D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614C9D4285FB5D90089DF38 /* TagListRowView.swift */; };
 		D61E917E2860AA76000FFCFA /* noetsiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */; };
-		D6574830285B68A700DE1C6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* AuthView.swift */; };
+		D6574830285B68A700DE1C6B /* LocalAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* LocalAuthView.swift */; };
 		D65B8F3928613AE00062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
 		D65B8F3A28613AE10062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
 		D65B8F3B28613C4D0062E6BD /* noetsiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AD2BA52853867E00BFE2C3 /* noetsiTests.swift */; };
@@ -40,7 +40,7 @@
 		D696B3F728444EBB0018281D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B3F628444EBB0018281D /* MainView.swift */; };
 		D69A03D3285CE51500B07BA1 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D2285CE51500B07BA1 /* TagListView.swift */; };
 		D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69A03D4285CE71E00B07BA1 /* SettingsView.swift */; };
-		D6A2FC4A285C049C0082AE57 /* AuthViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */; };
+		D6A2FC4A285C049C0082AE57 /* LocalAuthViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2FC49285C049C0082AE57 /* LocalAuthViewModifier.swift */; };
 		D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B472844DD0500D11E71 /* FirestoreManager.swift */; };
 		D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A36B492844E4E700D11E71 /* Note.swift */; };
 		D6ABC5F6284E55C5007170A9 /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */; };
@@ -72,7 +72,7 @@
 		D608FC18285FEB5E00CEA24A /* noetsiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noetsiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiUITests.swift; sourceTree = "<group>"; };
 		D614C9D4285FB5D90089DF38 /* TagListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListRowView.swift; sourceTree = "<group>"; };
-		D657482F285B68A700DE1C6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D657482F285B68A700DE1C6B /* LocalAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthView.swift; sourceTree = "<group>"; };
 		D65B8F3728613ABD0062E6BD /* testingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingHelpers.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
 		D65CC38728562D4000D9A377 /* NoteBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBackground.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		D696B3F628444EBB0018281D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D69A03D2285CE51500B07BA1 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		D69A03D4285CE71E00B07BA1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModifier.swift; sourceTree = "<group>"; };
+		D6A2FC49285C049C0082AE57 /* LocalAuthViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthViewModifier.swift; sourceTree = "<group>"; };
 		D6A36B472844DD0500D11E71 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6A36B492844E4E700D11E71 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D6ABC5F5284E55C5007170A9 /* ThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorView.swift; sourceTree = "<group>"; };
@@ -150,8 +150,8 @@
 		D614C9D9285FB7030089DF38 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				D657482F285B68A700DE1C6B /* AuthView.swift */,
-				D6A2FC49285C049C0082AE57 /* AuthViewModifier.swift */,
+				D657482F285B68A700DE1C6B /* LocalAuthView.swift */,
+				D6A2FC49285C049C0082AE57 /* LocalAuthViewModifier.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 				D696B3C628440FA00018281D /* noetsiApp.swift in Sources */,
 				D66A6ACE28492C4F009DB38F /* TagEditorView.swift in Sources */,
 				D6A36B482844DD0500D11E71 /* FirestoreManager.swift in Sources */,
-				D6A2FC4A285C049C0082AE57 /* AuthViewModifier.swift in Sources */,
+				D6A2FC4A285C049C0082AE57 /* LocalAuthViewModifier.swift in Sources */,
 				D6ABC5F6284E55C5007170A9 /* ThemeEditorView.swift in Sources */,
 				D65CC38C28564BC500D9A377 /* HorizontalPickerView.swift in Sources */,
 				D607CF5F285BD3A2007CF67B /* DragToHideModifier.swift in Sources */,
@@ -440,7 +440,7 @@
 				D69A03D5285CE71E00B07BA1 /* SettingsView.swift in Sources */,
 				D67E75372847D9FC00150062 /* NoteListRowView.swift in Sources */,
 				D66A6ACC284920E1009DB38F /* TagView.swift in Sources */,
-				D6574830285B68A700DE1C6B /* AuthView.swift in Sources */,
+				D6574830285B68A700DE1C6B /* LocalAuthView.swift in Sources */,
 				D66A6AD028497193009DB38F /* NoteColor.swift in Sources */,
 				D683EDAC285CC8010091E13F /* NoteListView.swift in Sources */,
 				D607CF5D285BB4F9007CF67B /* ReminderFormView.swift in Sources */,

@@ -45,6 +45,6 @@ struct MainView: View {
                 }
                 .tag("settings")
         }
-        .authenticationDialog(isUnlocked: $isUnlocked)
+        .localAuthenticationDialog(isUnlocked: $isUnlocked)
     }
 }
