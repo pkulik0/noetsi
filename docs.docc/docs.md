@@ -12,36 +12,40 @@ Notes app with support for tags, checklists and reminders.
 
 ## Topics
 
-### Managing data & classes
+### Data classes and controllers
 
 - ``FirestoreManager``
 - ``Note``
+
+### Entry point
+- ``noetsiApp``
 
 ### Root views
 - ``WelcomeView``
 - ``MainView``
 
-### App tabs
+### Tabs
 - ``NotesView``
 - ``TagsView``
 - ``SettingsView``
 
-### Note
+### Note views
 - ``NoteView``
 - ``NoteListRowView``
+- ``NoteBackground``
 - ``ThemeEditorView``
 - ``ReminderView``
 - ``ReminderFormView``
 - ``CheckboxView``
 - ``ChecklistView``
 
-### Tag
+### Tag views
 - ``TagView``
 - ``TagRollView``
 - ``TagListRowView``
 - ``TagEditorView``
 
-### Authentication
+### Authentication views
 
 - ``LocalAuthView``
 - ``LocalAuthViewModifier``
