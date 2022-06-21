@@ -41,6 +41,7 @@ class FirestoreManager: ObservableObject {
     /// Value used for detecting if the application is currently running automated tests.
     private let debugMode: Bool = ProcessInfo.processInfo.environment["unit_testing"] == "true"
     
+    /// Initialize ``FirestoreManager`` by fetching data. Enables debugMode if the app is running unit tests.
     init() {
         if debugMode {
             print("Running Firestore locally.")

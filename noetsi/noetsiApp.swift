@@ -8,10 +8,16 @@
 import SwiftUI
 import Firebase
 
+///
+/// The application's entry point.
+///
+/// ``noetsiApp`` redirects the user to either ``MainView`` or ``WelcomeView`` depending on their authentication status.
+///
 @main
 struct noetsiApp: App {
     @StateObject private var firestoreManager = FirestoreManager()
     
+    /// Configure Firebase during start up.
     init() {
         FirebaseApp.configure()
     }
