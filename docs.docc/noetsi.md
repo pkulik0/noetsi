@@ -23,7 +23,7 @@ Noetsi is a cloud synchronized notes app with support for various backgrounds an
 - ``FirestoreManager``
 
 ### Data classes/structs
-- <doc:Note>
+- ``Note``
 - ``Pattern``
 - ``ChecklistItem``
 
