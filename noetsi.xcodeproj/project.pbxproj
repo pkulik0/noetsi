@@ -179,7 +179,7 @@
 		D614C9DC285FB8260089DF38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D651C57C28622A2900EBCCC8 /* RootViews */,
+				D651C57C28622A2900EBCCC8 /* Roots */,
 				D692AA7C2863204900B05FA0 /* Tabs */,
 				D614C9DD285FB8610089DF38 /* Checklist */,
 				D614C9DB285FB7E10089DF38 /* Reminder */,
@@ -222,13 +222,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		D651C57C28622A2900EBCCC8 /* RootViews */ = {
+		D651C57C28622A2900EBCCC8 /* Roots */ = {
 			isa = PBXGroup;
 			children = (
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
 				D696B3F628444EBB0018281D /* MainView.swift */,
 			);
-			path = RootViews;
+			path = Roots;
 			sourceTree = "<group>";
 		};
 		D65B8F3428613A500062E6BD /* Tests */ = {
