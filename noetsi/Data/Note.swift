@@ -42,7 +42,7 @@ class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConv
     @Published var pattern: Pattern
     
     /// Checklist attached to ``Note``.
-    @Published var checklist: [ChecklistItem]
+    @Published var checklist: [ChecklistEntry]
     
     /// Optional reminder attached to the ``Note`` that fires at a user-defined time.
     @Published var reminder: UNNotificationRequest?
@@ -86,7 +86,7 @@ class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConv
     }
     
     /// Base case initializer.
-    init(id: String, title: String, body: String, tags: [String], timestamp: Int, color: Color, pattern: Pattern, checklist: [ChecklistItem], notificationRequest: UNNotificationRequest?) {
+    init(id: String, title: String, body: String, tags: [String], timestamp: Int, color: Color, pattern: Pattern, checklist: [ChecklistEntry], notificationRequest: UNNotificationRequest?) {
         self.id = id
         self.title = title
         self.body = body
@@ -115,7 +115,7 @@ class Note: ObservableObject, Codable, Identifiable, Equatable, CustomStringConv
         tags = try container.decode([String].self, forKey: .tags)
         pattern = try container.decode(Pattern.self, forKey: .pattern)
         timestamp = try container.decode(Int.self, forKey: .timestamp)
-        checklist = try container.decode([ChecklistItem].self, forKey: .checklist)
+        checklist = try container.decode([ChecklistEntry].self, forKey: .checklist)
 
         let colorName = try container.decode(String.self, forKey: .color)
         color = Color.noteColorByName[colorName] ?? Color.noteColors[0]

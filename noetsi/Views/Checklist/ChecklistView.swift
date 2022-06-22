@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-/// Displays a list of ``Note/ChecklistItem`` and allows to add or remove elements.
+/// Displays a list of ``ChecklistEntry`` and allows to add or remove elements.
 struct ChecklistView: View {
     
     /// The checklist to display.
-    @Binding var checklist: [ChecklistItem]
+    @Binding var checklist: [ChecklistEntry]
     
     /// Currently focused field, can be passed down from the parent.
     @FocusState var focusedField: String?
@@ -61,7 +61,7 @@ struct ChecklistView: View {
     /// Add a new item to the checklist.
     func addItem() {
         if !newItem.trimmingCharacters(in: .whitespaces).isEmpty {
-            checklist.append(ChecklistItem(text: newItem, isChecked: false))
+            checklist.append(ChecklistEntry(text: newItem, isChecked: false))
             newItem = ""
         }
     }

@@ -25,7 +25,7 @@ Noetsi is a cloud synchronized notes app with support for various backgrounds an
 ### Data classes/structs
 - Note
 - Pattern
-- ChecklistItem
+- ChecklistEntry
 
 ### Entry point
 - noetsiApp
@@ -44,10 +44,14 @@ Noetsi is a cloud synchronized notes app with support for various backgrounds an
 - NoteListRowView
 - NoteBackground
 - ThemeEditorView
-- ReminderView
-- ReminderFormView
+
+### Checklist views
 - CheckboxView
 - ChecklistView
+
+### Reminder views
+- ReminderView
+- ReminderFormView
 
 ### Tag views
 - TagView

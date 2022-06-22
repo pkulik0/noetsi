@@ -13,7 +13,7 @@
 		D614C9D5285FB5D90089DF38 /* TagListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614C9D4285FB5D90089DF38 /* TagListRowView.swift */; };
 		D61E917E2860AA76000FFCFA /* noetsiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */; };
 		D651C57E286275F700EBCCC8 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651C57D286275F700EBCCC8 /* Pattern.swift */; };
-		D651C5802862765600EBCCC8 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651C57F2862765600EBCCC8 /* ChecklistItem.swift */; };
+		D651C5802862765600EBCCC8 /* ChecklistEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D651C57F2862765600EBCCC8 /* ChecklistEntry.swift */; };
 		D6574830285B68A700DE1C6B /* LocalAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657482F285B68A700DE1C6B /* LocalAuthView.swift */; };
 		D65B8F3928613AE00062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
 		D65B8F3A28613AE10062E6BD /* testingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65B8F3728613ABD0062E6BD /* testingHelpers.swift */; };
@@ -73,7 +73,7 @@
 		D608FC1A285FEB5E00CEA24A /* noetsiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noetsiUITests.swift; sourceTree = "<group>"; };
 		D614C9D4285FB5D90089DF38 /* TagListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListRowView.swift; sourceTree = "<group>"; };
 		D651C57D286275F700EBCCC8 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
-		D651C57F2862765600EBCCC8 /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
+		D651C57F2862765600EBCCC8 /* ChecklistEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistEntry.swift; sourceTree = "<group>"; };
 		D657482F285B68A700DE1C6B /* LocalAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthView.swift; sourceTree = "<group>"; };
 		D65B8F3728613ABD0062E6BD /* testingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingHelpers.swift; sourceTree = "<group>"; };
 		D65CC3832856252600D9A377 /* ShareItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItemsView.swift; sourceTree = "<group>"; };
@@ -138,8 +138,6 @@
 		D614C9D7285FB6D60089DF38 /* Note */ = {
 			isa = PBXGroup;
 			children = (
-				D614C9DB285FB7E10089DF38 /* Reminders */,
-				D614C9DD285FB8610089DF38 /* Checklist */,
 				D6601A4628456EBF00BB639F /* NoteView.swift */,
 				D67E75362847D9FC00150062 /* NoteListRowView.swift */,
 				D65CC38728562D4000D9A377 /* NoteBackground.swift */,
@@ -158,7 +156,7 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		D614C9DA285FB7DA0089DF38 /* Tags */ = {
+		D614C9DA285FB7DA0089DF38 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
 				D66A6ACB284920E1009DB38F /* TagView.swift */,
@@ -166,25 +164,28 @@
 				D614C9D4285FB5D90089DF38 /* TagListRowView.swift */,
 				D66A6ACD28492C4F009DB38F /* TagEditorView.swift */,
 			);
-			path = Tags;
+			path = Tag;
 			sourceTree = "<group>";
 		};
-		D614C9DB285FB7E10089DF38 /* Reminders */ = {
+		D614C9DB285FB7E10089DF38 /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
 				D607CF5A285BA326007CF67B /* ReminderView.swift */,
 				D607CF5C285BB4F9007CF67B /* ReminderFormView.swift */,
 			);
-			path = Reminders;
+			path = Reminder;
 			sourceTree = "<group>";
 		};
 		D614C9DC285FB8260089DF38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D651C57C28622A2900EBCCC8 /* Root Views */,
+				D651C57C28622A2900EBCCC8 /* RootViews */,
+				D692AA7C2863204900B05FA0 /* Tabs */,
+				D614C9DD285FB8610089DF38 /* Checklist */,
+				D614C9DB285FB7E10089DF38 /* Reminder */,
 				D614C9DE285FB8A30089DF38 /* Utility */,
 				D614C9D7285FB6D60089DF38 /* Note */,
-				D614C9DA285FB7DA0089DF38 /* Tags */,
+				D614C9DA285FB7DA0089DF38 /* Tag */,
 				D614C9D9285FB7030089DF38 /* Auth */,
 			);
 			path = Views;
@@ -215,22 +216,19 @@
 			children = (
 				D6A36B472844DD0500D11E71 /* FirestoreManager.swift */,
 				D6A36B492844E4E700D11E71 /* Note.swift */,
-				D651C57F2862765600EBCCC8 /* ChecklistItem.swift */,
+				D651C57F2862765600EBCCC8 /* ChecklistEntry.swift */,
 				D651C57D286275F700EBCCC8 /* Pattern.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		D651C57C28622A2900EBCCC8 /* Root Views */ = {
+		D651C57C28622A2900EBCCC8 /* RootViews */ = {
 			isa = PBXGroup;
 			children = (
 				D696B3C728440FA00018281D /* WelcomeView.swift */,
-				D69A03D4285CE71E00B07BA1 /* SettingsView.swift */,
-				D683EDAB285CC8000091E13F /* NotesView.swift */,
-				D69A03D2285CE51500B07BA1 /* TagsView.swift */,
 				D696B3F628444EBB0018281D /* MainView.swift */,
 			);
-			path = "Root Views";
+			path = RootViews;
 			sourceTree = "<group>";
 		};
 		D65B8F3428613A500062E6BD /* Tests */ = {
@@ -249,6 +247,16 @@
 				D6F87CA72855424E0033E6FC /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D692AA7C2863204900B05FA0 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				D69A03D4285CE71E00B07BA1 /* SettingsView.swift */,
+				D683EDAB285CC8000091E13F /* NotesView.swift */,
+				D69A03D2285CE51500B07BA1 /* TagsView.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		D696B3B928440FA00018281D = {
@@ -433,7 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A36B4A2844E4E700D11E71 /* Note.swift in Sources */,
-				D651C5802862765600EBCCC8 /* ChecklistItem.swift in Sources */,
+				D651C5802862765600EBCCC8 /* ChecklistEntry.swift in Sources */,
 				D696B3C828440FA00018281D /* WelcomeView.swift in Sources */,
 				D6601A4728456EBF00BB639F /* NoteView.swift in Sources */,
 				D65CC38E2856619D00D9A377 /* ChecklistView.swift in Sources */,
