@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import SwiftUI
 import Firebase
 @testable import noetsi
 
