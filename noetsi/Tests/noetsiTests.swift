@@ -15,13 +15,9 @@ class noetsiTests: XCTestCase {
     let firestoreManager = FirestoreManager()
 
     override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
         clearFirestore()
     }
-    
+
     func clearFirestore() {
         let semaphore = DispatchSemaphore(value: 0)
         let projectId = FirebaseApp.app()!.options.projectID!
@@ -56,7 +52,6 @@ class noetsiTests: XCTestCase {
     func testWriteNoteSimple() throws {
         let note = Note(id: randomText(length: 10))
         firestoreManager.writeNote(note: note)
-        waitForUpdate()
         
         firestoreManager.fetchData()
         waitForUpdate()
@@ -65,14 +60,12 @@ class noetsiTests: XCTestCase {
     }
     
     func testWriteNoteMulitple() throws {
+        var notes: [Note] = []
         for _ in 0...50 {
-            firestoreManager.addNote()
-            firestoreManager.writeNote(note: firestoreManager.notes[0])
+            let note = Note(id: randomText(length: 5))
+            firestoreManager.writeNote(note: note)
+            notes.append(note)
         }
-        waitForUpdate()
-        
-        let notes = firestoreManager.notes
-        firestoreManager.notes = []
         
         firestoreManager.fetchData()
         waitForUpdate()
@@ -85,7 +78,6 @@ class noetsiTests: XCTestCase {
         
         firestoreManager.layout.insert(noteID, at: 0)
         firestoreManager.writeLayout()
-        waitForUpdate()
         
         firestoreManager.layout = []
         
@@ -98,7 +90,6 @@ class noetsiTests: XCTestCase {
     func testWriteLayoutMultiple() throws {
         firestoreManager.layout = [randomText(length: 10), randomText(length: 10), randomText(length: 10)]
         firestoreManager.writeLayout()
-        waitForUpdate()
         
         let layoutCopy = firestoreManager.layout
         firestoreManager.layout = []
@@ -109,6 +100,34 @@ class noetsiTests: XCTestCase {
         XCTAssert(firestoreManager.layout == layoutCopy)
     }
     
+    func testDeleteNote() throws {
+        let note = Note(id: randomText(length: 5))
+        firestoreManager.writeNote(note: note)
+        
+        firestoreManager.fetchData()
+        waitForUpdate()
+        XCTAssert(firestoreManager.notes == [note])
+
+        firestoreManager.deleteNote(id: note.id)
+        firestoreManager.fetchData()
+        waitForUpdate()
+        XCTAssert(firestoreManager.notes == [])
+    }
+    
+    func testFetchData() throws {
+        var notes: [Note] = []
+        for _ in 0...100 {
+            let note = Note(id: randomText(length: 5))
+            firestoreManager.writeNote(note: note)
+            notes.append(note)
+        }
+        
+        firestoreManager.fetchData()
+        waitForUpdate()
+        
+        XCTAssert(firestoreManager.notes.sorted { $0.id > $1.id } == notes.sorted { $0.id > $1.id })
+    }
+
     func testMoveSimple() throws {
         for _ in 0..<3 {
             firestoreManager.addNote()
@@ -171,5 +190,56 @@ class noetsiTests: XCTestCase {
         
         XCTAssert(notesSnapshot[1] == firestoreManager.notes.first!)
         XCTAssert(layoutSnapshot[1] == firestoreManager.layout.first!)
+    }
+    
+    func testNoteCopy() throws {
+        let note = Note(id: randomText(length: 5))
+        let noteCopy = note.copy()
+        XCTAssert(note.id == noteCopy.id)
+        
+        note.id = ""
+        XCTAssert(note.id != noteCopy.id)
+    }
+    
+    func testNoteEquatable() throws {
+        let note0 = Note()
+        var note1 = note0.copy()
+        XCTAssert(note0 == note1)
+        
+        note1.id = "x"
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.title = "x"
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.body = "x"
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.tags = ["x"]
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.timestamp = 1
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.color = .white
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.pattern = Pattern(type: .Grid, size: 99)
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.checklist = [ChecklistEntry(text: "x", isChecked: true)]
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
+        
+        note1.reminder = UNNotificationRequest(identifier: "x", content: UNNotificationContent(), trigger: nil)
+        XCTAssert(note0 != note1)
+        note1 = note0.copy()
     }
 }
