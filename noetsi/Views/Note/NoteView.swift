@@ -51,7 +51,7 @@ struct NoteView: View {
                             .font(.title.bold())
                             .focused($focusedField, equals: "title")
                                 
-                        fixedTextEditor
+                        noteEditor
                     }
                     .id("note")
                     .padding([.leading, .top], 25)
@@ -103,9 +103,6 @@ struct NoteView: View {
         .sheet(isPresented: $showTagEditor, content: {
             TagEditorView(tags: $note.tags)
         })
-        .toolbar {
-            toolbarItems
-        }
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showShareView, content: {
             ShareItemsView(activityItems: [note.shareable], applicationActivites: nil)
@@ -121,33 +118,7 @@ struct NoteView: View {
                 firestoreManager.writeNote(note: note)
             }
         }
-    }
-    
-    /// SwiftUI TextEditor wrapped around with other views to add a placeholder and fix its size issue.
-    var fixedTextEditor: some View {
-        ZStack(alignment: .topLeading) {
-            if note.body.isEmpty {
-                Text("Empty")
-                    .opacity(0.5)
-                    .padding(.top, 10)
-                    .padding(.leading, 5)
-            }
-            Text(note.body)
-                .foregroundColor(.clear)
-                .padding(8)
-                .frame(maxWidth: .infinity)
-                .frame(height: UIScreen.main.bounds.height * 0.5)
-                .overlay {
-                    TextEditor(text: $note.body)
-                        .focused($focusedField, equals: "body")
-                }
-                .padding(.bottom)
-        }
-    }
-    
-    /// The items displayed on the toolbars.
-    var toolbarItems: some ToolbarContent {
-        Group {
+        .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if !showChecklist && note.checklist.isEmpty {
                     Button {
@@ -188,6 +159,28 @@ struct NoteView: View {
                     focusedField = nil
                 }
             }
+        }
+    }
+    
+    /// SwiftUI TextEditor wrapped around with other views to add a placeholder and fix its size issue.
+    var noteEditor: some View {
+        ZStack(alignment: .topLeading) {
+            if note.body.isEmpty {
+                Text("Empty")
+                    .opacity(0.5)
+                    .padding(.top, 10)
+                    .padding(.leading, 5)
+            }
+            Text(note.body)
+                .foregroundColor(.clear)
+                .padding(8)
+                .frame(maxWidth: .infinity)
+                .frame(height: UIScreen.main.bounds.height * 0.45)
+                .overlay {
+                    TextEditor(text: $note.body)
+                        .focused($focusedField, equals: "body")
+                }
+                .padding(.bottom)
         }
     }
     
